@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib",
+    "rootDir": "./src",
+    "module": "commonjs",
+    "target": "es2020",
+    "jsx": "react-jsx",
+    "declaration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "moduleResolution": "node"
+  },
+  "include": [
+    "src/og-templates/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "lib"
+  ]
+}

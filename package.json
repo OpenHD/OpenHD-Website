@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
+    "prestart": "tsc --project tsconfig.client.json",
     "start": "docusaurus start",
+    "prebuild": "tsc --project tsconfig.client.json",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",

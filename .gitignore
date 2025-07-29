@@ -24,6 +24,7 @@ missing-assets-report.json
 
 # Social card generation
 /preview-images
+/lib
 
 # Tools and temp files
 /tools/node_modules
