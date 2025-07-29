@@ -36,6 +36,111 @@ const config: Config = {
     locales: ['en'],
   },
 
+  // Custom meta tags for better social media sharing
+  headTags: [
+    // Open Graph meta tags
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:title',
+        content: 'OpenHD - Open Source Digital FPV Ecosystem',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:description',
+        content: 'Professional digital FPV system for drones and RC aircraft. High-quality video transmission, telemetry, and ground station software.',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:image',
+        content: 'https://openhd.github.io/OpenHD-Website/img/openhd-social-card.png',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:image:width',
+        content: '1200',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:image:height',
+        content: '630',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:type',
+        content: 'website',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:url',
+        content: 'https://openhd.github.io/OpenHD-Website/',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:site_name',
+        content: 'OpenHD',
+      },
+    },
+    // Twitter Card meta tags
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'twitter:title',
+        content: 'OpenHD - Open Source Digital FPV Ecosystem',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'twitter:description',
+        content: 'Professional digital FPV system for drones and RC aircraft. High-quality video transmission, telemetry, and ground station software.',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'twitter:image',
+        content: 'https://openhd.github.io/OpenHD-Website/img/openhd-social-card.png',
+      },
+    },
+    // Additional meta tags
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'description',
+        content: 'OpenHD is an open source digital FPV ecosystem for professional drone and RC aircraft applications. Features high-quality video transmission, comprehensive telemetry, and advanced ground station software.',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'keywords',
+        content: 'OpenHD, FPV, digital video transmission, drone, RC aircraft, open source, telemetry, ground station, HD video, WiFi FPV',
+      },
+    },
+  ],
+
   presets: [
     [
       'classic',
@@ -81,6 +186,28 @@ const config: Config = {
         searchResultLimits: 8,
         searchResultContextMaxLength: 50,
         explicitSearchResultPath: true,
+      },
+    ],
+    [
+      '@acid-info/docusaurus-og',
+      {
+        path: './preview-images',
+        imageRenderers: {
+          'docusaurus-plugin-content-docs': {
+            component: './src/og-templates/DocsOGTemplate.tsx',
+            context: {
+              siteName: 'OpenHD',
+              siteUrl: process.env.NODE_ENV === 'production' ? 'https://openhd.github.io/OpenHD-Website/' : 'http://localhost:3000',
+            },
+          },
+          'docusaurus-plugin-content-pages': {
+            component: './src/og-templates/PageOGTemplate.tsx',
+            context: {
+              siteName: 'OpenHD',
+              siteUrl: process.env.NODE_ENV === 'production' ? 'https://openhd.github.io/OpenHD-Website/' : 'http://localhost:3000',
+            },
+          },
+        },
       },
     ],
     'docusaurus-plugin-image-zoom',
