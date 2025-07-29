@@ -42,7 +42,7 @@ Now, Let's gets get started:
 
 7. In the next window you have to introduce the port (5760)
 
-![PORT](/img/assets/PORT_MSP.png)
+![PORT](/img/assets/Port_MSP.png)
 
 8. Now you should have video but not telemetry, to solve it you need to press in the drop-down and change it from "onboard" to "Fixed wing"
 
