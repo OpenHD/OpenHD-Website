@@ -4,16 +4,18 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -32,9 +34,14 @@ jobs:
       - name: Build website 🔧
         run: npm run build
 
-      - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Setup Pages 📄
+        uses: actions/configure-pages@v4
+        
+      - name: Upload to GitHub Pages �
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: build
-          branch: gh-pages
-          clean: true
+          path: build
+          
+      - name: Deploy to GitHub Pages 🚀
+        id: deployment
+        uses: actions/deploy-pages@v4
