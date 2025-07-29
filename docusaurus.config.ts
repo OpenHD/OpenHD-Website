@@ -211,6 +211,11 @@ const config: Config = {
   themeConfig: {
     // Replace with your project's social card
     image: 'img/social-cards/openhd-default.svg',
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
     navbar: {
       title: 'OpenHD',
       logo: {
