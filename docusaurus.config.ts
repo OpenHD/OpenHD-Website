@@ -57,7 +57,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:image',
-        content: 'https://openhd.github.io/OpenHD-Website/img/openhd-social-card.png',
+        content: 'https://openhd.github.io/OpenHD-Website/img/social-cards/openhd-default.svg',
       },
     },
     {
@@ -121,7 +121,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'twitter:image',
-        content: 'https://openhd.github.io/OpenHD-Website/img/openhd-social-card.png',
+        content: 'https://openhd.github.io/OpenHD-Website/img/social-cards/openhd-default.svg',
       },
     },
     // Additional meta tags
@@ -188,18 +188,17 @@ const config: Config = {
         explicitSearchResultPath: true,
       },
     ],
-    ...(process.env.NODE_ENV === 'development' ? [
-      [
-        '@acid-info/docusaurus-og',
-        {
-          path: './preview-images',
-          imageRenderers: {
-            'docusaurus-plugin-content-docs': require('./lib/ImageRenderers').docs,
-            'docusaurus-plugin-content-pages': require('./lib/ImageRenderers').pages,
-          },
-        },
-      ]
-    ] : []),
+    // OG Plugin temporarily disabled due to theme conflicts
+    // [
+    //   '@acid-info/docusaurus-og',
+    //   {
+    //     path: './preview-images',
+    //     imageRenderers: {
+    //       'docusaurus-plugin-content-docs': require('./lib/ImageRenderers').docs,
+    //       'docusaurus-plugin-content-pages': require('./lib/ImageRenderers').pages,
+    //     },
+    //   },
+    // ],
     'docusaurus-plugin-image-zoom',
   ],
 
@@ -211,7 +210,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/social-cards/openhd-default.svg',
     navbar: {
       title: 'OpenHD',
       logo: {

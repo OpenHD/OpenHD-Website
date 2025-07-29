@@ -1,5 +1,6 @@
 ---
 description: Flashing Your Air and Ground Units with OpenHD Firmware
+image: /img/social-cards/openhd-default.svg
 ---
 
 # Flashing Your Air and Ground Units with OpenHD Firmware (Windows)

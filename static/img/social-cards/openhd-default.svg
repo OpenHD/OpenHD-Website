@@ -1,0 +1,62 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1c262f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#004a6c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00a6f2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#26b4f5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="120" cy="120" r="50" fill="rgba(0, 166, 242, 0.1)"/>
+  <circle cx="1080" cy="510" r="30" fill="rgba(0, 166, 242, 0.08)"/>
+  <rect x="40" y="40" width="80" height="4" rx="2" fill="rgba(0, 166, 242, 0.3)"/>
+  <rect x="1080" y="40" width="80" height="4" rx="2" fill="rgba(0, 166, 242, 0.3)"/>
+  
+  <!-- OpenHD Logo (circular with signal waves) -->
+  <g transform="translate(460, 160)">
+    <!-- Logo background circle -->
+    <circle cx="40" cy="40" r="40" fill="#000000" stroke="#ffffff" stroke-width="3"/>
+    
+    <!-- White signal waves (left side) -->
+    <path d="M15 25 Q25 15 35 25" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M12 30 Q25 12 38 30" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M9 35 Q25 9 41 35" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+    
+    <!-- Blue signal waves (right side) -->
+    <path d="M45 25 Q55 15 65 25" stroke="#00a6f2" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M42 30 Q55 12 68 30" stroke="#00a6f2" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M39 35 Q55 9 71 35" stroke="#00a6f2" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Brand name -->
+  <text x="580" y="235" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="bold" fill="white">OpenHD</text>
+  
+  <!-- Main title with gradient -->
+  <text x="600" y="320" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="bold" text-anchor="middle" fill="url(#textGrad)">Open Source Digital FPV</text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="380" font-family="Inter, Arial, sans-serif" font-size="26" text-anchor="middle" fill="rgba(255,255,255,0.85)">Professional HD video transmission for drones</text>
+  
+  <!-- Feature highlights -->
+  <g font-family="Inter, Arial, sans-serif" font-size="18" fill="#00a6f2">
+    <text x="600" y="430" text-anchor="middle">• Long Range WiFi • HD Video • Telemetry • Open Source</text>
+  </g>
+  
+  <!-- Footer -->
+  <text x="1120" y="580" font-family="Inter, Arial, sans-serif" font-size="18" text-anchor="end" fill="rgba(255,255,255,0.7)">openhd.github.io</text>
+  
+  <!-- Subtle tech pattern -->
+  <g opacity="0.05">
+    <line x1="0" y1="200" x2="1200" y2="200" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="400" x2="1200" y2="400" stroke="white" stroke-width="1"/>
+    <line x1="200" y1="0" x2="200" y2="630" stroke="white" stroke-width="1"/>
+    <line x1="1000" y1="0" x2="1000" y2="630" stroke="white" stroke-width="1"/>
+  </g>
+</svg>
