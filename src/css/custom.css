@@ -56,15 +56,58 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 166, 242, 0.15);
 }
 
-/* Hero section styling */
+/* Hero section styling with darker theme */
 .hero {
-  background: var(--openhd-gradient);
+  background: linear-gradient(135deg, #1c262f 0%, #003a52 100%);
   color: white;
 }
 
 .hero__title {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
+}
+
+/* Override for subtitle to be white/light */
+.hero .hero__subtitle {
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6) !important;
+  font-size: 1.1rem !important;
+  font-weight: 300 !important;
+  opacity: 0.9 !important;
+}
+
+/* Mobile subtitle adjustments - hide desktop line breaks */
+@media screen and (max-width: 768px) {
+  .hero .hero__subtitle {
+    font-size: 0.95rem !important;
+    max-width: 90% !important;
+    line-height: 1.4 !important;
+  }
+  
+  .hero .hero__subtitle br {
+    display: none;
+  }
+}
+
+/* If there's a specific animation class for the OpenSource text */
+.animated-opensource,
+.hero-animation,
+.text-animation {
+  background: linear-gradient(45deg, #0074aa, #00a6f2, #26b4f5);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Custom button styling */

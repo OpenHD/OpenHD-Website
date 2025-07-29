@@ -14,28 +14,13 @@ function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero', styles.heroBanner)}>
-      {/* FPV HUD Corner Elements */}
-      <div className={styles.hudTopLeft}>
-        <div className={styles.hudCorner}></div>
-        <div className={styles.hudInfo}>OPENHD</div>
-      </div>
-      <div className={styles.hudTopRight}>
-        <div className={styles.hudCorner}></div>
-        <div className={styles.hudInfo}>DIGITAL FPV</div>
-      </div>
-      <div className={styles.hudBottomLeft}>
-        <div className={styles.hudCorner}></div>
-        <div className={styles.hudInfo}>OPEN SOURCE</div>
-      </div>
-      <div className={styles.hudBottomRight}>
-        <div className={styles.hudCorner}></div>
-        <div className={styles.hudInfo}>READY TO FLY</div>
-      </div>
-      
-      {/* Crosshair */}
-      <div className={styles.crosshair}>
-        <div className={styles.crosshairH}></div>
-        <div className={styles.crosshairV}></div>
+      {/* Signal Strength Indicator - Right Side */}
+      <div className={styles.hudSignal}>
+        <div className={styles.hudSignalBar}></div>
+        <div className={styles.hudSignalBar}></div>
+        <div className={styles.hudSignalBar}></div>
+        <div className={styles.hudSignalBar}></div>
+        <div className={styles.hudSignalBar}></div>
       </div>
       
       <div className="container">
@@ -44,8 +29,9 @@ function HomepageHeader() {
             Digital <span className={styles.heroAccent}>OpenSource</span><br />FPV System
           </Heading>
           <p className="hero__subtitle">
-            Experience the freedom of flight with our cutting-edge open-source digital FPV ecosystem.
-            Crystal clear video transmission, telemetry, and RC control - all in one powerful platform.
+            Experience the freedom of flight with our cutting-edge<br />
+            open-source digital FPV ecosystem. Crystal clear video<br />
+            transmission, telemetry, and RC control - all in one powerful platform.
           </p>
         </Link>
         <div className={styles.buttons}>
@@ -71,6 +57,9 @@ function HomepageHeader() {
           </a>
         </div>
       </div>
+      
+      {/* Smooth fade to content */}
+      <div className={styles.fadeToContent}></div>
     </header>
   );
 }
@@ -267,9 +256,7 @@ function PartnersSection() {
     { name: 'DigitalOcean', logo: useBaseUrl('/img/digitalocean.png'), url: 'https://www.digitalocean.com/', description: 'Reliable Webserver provider, hosts OpenHD Websites, Forum and our Images, for worldwide availability.' },
     { name: 'StickerMule', logo: useBaseUrl('/img/stickermule.png'), url: 'https://www.stickermule.com/eu/custom-stickers', description: 'Specializes in high-quality custom printing, particularly custom stickers and labels, helps us with promotional Material.' },
     { name: 'Maple Wireless', logo: useBaseUrl('/img/maple.png'), url: 'https://www.maple-wireless.com/', description: 'Long time Partner and Developer of the Sword Antenna, helps out with great antennas.' },
-    { name: 'Linux Automation', logo: useBaseUrl('/img/linuxauto.svg'), url: 'https://www.linux-automation.com/', description: 'Sponsors hardware to allow us to make very precise latency Measurements.' },
-    { name: 'BeastTX', logo: useBaseUrl('/img/beasttx_text_r_blk2.png'), url: '#', description: 'The ultimate UAV controller made in Germany. Generously sponsoring/integrating with OpenHD.' },
-    { name: 'TM IT-Systemhaus', logo: useBaseUrl('/img/tm-it.png'), url: 'https://www.tm-sys.it/', description: 'The developers behind BeastTX. As drone enthusiasts, they support good things, such as deer-rescuing and alike.' }
+    { name: 'Linux Automation', logo: useBaseUrl('/img/linuxauto.svg'), url: 'https://www.linux-automation.com/', description: 'Sponsors hardware to allow us to make very precise latency Measurements.' }
   ];
 
   return (

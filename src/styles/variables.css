@@ -1,0 +1,53 @@
+/**
+ * CSS Custom Properties (Variables) for OpenHD Theme
+ * Centralized color and spacing definitions
+ */
+
+:root {
+  /* OpenHD Brand Colors */
+  --openhd-primary: #007acc;
+  --openhd-primary-rgb: 0, 122, 204;
+  --openhd-secondary: #ffffff;
+  --openhd-accent: #00a6f2;
+  
+  /* FPV/OSD Theme Colors */
+  --fpv-blue: rgba(var(--openhd-primary-rgb), 0.9);
+  --fpv-blue-light: rgba(var(--openhd-primary-rgb), 0.6);
+  --fpv-blue-lighter: rgba(var(--openhd-primary-rgb), 0.3);
+  --fpv-blue-lightest: rgba(var(--openhd-primary-rgb), 0.1);
+  
+  /* Shadows and Glows */
+  --fpv-glow-small: 0 0 8px rgba(var(--openhd-primary-rgb), 0.4);
+  --fpv-glow-medium: 0 0 10px rgba(var(--openhd-primary-rgb), 0.3);
+  --fpv-glow-large: 0 0 15px rgba(var(--openhd-primary-rgb), 0.8);
+  --fpv-glow-xl: 0 0 20px rgba(var(--openhd-primary-rgb), 0.2);
+  
+  /* Text Shadows */
+  --text-shadow-strong: 3px 3px 6px rgba(0, 0, 0, 0.7);
+  --text-shadow-medium: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  --text-shadow-fpv: 0 0 10px rgba(var(--openhd-primary-rgb), 0.3);
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  
+  /* HUD Layout */
+  --hud-border-width: 2px;
+  --hud-corner-size: 40px;
+  --hud-offset: 3vh;
+  --hud-offset-h: 3vw;
+  
+  /* Animations */
+  --animation-duration-fast: 0.3s;
+  --animation-duration-normal: 1s;
+  --animation-duration-slow: 2.5s;
+}
+
+/* Dark mode overrides */
+[data-theme='dark'] {
+  --fpv-blue: rgba(var(--openhd-primary-rgb), 1);
+  --fpv-glow-large: 0 0 20px rgba(var(--openhd-primary-rgb), 1);
+}

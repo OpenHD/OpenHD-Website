@@ -1,0 +1,226 @@
+/**
+ * Reusable FPV/HUD Components and Animations
+ */
+
+/* ========================================
+   ANIMATIONS 
+======================================== */
+
+@keyframes fpvPulse {
+  0%, 100% { 
+    background-position: 0% 50%;
+    filter: drop-shadow(var(--fpv-glow-small));
+  }
+  50% { 
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 12px rgba(var(--openhd-primary-rgb), 0.6));
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hudFlicker {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.7; }
+}
+
+/* ========================================
+   HUD COMPONENTS 
+======================================== */
+
+.fpv-hud-element {
+  position: absolute;
+  z-index: 5;
+  color: var(--fpv-blue);
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-shadow: var(--fpv-glow-large);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fpv-corner {
+  width: var(--hud-corner-size);
+  height: var(--hud-corner-size);
+  position: relative;
+  border: none;
+}
+
+.fpv-corner-glow {
+  box-shadow: 
+    var(--fpv-glow-medium),
+    inset 0 0 10px var(--fpv-blue-lightest);
+}
+
+/* Corner Variations */
+.fpv-corner--top-left {
+  border-left: 3px solid var(--fpv-blue-light);
+  border-top: 3px solid var(--fpv-blue-light);
+  border-top-left-radius: 2px;
+}
+
+.fpv-corner--top-right {
+  border-right: 3px solid var(--fpv-blue-light);
+  border-top: 3px solid var(--fpv-blue-light);
+  border-top-right-radius: 2px;
+}
+
+.fpv-corner--bottom-left {
+  border-left: 3px solid var(--fpv-blue-light);
+  border-bottom: 3px solid var(--fpv-blue-light);
+  border-bottom-left-radius: 2px;
+}
+
+.fpv-corner--bottom-right {
+  border-right: 3px solid var(--fpv-blue-light);
+  border-bottom: 3px solid var(--fpv-blue-light);
+  border-bottom-right-radius: 2px;
+}
+
+/* Corner Decorations */
+.fpv-corner--top-left::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 12px;
+  height: 12px;
+  border-left: 1px solid var(--fpv-blue-light);
+  border-top: 1px solid var(--fpv-blue-light);
+}
+
+.fpv-corner--top-right::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 12px;
+  height: 12px;
+  border-right: 1px solid var(--fpv-blue-light);
+  border-top: 1px solid var(--fpv-blue-light);
+}
+
+.fpv-corner--bottom-left::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: -3px;
+  width: 12px;
+  height: 12px;
+  border-left: 1px solid var(--fpv-blue-light);
+  border-bottom: 1px solid var(--fpv-blue-light);
+}
+
+.fpv-corner--bottom-right::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 12px;
+  height: 12px;
+  border-right: 1px solid var(--fpv-blue-light);
+  border-bottom: 1px solid var(--fpv-blue-light);
+}
+
+/* ========================================
+   FPV OVERLAYS 
+======================================== */
+
+.fpv-overlay {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.3) 100%),
+    linear-gradient(180deg, var(--fpv-blue-lightest) 0%, transparent 30%, transparent 70%, var(--fpv-blue-lightest) 100%);
+  z-index: 1;
+}
+
+.fpv-frame {
+  content: '';
+  position: absolute;
+  top: 2vh;
+  left: 2vw;
+  right: 2vw;
+  bottom: 2vh;
+  border: var(--hud-border-width) solid var(--fpv-blue-lighter);
+  border-radius: 10px;
+  box-shadow: 
+    inset 0 0 30px var(--fpv-blue-lightest),
+    var(--fpv-glow-xl);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ========================================
+   CROSSHAIR 
+======================================== */
+
+.fpv-crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.fpv-crosshair-h {
+  width: 30px;
+  height: 2px;
+  background: var(--fpv-blue);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: var(--fpv-glow-small);
+}
+
+.fpv-crosshair-v {
+  width: 2px;
+  height: 30px;
+  background: var(--fpv-blue);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: var(--fpv-glow-small);
+}
+
+/* ========================================
+   UTILITY CLASSES 
+======================================== */
+
+.fpv-glow {
+  box-shadow: var(--fpv-glow-medium);
+}
+
+.fpv-glow-large {
+  box-shadow: var(--fpv-glow-large);
+}
+
+.fpv-text-glow {
+  text-shadow: var(--fpv-glow-large);
+}
+
+.fade-in-up {
+  animation: fadeInUp var(--animation-duration-normal) ease-out;
+}
+
+.fade-in-up-delayed {
+  animation: fadeInUp var(--animation-duration-normal) ease-out var(--animation-duration-fast) both;
+}

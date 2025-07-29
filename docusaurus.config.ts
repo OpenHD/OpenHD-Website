@@ -83,7 +83,14 @@ const config: Config = {
         explicitSearchResultPath: true,
       },
     ],
+    'docusaurus-plugin-image-zoom',
   ],
+
+  markdown: {
+    mermaid: true,
+  },
+  
+  themes: ['@docusaurus/theme-mermaid'],
 
   themeConfig: {
     // Replace with your project's social card
@@ -103,7 +110,7 @@ const config: Config = {
         },
         {
           type: 'docsVersionDropdown',
-          position: 'left',
+          position: 'right',
           dropdownActiveClassDisabled: true,
         },
         {

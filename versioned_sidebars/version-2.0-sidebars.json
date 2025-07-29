@@ -37,8 +37,18 @@
     },
     {
       "type": "category",
+      "label": "RC Control",
+      "items": [
+        "rc-control/general",
+        "rc-control/rc-over-mavlink",
+        "rc-control/rc-over-serial"
+      ]
+    },
+    {
+      "type": "category",
       "label": "Ground Station Software",
       "items": [
+        "ground-station-software/qopen.hd-recommended",
         "ground-station-software/mission-planner",
         "ground-station-software/qgroundcontrol",
         "ground-station-software/tower",
@@ -46,6 +56,35 @@
         "ground-station-software/gstreamer",
         "ground-station-software/fishingfancam",
         "ground-station-software/raspberrypi-camera-viewer"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Advanced Setup",
+      "items": [
+        "advanced-setup/bidirectional-telemetry",
+        "advanced-setup/usb-tethering",
+        "advanced-setup/wifi-hotspot",
+        "advanced-setup/ethernet-hotspot",
+        "advanced-setup/ground-recording",
+        "advanced-setup/using-only-an-ip-camera",
+        "advanced-setup/using-an-ip-or-usb-camera-as-second-camera",
+        "advanced-setup/bandwidth-switching",
+        "advanced-setup/lte-connection",
+        "advanced-setup/ground-power-monitoring"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Developer Corner",
+      "items": [
+        "developers/the-openhd-ecosystem",
+        "developers/making-a-release",
+        "developers/updating-package-on-a-pi",
+        "developers/change-packet-source-on-a-pi",
+        "developers/building-an-image",
+        "developers/essentials",
+        "developers/qopenhd-and-custom-mavlink"
       ]
     }
   ]
