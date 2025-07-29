@@ -188,28 +188,29 @@ const config: Config = {
         explicitSearchResultPath: true,
       },
     ],
-    [
-      '@acid-info/docusaurus-og',
-      {
-        path: './preview-images',
-        imageRenderers: {
-          'docusaurus-plugin-content-docs': {
-            component: './src/og-templates/DocsOGTemplate.tsx',
-            context: {
-              siteName: 'OpenHD',
-              siteUrl: process.env.NODE_ENV === 'production' ? 'https://openhd.github.io/OpenHD-Website/' : 'http://localhost:3000',
-            },
-          },
-          'docusaurus-plugin-content-pages': {
-            component: './src/og-templates/PageOGTemplate.tsx',
-            context: {
-              siteName: 'OpenHD',
-              siteUrl: process.env.NODE_ENV === 'production' ? 'https://openhd.github.io/OpenHD-Website/' : 'http://localhost:3000',
-            },
-          },
-        },
-      },
-    ],
+    // Temporarily disabled due to GitHub Actions build issues
+    // [
+    //   '@acid-info/docusaurus-og',
+    //   {
+    //     path: './preview-images',
+    //     imageRenderers: {
+    //       'docusaurus-plugin-content-docs': {
+    //         component: './src/og-templates/DocsOGTemplate.tsx',
+    //         context: {
+    //           siteName: 'OpenHD',
+    //           siteUrl: process.env.NODE_ENV === 'production' ? 'https://openhd.github.io/OpenHD-Website/' : 'http://localhost:3000',
+    //         },
+    //       },
+    //       'docusaurus-plugin-content-pages': {
+    //         component: './src/og-templates/PageOGTemplate.tsx',
+    //         context: {
+    //           siteName: 'OpenHD',
+    //           siteUrl: process.env.NODE_ENV === 'production' ? 'https://openhd.github.io/OpenHD-Website/' : 'http://localhost:3000',
+    //         },
+    //       },
+    //     },
+    //   },
+    // ],
     'docusaurus-plugin-image-zoom',
   ],
 

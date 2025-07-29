@@ -21,3 +21,19 @@ yarn-error.log*
 
 # Migration reports
 missing-assets-report.json
+
+# Social card generation
+/preview-images
+
+# Tools and temp files
+/tools/node_modules
+social-card-template.html
+
+# Windows artifacts
+nul
+Thumbs.db
+*.tmp
+
+# Version control temp files
+versioned_docs/version-evo/
+*.bak
