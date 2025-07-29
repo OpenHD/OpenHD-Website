@@ -1,0 +1,52 @@
+{
+  "tutorialSidebar": [
+    {
+      "type": "doc",
+      "id": "intro",
+      "label": "Introduction"
+    },
+    {
+      "type": "category",
+      "label": "General",
+      "items": [
+        "general/features",
+        "general/faq", 
+        "general/contributing",
+        "general/getting-started"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Hardware",
+      "items": [
+        "hardware/wiring",
+        "hardware/wifi-adapters",
+        "hardware/sbcs",
+        "hardware/cameras",
+        "hardware/displays"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Software Setup",
+      "items": [
+        "software-setup/telemetry-and-osd",
+        "software-setup/smartsync",
+        "software-setup/test"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Ground Station Software",
+      "items": [
+        "ground-station-software/mission-planner",
+        "ground-station-software/qgroundcontrol",
+        "ground-station-software/tower",
+        "ground-station-software/fpv_vr",
+        "ground-station-software/gstreamer",
+        "ground-station-software/fishingfancam",
+        "ground-station-software/raspberrypi-camera-viewer"
+      ]
+    }
+  ]
+}

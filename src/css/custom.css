@@ -1,0 +1,79 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* FontAwesome CDN Import */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* OpenHD Theme Colors */
+:root {
+  /* OpenHD Primary Colors */
+  --ifm-color-primary: #00a6f2;
+  --ifm-color-primary-dark: #0095d9;
+  --ifm-color-primary-darker: #008dcf;
+  --ifm-color-primary-darkest: #0074aa;
+  --ifm-color-primary-light: #1ab0f4;
+  --ifm-color-primary-lighter: #26b4f5;
+  --ifm-color-primary-lightest: #4cc2f7;
+  
+  /* OpenHD Background Colors */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f8f9fa;
+  
+  /* OpenHD Dark Theme Colors */
+  --ifm-color-primary-contrast-background: #1c262f;
+  --ifm-color-primary-contrast-foreground: #212d37;
+  
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 166, 242, 0.1);
+  
+  /* Custom OpenHD Variables */
+  --openhd-primary: #1c262f;
+  --openhd-primary-light: #212d37;
+  --openhd-secondary: #004a6c;
+  --openhd-tertiary: #00a6f2;
+  --openhd-gradient: linear-gradient(to right, #004a6c, #00a6f2);
+}
+
+/* Dark theme with OpenHD colors */
+[data-theme='dark'] {
+  --ifm-color-primary: #00a6f2;
+  --ifm-color-primary-dark: #0095d9;
+  --ifm-color-primary-darker: #008dcf;
+  --ifm-color-primary-darkest: #0074aa;
+  --ifm-color-primary-light: #1ab0f4;
+  --ifm-color-primary-lighter: #26b4f5;
+  --ifm-color-primary-lightest: #4cc2f7;
+  
+  /* Dark backgrounds */
+  --ifm-background-color: #1c262f;
+  --ifm-background-surface-color: #212d37;
+  --ifm-navbar-background-color: #1c262f;
+  --ifm-footer-background-color: #1c262f;
+  
+  --docusaurus-highlighted-code-line-bg: rgba(0, 166, 242, 0.15);
+}
+
+/* Hero section styling */
+.hero {
+  background: var(--openhd-gradient);
+  color: white;
+}
+
+.hero__title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+/* Custom button styling */
+.button--primary {
+  background: var(--openhd-gradient);
+  border: none;
+}
+
+.button--primary:hover {
+  background: var(--openhd-secondary);
+}
+
