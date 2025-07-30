@@ -162,6 +162,9 @@ const config: Config = {
               path: '/2.0',
             },
           },
+          // Show h4 headings in table of contents (perfect for FAQ)
+          showLastUpdateTime: true,
+          showLastUpdateAuthor: true,
         },
         blog: false,
         theme: {
@@ -200,6 +203,12 @@ const config: Config = {
     //   },
     // ],
     'docusaurus-plugin-image-zoom',
+    () => ({
+      name: 'auto-captions-plugin',
+      getClientModules() {
+        return [require.resolve('./src/components/AutoCaptions.js')];
+      },
+    }),
   ],
 
   markdown: {
@@ -211,6 +220,18 @@ const config: Config = {
   themeConfig: {
     // Replace with your project's social card
     image: 'img/social-cards/openhd-default.svg',
+    zoom: {
+      selector: '.theme-doc-markdown .markdown :not(em) > img',
+      background: {
+        light: 'rgb(255, 255, 255)',
+        dark: 'rgb(50, 50, 50)',
+      },
+      config: {
+        // medium-zoom options
+        margin: 24,
+        scrollOffset: 0,
+      },
+    },
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,

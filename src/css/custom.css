@@ -120,3 +120,154 @@
   background: var(--openhd-secondary);
 }
 
+/* Auto-generate captions from alt text - wrap images in figure elements */
+.markdown img[alt]:not([alt=""]) {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Create caption styling for images with alt text */
+.markdown p:has(img[alt]:not([alt=""])) {
+  position: relative;
+}
+
+/* Alternative approach using JavaScript will be needed for true auto-captions */
+/* For now, we rely on the alt text being visible on hover and screen readers */
+/* Image borders only in documentation */
+.theme-doc-markdown img[alt]:not([alt=""]) {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Wrap long commands */
+pre code {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  word-break: break-all !important;
+}
+
+/* Better code block styling */
+pre {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Image zoom enhancements - ONLY in documentation */
+.theme-doc-markdown img {
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.theme-doc-markdown img:hover {
+  transform: scale(1.02);
+}
+
+/* Ensure zoom works with flex layouts in documentation */
+.theme-doc-markdown .markdown img,
+.theme-doc-markdown article img {
+  max-width: 100%;
+  height: auto;
+  cursor: zoom-in;
+}
+
+/* Fix for images in flex containers in documentation */
+.theme-doc-markdown div[style*="display: flex"] img,
+.theme-doc-markdown div[style*="display:flex"] img {
+  cursor: zoom-in;
+}
+
+/* Modern table styling */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table th {
+  background: var(--ifm-color-primary);
+  color: white;
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  vertical-align: top;
+}
+
+table tr:nth-child(even) {
+  background-color: var(--ifm-background-surface-color);
+}
+
+table tr:hover {
+  background-color: var(--ifm-color-emphasis-100);
+  transition: background-color 0.2s ease;
+}
+
+/* Dark theme table adjustments */
+[data-theme='dark'] table th {
+  background: var(--ifm-color-primary-dark);
+}
+
+[data-theme='dark'] table tr:hover {
+  background-color: var(--ifm-color-emphasis-200);
+}
+
+/* Compact tables */
+.table-compact table {
+  font-size: 0.85rem;
+}
+
+.table-compact th,
+.table-compact td {
+  padding: 8px 12px;
+}
+
+
+/* Sidebar important items highlighting */
+.theme-doc-sidebar-item-link[href="/introduction"],
+.theme-doc-sidebar-item-link[href="/installation-guide"],
+.theme-doc-sidebar-item-link[href="/hardware/first-time-setup"],
+.theme-doc-sidebar-item-link[href="/general/faq"],
+.theme-doc-sidebar-item-link[href="/downloads"] {
+  font-weight: 600 !important;
+  color: var(--ifm-color-primary) !important;
+  background-color: var(--ifm-color-primary-lightest);
+  border-radius: 4px;
+  border-left: 3px solid var(--ifm-color-primary);
+}
+
+.theme-doc-sidebar-item-link[href="/introduction"]:before,
+.theme-doc-sidebar-item-link[href="/installation-guide"]:before,
+.theme-doc-sidebar-item-link[href="/hardware/first-time-setup"]:before {
+  content: "⭐ ";
+  margin-right: 4px;
+}
+
+.theme-doc-sidebar-item-link[href="/general/faq"]:before {
+  content: "❓ ";
+  margin-right: 4px;
+}
+
+.theme-doc-sidebar-item-link[href="/downloads"]:before {
+  content: "⬇️ ";
+  margin-right: 4px;
+}
+
+/* Dark theme adjustments for sidebar highlighting */
+[data-theme='dark'] .theme-doc-sidebar-item-link[href="/introduction"],
+[data-theme='dark'] .theme-doc-sidebar-item-link[href="/installation-guide"],
+[data-theme='dark'] .theme-doc-sidebar-item-link[href="/hardware/first-time-setup"],
+[data-theme='dark'] .theme-doc-sidebar-item-link[href="/general/faq"],
+[data-theme='dark'] .theme-doc-sidebar-item-link[href="/downloads"] {
+  background-color: var(--ifm-color-emphasis-200);
+}
+

@@ -40,11 +40,17 @@ To configure the pipeline to the camera you need to modify the script "custom_un
 
 **Step 3** 
 
-At the bottom of the script, comment all the configurations and put the name of the new one you have created and save the file. Finally, open a terminal and execute the following command "sudo chmod +x PATH/custom_unmanaged_camera.sh" with the correct path to the file.
+At the bottom of the script, comment all the configurations and put the name of the new one you have created and save the file. Finally, open a terminal and execute the following command:
+
+```bash
+sudo chmod +x PATH/custom_unmanaged_camera.sh
+```
+
+Replace PATH with the correct path to the file.
 
 **Step 4** 
 
-To create the service that activates the script you must follow the next steps. Download the following file (https://github.com/OpenHD/OpenHD/blob/2.5-evo-rapha/systemd/custom_unmanaged_camera.service) that isn't included in version 2.6.0 of OpenHD. You need to copy that file in /boot/etc/systemd/system/ but you need to do it using the terminal with the command "sudo cp ORIGINPATH/custom_unmanaged_camera.service DESTINATIONPATH/etc/systemd/system/" where both "originpath" and "destinationpath" are correct paths. After that you are ready to turn on air sbc and follow next steps. Connect a monitor and a keyboard to air sbc and exit from kiosk mode using Ctrl+C. After that, activate the new service using "sudo systemctl enable custom_unmanaged_camera" command. Following that, start the service with "sudo systemctl start custom_unmanaged_camera" command and then confirm that it is active with "sudo systemctl status custom_unmanaged_camera" command. Reboot air sbc with "sudo reboot" and it should be ready.
+To create the service that activates the script you must follow the next steps. Download the following file [custom_unmanaged_camera.service](https://github.com/OpenHD/OpenHD/blob/2.5-evo-rapha/systemd/custom_unmanaged_camera.service) that isn't included in version 2.6.0 of OpenHD. You need to copy that file in /boot/etc/systemd/system/ but you need to do it using the terminal with the command "sudo cp ORIGINPATH/custom_unmanaged_camera.service DESTINATIONPATH/etc/systemd/system/" where both "originpath" and "destinationpath" are correct paths. After that you are ready to turn on air sbc and follow next steps. Connect a monitor and a keyboard to air sbc and exit from kiosk mode using Ctrl+C. After that, activate the new service using "sudo systemctl enable custom_unmanaged_camera" command. Following that, start the service with "sudo systemctl start custom_unmanaged_camera" command and then confirm that it is active with "sudo systemctl status custom_unmanaged_camera" command. Reboot air sbc with "sudo reboot" and it should be ready.
 
 **Step 5** 
 

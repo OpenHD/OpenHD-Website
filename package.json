@@ -26,6 +26,8 @@
     "clsx": "^2.0.0",
     "docusaurus-plugin-image-zoom": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
+    "qr-code-styling": "^1.9.2",
+    "qrcode": "^1.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "rehype-katex": "^7.0.1",

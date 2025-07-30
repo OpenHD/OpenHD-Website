@@ -1,4 +1,4 @@
-# INAV: Intelligent Navigation System for Aerial Vehicles
+# INAV
 
 ## General Information
 

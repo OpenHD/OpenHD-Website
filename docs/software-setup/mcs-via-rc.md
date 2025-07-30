@@ -1,4 +1,4 @@
-# Dynamic MCS Index Adjustment with RC Switch
+# MCS via RC
 
 In OpenHD, you have the flexibility to dynamically change your MCS (Modulation and Coding Scheme) index, which directly affects your video bitrate and maximum range, during your flight. By increasing the MCS index, you can boost your available bitrate at the cost of reduced range, and vice versa. This feature is particularly useful for optimizing your FPV experience based on your current needs and conditions.
 

@@ -4,15 +4,17 @@ description: Setting Up Joystick RC Control
 
 # Joystick RC Control
 
-**WARNING**: This feature is currently in beta. Please exercise caution and perform thorough testing.
+:::warning
+This feature is currently in beta. Please exercise caution and perform thorough testing.
+:::
 
 OpenHD offers support for Remote Control (RC) input over MAVLINK, allowing you to connect a joystick (such as your RC controller in joystick mode) to your ground station via USB. This enables you to control your drone directly through the OpenHD wifibroadcast link.
 
-**NOTE**: It's important to be aware that WiFi may not be ideal for transmitting many small RC packets. For the best experience, it's recommended to use a standard RC link operating on a different frequency than your OpenHD wifibroadcast link. For example, you can use 2.4GHz ELRS for RC control and 5.8GHz for wifibroadcast.
-
-**NOTE 2**: RC over MAVLINK is supported by INAV, Ardupilot, and Pixhawk but is not supported on Betaflight.
-
-**NOTE 3**: RC data is transmitted over the same UART telemetry connection between OpenHD and your Flight Controller (FC) as required for MAVLINK telemetry.
+:::info Important Notes
+- It's important to be aware that WiFi may not be ideal for transmitting many small RC packets. For the best experience, it's recommended to use a standard RC link operating on a different frequency than your OpenHD wifibroadcast link. For example, you can use 2.4GHz ELRS for RC control and 5.8GHz for wifibroadcast.
+- RC over MAVLINK is supported by INAV, Ardupilot, and Pixhawk but is not supported on Betaflight.
+- RC data is transmitted over the same UART telemetry connection between OpenHD and your Flight Controller (FC) as required for MAVLINK telemetry.
+:::
 
 ## Setup Steps
 

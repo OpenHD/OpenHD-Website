@@ -1,0 +1,165 @@
+.appBanner {
+  background: linear-gradient(135deg, #1c262f 0%, #003a52 50%, #00527a 100%);
+  padding: 4rem 0;
+  margin: 3rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.appBanner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+
+.bannerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.bannerText {
+  flex: 1;
+  max-width: 600px;
+}
+
+.bannerTitle {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bannerTitle i {
+  color: var(--ifm-color-primary);
+  font-size: 2rem;
+}
+
+.bannerDescription {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.downloadButtons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.downloadBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  min-width: 180px;
+}
+
+.downloadBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-2px);
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(0, 166, 242, 0.3);
+}
+
+.downloadBtn i {
+  font-size: 1.5rem;
+  color: var(--ifm-color-primary);
+}
+
+.downloadText {
+  font-size: 0.85rem;
+  display: block;
+  opacity: 0.8;
+}
+
+.storeName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: block;
+}
+
+.qrSection {
+  flex-shrink: 0;
+}
+
+/* QR Section simplified - styling handled by ModernQRCode component */
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 996px) {
+  .bannerContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .bannerTitle {
+    font-size: 2rem;
+    justify-content: center;
+  }
+  
+  .downloadButtons {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .appBanner {
+    padding: 2rem 0;
+    margin: 2rem 0;
+  }
+  
+  .bannerTitle {
+    font-size: 1.75rem;
+  }
+  
+  .bannerDescription {
+    font-size: 1rem;
+  }
+  
+  .downloadButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .downloadBtn {
+    min-width: 200px;
+  }
+}
+
+/* Dark theme adjustments handled by ModernQRCode component */
+
+/* Animation effects */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.qrCode:hover {
+  animation: pulse 1.5s ease-in-out infinite;
+}

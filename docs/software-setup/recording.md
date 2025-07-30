@@ -1,4 +1,4 @@
-# OpenHD Flight Recording Options
+# Recording
 
 OpenHD offers two methods for recording your flight footage, whether for sharing on platforms like YouTube or for personal analysis.
 

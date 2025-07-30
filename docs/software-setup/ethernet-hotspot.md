@@ -13,7 +13,11 @@ In Passive mode, OpenHD's Ethernet is configured as a client, allowing you to co
 
 1. Connect an Ethernet cable from your Linux device to the Single Board Computer (SBC).
 2. Wait briefly.
-3. Open a terminal and enter the command: `sudo arp-scan --interface=eth0 --localnet` (**Replace ETH0 with the correct adapter connected to the SBC**).
+3. Open a terminal and enter the command:
+   ```bash
+   sudo arp-scan --interface=eth0 --localnet
+   ```
+   (**Replace ETH0 with the correct adapter connected to the SBC**).
 4. Test the connection by entering the SBC's IP address into your web browser; it should redirect you to the OpenHD web interface.
 ### Tethering
 

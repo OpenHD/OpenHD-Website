@@ -61,13 +61,32 @@ Place the module gently on the connectors until you feel they are seated in each
 
 It is advisable to limit the disassembly of the CM4 module as much as possible to avoid damaging the connector contacts.
 
-![right](/img/assets/Ochin2.png) ![wrong](/img/assets/Ochin3.png)
+<div style={{display: 'flex', gap: '20px', flexWrap: 'wrap'}}>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <img src="/img/assets/Ochin2.png" alt="Correct CM4 Module Installation" />
+    <p style={{textAlign: 'center', fontSize: '0.9rem', color: 'var(--ifm-color-success)'}}>✅ Correct Installation</p>
+  </div>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <img src="/img/assets/Ochin3.png" alt="Incorrect CM4 Module Installation" />
+    <p style={{textAlign: 'center', fontSize: '0.9rem', color: 'var(--ifm-color-danger)'}}>❌ Wrong Installation</p>
+  </div>
+</div>
 
 To remove the CM4 module from the ochin board is always suggested to use the proper extractor.
 
 You can find the .STL files to print [here](https://github.com/ochin-space/ochin-CM4/tree/master/3d/Covers%20turrets%20and%20extractors).
 
-![extractor](/img/assets/Ochin4.png) ![extractor](/img/assets/Ochin5.png) ![extractor](/img/assets/Ochin6.png)
+<div style={{display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center'}}>
+  <div style={{flex: '1', minWidth: '200px', maxWidth: '250px'}}>
+    <img src="/img/assets/Ochin4.png" alt="CM4 Extractor Tool Step 1" />
+  </div>
+  <div style={{flex: '1', minWidth: '200px', maxWidth: '250px'}}>
+    <img src="/img/assets/Ochin5.png" alt="CM4 Extractor Tool Step 2" />
+  </div>
+  <div style={{flex: '1', minWidth: '200px', maxWidth: '250px'}}>
+    <img src="/img/assets/Ochin6.png" alt="CM4 Extractor Tool Step 3" />
+  </div>
+</div>
 
 ### Flashing the Ochin
 

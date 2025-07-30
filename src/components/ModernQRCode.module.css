@@ -1,0 +1,108 @@
+.qrContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 200px;
+}
+
+.qrCodeWrapper {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(135deg, #1c262f 0%, #003a52 50%, #00527a 100%);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 
+    0 0 20px rgba(0, 166, 242, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(0, 166, 242, 0.4);
+  transition: all 0.3s ease;
+}
+
+.qrCodeWrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 0 30px rgba(0, 166, 242, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: var(--ifm-color-primary);
+}
+
+.qrCode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.qrCode svg {
+  width: 100%;
+  height: auto;
+  max-width: 160px;
+}
+
+/* QR Info */
+.qrInfo {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.qrTitle {
+  color: white;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.qrTitle i {
+  color: var(--ifm-color-primary);
+  font-size: 1rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.qrSubtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.75rem;
+  margin: 0.25rem 0 0 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark theme adjustments */
+[data-theme='dark'] .qrCodeWrapper {
+  background: linear-gradient(135deg, #1c262f 0%, #003a52 50%, #00527a 100%);
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+  .qrContainer {
+    max-width: 180px;
+  }
+  
+  .qrCodeWrapper {
+    padding: 10px;
+  }
+  
+  .qrInfo {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .qrCode svg {
+    max-width: 140px;
+  }
+}
+
+/* Animation effects removed */

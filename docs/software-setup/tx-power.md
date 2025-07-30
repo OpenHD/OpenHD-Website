@@ -1,4 +1,4 @@
-# TX Power Configuration in OpenHD Evo
+# TX Power
 
 **NOTE**: When adjusting the TX (transmit) power settings, it is your responsibility to adhere to the rules and regulations of your country.
 

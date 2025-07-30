@@ -1,4 +1,4 @@
-# Radxa Rock SBC's
+# Radxa
 
 The Radxa Single Board Computers (SBCs) are highly capable devices that offer significantly higher performance compared to the Raspberry Pi. Due to their impressive capabilities, we have incorporated support for Radxa SBCs in our 2.4-Evo releases and newer.
 

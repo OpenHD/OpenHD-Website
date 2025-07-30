@@ -40,10 +40,24 @@ For more detailed documents, please follow the official GitHub links:
 
 ## Wiring
 
-![wiring](https://raw.githubusercontent.com/OpenHD/Documentation/evo/.gitbook/assets/Ochinv2-1.png)
-![ext-board](https://raw.githubusercontent.com/OpenHD/Documentation/evo/.gitbook/assets/Ochinv2-2.png)
-![underside](https://raw.githubusercontent.com/OpenHD/Documentation/evo/.gitbook/assets/Ochinv2-3.png)
-![button](https://raw.githubusercontent.com/OpenHD/Documentation/evo/.gitbook/assets/Ochinv2-4.png)
+<div style={{display: 'flex', gap: '15px', flexWrap: 'wrap'}}>
+  <div style={{flex: '1', minWidth: '200px'}}>
+    <img src="/img/assets/v2-0/Ochinv2-1.png" alt="Ochin CM4v2 Wiring Diagram" />
+    <p style={{textAlign: 'center', fontSize: '0.85rem', margin: '5px 0'}}>Main Board Wiring</p>
+  </div>
+  <div style={{flex: '1', minWidth: '200px'}}>
+    <img src="/img/assets/v2-0/Ochinv2-2.png" alt="External Board" />
+    <p style={{textAlign: 'center', fontSize: '0.85rem', margin: '5px 0'}}>External Board</p>
+  </div>
+  <div style={{flex: '1', minWidth: '200px'}}>
+    <img src="/img/assets/v2-0/Ochinv2-3.png" alt="Board Underside" />
+    <p style={{textAlign: 'center', fontSize: '0.85rem', margin: '5px 0'}}>Board Underside</p>
+  </div>
+  <div style={{flex: '1', minWidth: '200px'}}>
+    <img src="/img/assets/v2-0/Ochinv2-4.png" alt="Button Configuration" />
+    <p style={{textAlign: 'center', fontSize: '0.85rem', margin: '5px 0'}}>Button Configuration</p>
+  </div>
+</div>
 
 ## Preliminary Considerations
 
@@ -64,14 +78,30 @@ The ochin_CM4v2 board is equipped with a 5VDC switching regulator necessary to p
 
 The CM4 connectors are delicate and dense. Ensure no dust or debris is on the connectors before positioning the CM4 module. Gently place the module on the connectors until they snap into place. Press the two long edges of the CM4 module until the connectors are fully inserted. Limit disassembly to avoid damaging the connector contacts.
 
-![right](https://raw.githubusercontent.com/OpenHD/Documentation/evo/.gitbook/assets/Ochinv2-5.png)
-![wrong](https://raw.githubusercontent.com/OpenHD/Documentation/evo/.gitbook/assets/Ochinv2-6.png)
+<div style={{display: 'flex', gap: '20px', flexWrap: 'wrap'}}>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <img src="/img/assets/v2-0/Ochinv2-5.png" alt="Correct CM4 Module Installation v2" />
+    <p style={{textAlign: 'center', fontSize: '0.9rem', color: 'var(--ifm-color-success)'}}>✅ Correct Installation</p>
+  </div>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <img src="/img/assets/v2-0/Ochinv2-6.png" alt="Incorrect CM4 Module Installation v2" />
+    <p style={{textAlign: 'center', fontSize: '0.9rem', color: 'var(--ifm-color-danger)'}}>❌ Wrong Installation</p>
+  </div>
+</div>
 
 To remove the CM4 module from the ochin board, use the proper extractor. The .STL files for printing the extractor can be found in the "3D" section of the GitHub repository.
 
-![tools](https://raw.githubusercontent.com/OpenHD/Documentation/evo/.gitbook/assets/Ochin5.png)
-![tools2](https://raw.githubusercontent.com/OpenHD/Documentation/evo/.gitbook/assets/Ochin6.png)
-![tools3](https://raw.githubusercontent.com/OpenHD/Documentation/evo/.gitbook/assets/Ochin7.png)
+<div style={{display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center'}}>
+  <div style={{flex: '1', minWidth: '200px', maxWidth: '250px'}}>
+    <img src="/img/assets/Ochin5.png" alt="CM4 Extractor Tool" />
+  </div>
+  <div style={{flex: '1', minWidth: '200px', maxWidth: '250px'}}>
+    <img src="/img/assets/Ochin6.png" alt="CM4 Extractor Usage" />
+  </div>
+  <div style={{flex: '1', minWidth: '200px', maxWidth: '250px'}}>
+    <img src="/img/assets/Ochin7.png" alt="Boot Button Location" />
+  </div>
+</div>
 
 ### Flashing the CM4 eMMC
 
@@ -93,8 +123,16 @@ The CSI camera can be connected to one of the two FFC connectors. The copper con
 
 The WiFi dongle can be connected to one of the 4 USB connectors on the board. It is advisable to cut a USB extender and solder it to a GHS connector, keeping the wires on the connector side as short as possible.
 
-![connection1](https://raw.githubusercontent.com/OpenHD/Documentation/evo/.gitbook/assets/Ochin9.png)
-![connection2](https://raw.githubusercontent.com/OpenHD/Documentation/evo/.gitbook/assets/Ochin10.png)
+<div style={{display: 'flex', gap: '20px', flexWrap: 'wrap'}}>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <img src="/img/assets/Ochin9.png" alt="WiFi Dongle Connection Method 1" />
+    <p style={{textAlign: 'center', fontSize: '0.85rem', margin: '5px 0'}}>Connection Method 1</p>
+  </div>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <img src="/img/assets/Ochin10.png" alt="WiFi Dongle Connection Method 2" />
+    <p style={{textAlign: 'center', fontSize: '0.85rem', margin: '5px 0'}}>Connection Method 2</p>
+  </div>
+</div>
 
 ### Connecting the Telemetry
 

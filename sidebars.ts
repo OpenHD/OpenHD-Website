@@ -21,12 +21,12 @@ const sidebars: SidebarsConfig = {
       label: 'General',
       items: [
         'general/features',
-        'general/troubleshooting',
         'general/faq',
         'general/software-faq',
         'general/contributing',
         'general/team',
         'general/OpenHD-vs-Alternatives',
+        'general/troubleshooting',
       ],
     },
     {
@@ -39,9 +39,15 @@ const sidebars: SidebarsConfig = {
           label: 'SBCs',
           items: [
             'hardware/sbcs',
-            'hardware/raspberry',
-            'hardware/ochin',
-            'hardware/ochinv2',
+            {
+              type: 'category',
+              label: 'Raspberry',
+              items: [
+                'hardware/raspberry',
+                'hardware/ochin',
+                'hardware/ochinv2',
+              ],
+            },
             'hardware/X86',
             'hardware/radxa',
             'hardware/custom-hardware',
@@ -63,14 +69,8 @@ const sidebars: SidebarsConfig = {
             'hardware/cameras/raspberry-cameras',
             'hardware/cameras/radxa-cameras',
             'hardware/cameras/usb-camera',
-            {
-              type: 'category',
-              label: 'HDMI Cameras',
-              items: [
-                'hardware/cameras/rpi-hdmi-to-csi',
-                'hardware/cameras/hdmi-cameras-rpi',
-              ],
-            },
+            'hardware/cameras/rpi-hdmi-to-csi',
+            'hardware/cameras/hdmi-cameras-rpi',
             'hardware/cameras/ip-cameras',
             'hardware/cameras/special-camera',
             'hardware/cameras/custom-cameras',

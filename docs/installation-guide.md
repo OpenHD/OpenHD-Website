@@ -1,9 +1,9 @@
 ---
-description: Flashing Your Air and Ground Units with OpenHD Firmware
+description: Complete guide for installing OpenHD firmware on your air and ground units
 image: /img/social-cards/openhd-default.svg
 ---
 
-# Flashing Your Air and Ground Units with OpenHD Firmware (Windows)
+# Installation Guide
 
 ## Requirements:
 
@@ -38,29 +38,48 @@ Open the image writer and select the latest OpenHD release from the drop-down me
 **Step 3:**
 Insert your SD card into the card reader, and select it from the "Choose storage" option. If you are using a CM4, it will appear as an SD card.
 
-![Storage](/img/assets/seleccionarsd1.png)
-![Storage](/img/assets/seleccionarsd2.png)
+<div style={{display: 'flex', gap: '20px', flexWrap: 'wrap'}}>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <img src="/img/assets/seleccionarsd1.png" alt="Select SD Card - Step 1" />
+  </div>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <img src="/img/assets/seleccionarsd2.png" alt="Select SD Card - Step 2" />
+  </div>
+</div>
 
 **Step 4:**
 Click on "Settings" in the lower-right corner and choose either "Air" or "Ground," depending on whether you want to flash an air or ground image. This step is essential for a functional OpenHD setup; you need to flash one Air unit (select air) and one Ground unit (select ground).
 
-![Settings](/img/assets/seleccionarconfiguraciones.png)
-![Settings](/img/assets/seleccionarconfiguraciones2.png)
+<div style={{display: 'flex', gap: '20px', flexWrap: 'wrap'}}>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <img src="/img/assets/seleccionarconfiguraciones.png" alt="Settings Configuration - Overview" />
+  </div>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <img src="/img/assets/seleccionarconfiguraciones2.png" alt="Settings Configuration - Options" />
+  </div>
+</div>
 
 **Step 4.1:**
 In this step you can also select a binding phrase to improve the protection of the link (its not mandatory) both binding phrases on air and ground need to be the same (you CANT change it after without a reflash of both air and ground sds), if you want to use it just click on "set binding phrase" and write the phrase (max 10 characters)
 
 ![Binding phrase](/img/assets/seleccionarconfiguraciones2.png)
 
-**Step 4.2:**
-For ground the settings are quite simple, just click on ground and then "SAVE"
+**Step 4.2 & 4.3: Air and Ground Configuration**
 
-![Ground settings](/img/assets/seleccionarconfiguracionesground.png)
+Configure your device type:
 
-**Step 4.3:**
-For air you need to select "air" and then the camera you want to use (you can change it after that on the settings) also you need to click "SAVE" when you have finished
-
-![Air settings](/img/assets/seleccionarconfiguracionesair.png)
+<div style={{display: 'flex', gap: '20px', flexWrap: 'wrap'}}>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <h4>Ground Settings</h4>
+    <p>For ground the settings are quite simple, just click on ground and then "SAVE"</p>
+    <img src="/img/assets/seleccionarconfiguracionesground.png" alt="Ground Configuration Settings" />
+  </div>
+  <div style={{flex: '1', minWidth: '300px'}}>
+    <h4>Air Settings</h4>
+    <p>For air you need to select "air" and then the camera you want to use (you can change it after that on the settings) also you need to click "SAVE" when you have finished</p>
+    <img src="/img/assets/seleccionarconfiguracionesair.png" alt="Air Configuration Settings" />
+  </div>
+</div>
 
 **Step 5:**
 Flash your image by clicking on "Write." This process may take some time.
