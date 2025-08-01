@@ -283,12 +283,12 @@ const config: Config = {
               continue;
             }
             
-            // Convert to AVIF
+            // Convert to AVIF with robust error handling
             await sharp(imagePath)
               .avif({ quality: 60, effort: 6 })
               .toFile(avifPath);
               
-            // Convert to WebP as fallback
+            // Convert to WebP as fallback  
             await sharp(imagePath)
               .webp({ quality: 75 })
               .toFile(webpPath);
@@ -307,35 +307,19 @@ const config: Config = {
         
         console.log(`📊 Conversion complete: ${convertedCount} converted, ${skippedCount} cached`)
         
-        console.log('🎉 Image conversion complete!\n');
+        console.log(`🎉 AVIF conversion complete! 
         
-        // Replace img tags with picture elements in HTML files
-        console.log('🔄 Updating HTML files to use AVIF images...');
-        const fs = require('fs').promises;
-        const htmlFiles = glob.sync(path.join(outDir, '**/*.html'));
-        
-        for (const htmlFile of htmlFiles) {
-          try {
-            let html = await fs.readFile(htmlFile, 'utf8');
-            
-            // Replace img tags that reference png/jpg/jpeg files
-            html = html.replace(
-              /<img([^>]+)src="([^"]+\.(png|jpe?g))"([^>]*)>/gi,
-              (match, beforeSrc, imageSrc, extension, afterSrc) => {
-                const avifSrc = imageSrc.replace(/\.(png|jpe?g)$/i, '.avif');
-                const webpSrc = imageSrc.replace(/\.(png|jpe?g)$/i, '.webp');
-                
-                return `<picture><source srcset="${avifSrc}" type="image/avif"><source srcset="${webpSrc}" type="image/webp"><img${beforeSrc}src="${imageSrc}"${afterSrc}></picture>`;
-              }
-            );
-            
-            await fs.writeFile(htmlFile, html);
-          } catch (error) {
-            console.warn(`⚠️  Failed to update HTML file ${htmlFile}:`, error.message);
-          }
-        }
-        
-        console.log(`✅ Updated ${htmlFiles.length} HTML files with AVIF support\n`);
+✅ Generated ${convertedCount} AVIF images for optimized loading
+📁 AVIF files available alongside originals for manual use
+🔧 Use <picture> elements in components for automatic fallbacks
+
+Example usage:
+<picture>
+  <source srcset="/img/image.avif" type="image/avif" />
+  <source srcset="/img/image.webp" type="image/webp" />
+  <img src="/img/image.png" alt="Description" />
+</picture>
+`);
       },
     }),
     // OG Plugin temporarily disabled due to theme conflicts
