@@ -25,6 +25,7 @@
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.0.0",
     "docusaurus-plugin-image-zoom": "^2.0.0",
+    "glob": "^11.0.3",
     "prism-react-renderer": "^2.3.0",
     "qr-code-styling": "^1.9.2",
     "qrcode": "^1.5.4",
@@ -38,6 +39,8 @@
     "@docusaurus/module-type-aliases": "3.8.1",
     "@docusaurus/tsconfig": "3.8.1",
     "@docusaurus/types": "3.8.1",
+    "responsive-loader": "^3.1.2",
+    "sharp": "^0.34.3",
     "typescript": "~5.6.2"
   },
   "browserslist": {

@@ -191,6 +191,112 @@ const config: Config = {
         explicitSearchResultPath: true,
       },
     ],
+    // AVIF image conversion plugin
+    () => ({
+      name: 'avif-images',
+      async loadContent() {
+        return null;
+      },
+      async contentLoaded({actions}) {
+        // Convert static images during development
+        if (process.env.NODE_ENV === 'development') {
+          const path = require('path');
+          const sharp = require('sharp');
+          const glob = require('glob');
+          
+          const staticDir = path.join(__dirname, 'static/img');
+          const imagePattern = path.join(staticDir, '**/*.{png,jpg,jpeg}');
+          const imageFiles = glob.sync(imagePattern);
+          
+          console.log(`\n🖼️  Converting ${imageFiles.length} static images for development...`);
+          
+          for (const imagePath of imageFiles.slice(0, 10)) { // Limit to first 10 for dev speed
+            try {
+              const avifPath = imagePath.replace(/\.(png|jpe?g)$/i, '.avif');
+              const webpPath = imagePath.replace(/\.(png|jpe?g)$/i, '.webp');
+              
+              if (!require('fs').existsSync(avifPath)) {
+                await sharp(imagePath)
+                  .avif({ quality: 60, effort: 4 }) // Faster effort for dev
+                  .toFile(avifPath);
+              }
+              
+              if (!require('fs').existsSync(webpPath)) {
+                await sharp(imagePath)
+                  .webp({ quality: 75 })
+                  .toFile(webpPath);
+              }
+              
+              console.log(`✅ Dev converted: ${path.basename(imagePath)}`);
+            } catch (error) {
+              console.warn(`⚠️  Failed to convert ${imagePath}:`, error.message);
+            }
+          }
+        }
+      },
+      async postBuild({outDir}) {
+        const path = require('path');
+        const sharp = require('sharp');
+        const glob = require('glob');
+        
+        // Find all PNG/JPG files in build directory
+        const imagePattern = path.join(outDir, '**/*.{png,jpg,jpeg}');
+        const imageFiles = glob.sync(imagePattern);
+        
+        console.log(`\n🖼️  Converting ${imageFiles.length} images to AVIF...`);
+        
+        for (const imagePath of imageFiles) {
+          try {
+            const avifPath = imagePath.replace(/\.(png|jpe?g)$/i, '.avif');
+            const webpPath = imagePath.replace(/\.(png|jpe?g)$/i, '.webp');
+            
+            // Convert to AVIF
+            await sharp(imagePath)
+              .avif({ quality: 60, effort: 6 })
+              .toFile(avifPath);
+              
+            // Convert to WebP as fallback
+            await sharp(imagePath)
+              .webp({ quality: 75 })
+              .toFile(webpPath);
+              
+            console.log(`✅ Converted: ${path.basename(imagePath)}`);
+          } catch (error) {
+            console.warn(`⚠️  Failed to convert ${imagePath}:`, error.message);
+          }
+        }
+        
+        console.log('🎉 Image conversion complete!\n');
+        
+        // Replace img tags with picture elements in HTML files
+        console.log('🔄 Updating HTML files to use AVIF images...');
+        const fs = require('fs').promises;
+        const htmlFiles = glob.sync(path.join(outDir, '**/*.html'));
+        
+        for (const htmlFile of htmlFiles) {
+          try {
+            let html = await fs.readFile(htmlFile, 'utf8');
+            
+            // Replace img tags that reference png/jpg/jpeg files
+            html = html.replace(
+              /<img([^>]+)src="([^"]+\.(png|jpe?g))"([^>]*)>/gi,
+              (match, beforeSrc, imageSrc, extension, afterSrc) => {
+                const avifSrc = imageSrc.replace(/\.(png|jpe?g)$/i, '.avif');
+                const webpSrc = imageSrc.replace(/\.(png|jpe?g)$/i, '.webp');
+                
+                return `<picture><source srcset="${avifSrc}" type="image/avif"><source srcset="${webpSrc}" type="image/webp"><img${beforeSrc}src="${imageSrc}"${afterSrc}></picture>`;
+              }
+            );
+            
+            await fs.writeFile(htmlFile, html);
+          } catch (error) {
+            console.warn(`⚠️  Failed to update HTML file ${htmlFile}:`, error.message);
+          }
+        }
+        
+        console.log(`✅ Updated ${htmlFiles.length} HTML files with AVIF support\n`);
+      },
+    }),
     // OG Plugin temporarily disabled due to theme conflicts
     // [
     //   '@acid-info/docusaurus-og',
