@@ -262,44 +262,59 @@ const config: Config = {
         let convertedCount = 0;
         let skippedCount = 0;
         
-        for (const imagePath of imageFiles) {
-          try {
-            const avifPath = imagePath.replace(/\.(png|jpe?g)$/i, '.avif');
-            const webpPath = imagePath.replace(/\.(png|jpe?g)$/i, '.webp');
-            
-            // Calculate file hash for cache check
-            const imageBuffer = await fs.readFile(imagePath);
-            const imageHash = crypto.createHash('md5').update(imageBuffer).digest('hex');
-            const fileName = path.basename(imagePath);
-            
-            // Check if image was already converted with same hash
-            const cachedHash = imageCache[fileName];
-            const avifExists = await fs.access(avifPath).then(() => true).catch(() => false);
-            const webpExists = await fs.access(webpPath).then(() => true).catch(() => false);
-            
-            if (cachedHash === imageHash && avifExists && webpExists) {
-              console.log(`⚡ Cached: ${fileName}`);
-              skippedCount++;
-              continue;
-            }
-            
-            // Convert to AVIF with robust error handling
-            await sharp(imagePath)
-              .avif({ quality: 60, effort: 6 })
-              .toFile(avifPath);
+        // Process images in parallel batches for speed
+        const BATCH_SIZE = 8; // Parallel processing limit
+        const batches = [];
+        for (let i = 0; i < imageFiles.length; i += BATCH_SIZE) {
+          batches.push(imageFiles.slice(i, i + BATCH_SIZE));
+        }
+        
+        for (const batch of batches) {
+          const batchPromises = batch.map(async (imagePath) => {
+            try {
+              const avifPath = imagePath.replace(/\.(png|jpe?g)$/i, '.avif');
+              const webpPath = imagePath.replace(/\.(png|jpe?g)$/i, '.webp');
               
-            // Convert to WebP as fallback  
-            await sharp(imagePath)
-              .webp({ quality: 75 })
-              .toFile(webpPath);
-            
-            // Update cache
-            imageCache[fileName] = imageHash;
-            convertedCount++;
-            console.log(`✅ Converted: ${fileName}`);
-          } catch (error) {
-            console.warn(`⚠️  Failed to convert ${imagePath}:`, error.message);
-          }
+              // Calculate file hash for cache check
+              const imageBuffer = await fs.readFile(imagePath);
+              const imageHash = crypto.createHash('md5').update(imageBuffer).digest('hex');
+              const fileName = path.basename(imagePath);
+              
+              // Check if image was already converted with same hash
+              const cachedHash = imageCache[fileName];
+              const avifExists = await fs.access(avifPath).then(() => true).catch(() => false);
+              const webpExists = await fs.access(webpPath).then(() => true).catch(() => false);
+              
+              if (cachedHash === imageHash && avifExists && webpExists) {
+                console.log(`⚡ Cached: ${fileName}`);
+                return { type: 'cached', fileName };
+              }
+              
+              // Convert both formats in parallel
+              const [avifResult, webpResult] = await Promise.all([
+                sharp(imagePath)
+                  .avif({ quality: 60, effort: 4 }) // Reduced effort for speed
+                  .toFile(avifPath),
+                sharp(imagePath)
+                  .webp({ quality: 75 })
+                  .toFile(webpPath)
+              ]);
+              
+              // Update cache
+              imageCache[fileName] = imageHash;
+              console.log(`✅ Converted: ${fileName}`);
+              return { type: 'converted', fileName };
+            } catch (error) {
+              console.warn(`⚠️  Failed to convert ${imagePath}:`, error.message);
+              return { type: 'error', fileName: path.basename(imagePath) };
+            }
+          });
+          
+          const batchResults = await Promise.all(batchPromises);
+          batchResults.forEach(result => {
+            if (result?.type === 'converted') convertedCount++;
+            if (result?.type === 'cached') skippedCount++;
+          });
         }
         
         // Save updated cache
