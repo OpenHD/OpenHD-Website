@@ -30,6 +30,17 @@ jobs:
 
       - name: Install dependencies 📦
         run: npm ci
+
+      - name: Cache converted images 🖼️
+        uses: actions/cache@v4
+        with:
+          path: |
+            static/img/**/*.avif
+            static/img/**/*.webp
+            .image-cache
+          key: images-${{ hashFiles('static/img/**/*.{png,jpg,jpeg}') }}
+          restore-keys: |
+            images-
         
       - name: Build website 🔧
         run: npm run build

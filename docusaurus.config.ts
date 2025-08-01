@@ -238,17 +238,50 @@ const config: Config = {
         const path = require('path');
         const sharp = require('sharp');
         const glob = require('glob');
+        const fs = require('fs').promises;
+        const crypto = require('crypto');
+        
+        // Cache management
+        const cacheFile = path.join(__dirname, '.image-cache', 'hashes.json');
+        let imageCache = {};
+        
+        try {
+          await fs.mkdir(path.dirname(cacheFile), { recursive: true });
+          const cacheData = await fs.readFile(cacheFile, 'utf8');
+          imageCache = JSON.parse(cacheData);
+        } catch (e) {
+          // Cache file doesn't exist, start fresh
+        }
         
         // Find all PNG/JPG files in build directory
         const imagePattern = path.join(outDir, '**/*.{png,jpg,jpeg}');
         const imageFiles = glob.sync(imagePattern);
         
-        console.log(`\n🖼️  Converting ${imageFiles.length} images to AVIF...`);
+        console.log(`\n🖼️  Checking ${imageFiles.length} images for conversion...`);
+        
+        let convertedCount = 0;
+        let skippedCount = 0;
         
         for (const imagePath of imageFiles) {
           try {
             const avifPath = imagePath.replace(/\.(png|jpe?g)$/i, '.avif');
             const webpPath = imagePath.replace(/\.(png|jpe?g)$/i, '.webp');
+            
+            // Calculate file hash for cache check
+            const imageBuffer = await fs.readFile(imagePath);
+            const imageHash = crypto.createHash('md5').update(imageBuffer).digest('hex');
+            const fileName = path.basename(imagePath);
+            
+            // Check if image was already converted with same hash
+            const cachedHash = imageCache[fileName];
+            const avifExists = await fs.access(avifPath).then(() => true).catch(() => false);
+            const webpExists = await fs.access(webpPath).then(() => true).catch(() => false);
+            
+            if (cachedHash === imageHash && avifExists && webpExists) {
+              console.log(`⚡ Cached: ${fileName}`);
+              skippedCount++;
+              continue;
+            }
             
             // Convert to AVIF
             await sharp(imagePath)
@@ -259,12 +292,20 @@ const config: Config = {
             await sharp(imagePath)
               .webp({ quality: 75 })
               .toFile(webpPath);
-              
-            console.log(`✅ Converted: ${path.basename(imagePath)}`);
+            
+            // Update cache
+            imageCache[fileName] = imageHash;
+            convertedCount++;
+            console.log(`✅ Converted: ${fileName}`);
           } catch (error) {
             console.warn(`⚠️  Failed to convert ${imagePath}:`, error.message);
           }
         }
+        
+        // Save updated cache
+        await fs.writeFile(cacheFile, JSON.stringify(imageCache, null, 2));
+        
+        console.log(`📊 Conversion complete: ${convertedCount} converted, ${skippedCount} cached`)
         
         console.log('🎉 Image conversion complete!\n');
         
