@@ -35,11 +35,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            static/img/**/*.avif
-            static/img/**/*.webp
+            static/img
             .image-cache
-          key: images-${{ hashFiles('static/img/**/*.{png,jpg,jpeg}') }}
+          key: images-${{ runner.os }}-${{ hashFiles('static/img/**/*.png', 'static/img/**/*.jpg', 'static/img/**/*.jpeg') }}
           restore-keys: |
+            images-${{ runner.os }}-
             images-
         
       - name: Build website 🔧
