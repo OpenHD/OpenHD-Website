@@ -9,6 +9,18 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import AppDownloadBanner from '@site/src/components/AppDownloadBanner';
 import Heading from '@theme/Heading';
 
+// Auto-generated imports by migrate-to-native-ideal-image
+import arducamImg from '@site/static/img/arducam.png?formats=avif,webp&w=400,800,1200';
+import radxaImg from '@site/static/img/radxa.png?formats=avif,webp&w=400,800,1200';
+import veyeImg from '@site/static/img/veye.png?formats=avif,webp&w=400,800,1200';
+import sonicmodellImg from '@site/static/img/sonicmodell.png?formats=avif,webp&w=400,800,1200';
+import cloudsmithImg from '@site/static/img/cloudsmith.png?formats=avif,webp&w=400,800,1200';
+import pcbwayImg from '@site/static/img/pcbway.png?formats=avif,webp&w=400,800,1200';
+import digitaloceanImg from '@site/static/img/digitalocean.png?formats=avif,webp&w=400,800,1200';
+import stickermuleImg from '@site/static/img/stickermule.png?formats=avif,webp&w=400,800,1200';
+import mapleImg from '@site/static/img/maple.png?formats=avif,webp&w=400,800,1200';
+
+
 import styles from './index.module.css';
 
 function HomepageHeader() {
@@ -248,15 +260,15 @@ function AboutSection() {
 // Partners section component
 function PartnersSection() {
   const partners = [
-    { name: 'Arducam', logo: useBaseUrl('/img/arducam.png'), url: 'https://www.arducam.com/openhd/', description: 'Specializes in developing cameras, crafting drivers for new image sensors, and enhancing the FPV experience for all.' },
-    { name: 'Radxa', logo: useBaseUrl('/img/radxa.png'), url: 'https://radxa.com/', description: 'Known for producing single-board computers and related hardware products. They help us with Hardware support.' },
-    { name: 'Veye Imaging', logo: useBaseUrl('/img/veye.png'), url: 'https://www.veye.cc/', description: 'Specializes in developing high quality cameras. They made the first cameras fitted to outdoor usage on the RaspberryPi.' },
-    { name: 'SonicModell', logo: useBaseUrl('/img/sonicmodell.png'), url: 'http://www.sonicmodell.com/', description: 'Very reputable manufacturer for model planes, they provided us with a testing Platform for OpenHD (AR Wing Pro).' },
-    { name: 'Cloudsmith', logo: useBaseUrl('/img/cloudsmith.png'), url: 'https://www.cloudsmith.io/', description: 'Platform for securely storing and sharing software packages. It hosts all OpenHD binaries and makes our updating possible.' },
-    { name: 'PCBWay', logo: useBaseUrl('/img/pcbway.png'), url: 'https://www.pcbway.com/', description: 'Reliable manufacturing partner, streamlines OpenHD custom hardware prototype production, which helped us with the X20 VTX.' },
-    { name: 'DigitalOcean', logo: useBaseUrl('/img/digitalocean.png'), url: 'https://www.digitalocean.com/', description: 'Reliable Webserver provider, hosts OpenHD Websites, Forum and our Images, for worldwide availability.' },
-    { name: 'StickerMule', logo: useBaseUrl('/img/stickermule.png'), url: 'https://www.stickermule.com/eu/custom-stickers', description: 'Specializes in high-quality custom printing, particularly custom stickers and labels, helps us with promotional Material.' },
-    { name: 'Maple Wireless', logo: useBaseUrl('/img/maple.png'), url: 'https://www.maple-wireless.com/', description: 'Long time Partner and Developer of the Sword Antenna, helps out with great antennas.' },
+    { name: 'Arducam', logo: arducamImg.src, url: 'https://www.arducam.com/openhd/', description: 'Specializes in developing cameras, crafting drivers for new image sensors, and enhancing the FPV experience for all.' },
+    { name: 'Radxa', logo: radxaImg.src, url: 'https://radxa.com/', description: 'Known for producing single-board computers and related hardware products. They help us with Hardware support.' },
+    { name: 'Veye Imaging', logo: veyeImg.src, url: 'https://www.veye.cc/', description: 'Specializes in developing high quality cameras. They made the first cameras fitted to outdoor usage on the RaspberryPi.' },
+    { name: 'SonicModell', logo: sonicmodellImg.src, url: 'http://www.sonicmodell.com/', description: 'Very reputable manufacturer for model planes, they provided us with a testing Platform for OpenHD (AR Wing Pro).' },
+    { name: 'Cloudsmith', logo: cloudsmithImg.src, url: 'https://www.cloudsmith.io/', description: 'Platform for securely storing and sharing software packages. It hosts all OpenHD binaries and makes our updating possible.' },
+    { name: 'PCBWay', logo: pcbwayImg.src, url: 'https://www.pcbway.com/', description: 'Reliable manufacturing partner, streamlines OpenHD custom hardware prototype production, which helped us with the X20 VTX.' },
+    { name: 'DigitalOcean', logo: digitaloceanImg.src, url: 'https://www.digitalocean.com/', description: 'Reliable Webserver provider, hosts OpenHD Websites, Forum and our Images, for worldwide availability.' },
+    { name: 'StickerMule', logo: stickermuleImg.src, url: 'https://www.stickermule.com/eu/custom-stickers', description: 'Specializes in high-quality custom printing, particularly custom stickers and labels, helps us with promotional Material.' },
+    { name: 'Maple Wireless', logo: mapleImg.src, url: 'https://www.maple-wireless.com/', description: 'Long time Partner and Developer of the Sword Antenna, helps out with great antennas.' },
     { name: 'Linux Automation', logo: useBaseUrl('/img/linuxauto.svg'), url: 'https://www.linux-automation.com/', description: 'Sponsors hardware to allow us to make very precise latency Measurements.' }
   ];
 
