@@ -133,48 +133,237 @@
 
 /* Alternative approach using JavaScript will be needed for true auto-captions */
 /* For now, we rely on the alt text being visible on hover and screen readers */
-/* Image borders only in documentation */
-.theme-doc-markdown img[alt]:not([alt=""]) {
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Modern Image Component Styling */
+.modern-image-figure {
+  margin: 1.5rem auto;
+  text-align: center;
+  max-width: 100%;
 }
 
-/* Wrap long commands */
+.modern-image {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: zoom-in;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.modern-image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-color: var(--ifm-color-primary-light);
+}
+
+.modern-image:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.modern-image.error {
+  border-color: var(--ifm-color-danger);
+  background: var(--ifm-color-danger-lightest);
+}
+
+.modern-image-caption {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--ifm-color-content-secondary);
+  margin-top: 0.5rem;
+  padding: 8px 12px;
+  background-color: var(--ifm-background-surface-color);
+  border-radius: 6px;
+  border-left: 3px solid var(--ifm-color-primary);
+  line-height: 1.4;
+  display: inline-block;
+  max-width: 80%;
+}
+
+/* Shimmer animation for loading states */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Dark theme adjustments for modern image component */
+[data-theme='dark'] .modern-image {
+  border-color: var(--ifm-color-emphasis-300);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .modern-image:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border-color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .modern-image-caption {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .modern-image-figure {
+    margin: 1rem auto;
+  }
+  
+  .modern-image {
+    border-radius: 6px;
+  }
+  
+  .modern-image-caption {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    max-width: 95%;
+  }
+}
+
+/* Modern Image Styling and Zoom Enhancement */
+.theme-doc-markdown img,
+.theme-doc-markdown picture img {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: zoom-in;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
+
+.theme-doc-markdown img:hover,
+.theme-doc-markdown picture img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-color: var(--ifm-color-primary-light);
+}
+
+/* Picture element styling */
+.theme-doc-markdown picture {
+  display: block;
+  margin: 1rem auto;
+  max-width: 100%;
+}
+
+/* Loading state for images */
+.theme-doc-markdown img[data-enhanced] {
+  background: linear-gradient(90deg, 
+    var(--ifm-color-emphasis-200) 25%, 
+    var(--ifm-color-emphasis-100) 50%, 
+    var(--ifm-color-emphasis-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Focus states for accessibility */
+.theme-doc-markdown img:focus,
+.theme-doc-markdown picture img:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+  border-color: var(--ifm-color-primary);
+}
+
+/* Flex container image fixes */
+.theme-doc-markdown div[style*="display: flex"] img,
+.theme-doc-markdown div[style*="display:flex"] img,
+.theme-doc-markdown div[style*="display: flex"] picture img,
+.theme-doc-markdown div[style*="display:flex"] picture img {
+  cursor: zoom-in;
+  flex-shrink: 0;
+}
+
+/* Dark theme adjustments */
+[data-theme='dark'] .theme-doc-markdown img,
+[data-theme='dark'] .theme-doc-markdown picture img {
+  border-color: var(--ifm-color-emphasis-300);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .theme-doc-markdown img:hover,
+[data-theme='dark'] .theme-doc-markdown picture img:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border-color: var(--ifm-color-primary);
+}
+
+/* Enhanced auto-caption styling */
+.auto-caption {
+  text-align: center;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--ifm-color-content-secondary);
+  margin: 8px 0 16px 0;
+  padding: 8px 12px;
+  background-color: var(--ifm-background-surface-color);
+  border-radius: 6px;
+  border-left: 3px solid var(--ifm-color-primary);
+  line-height: 1.4;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.auto-caption:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark theme caption adjustments */
+[data-theme='dark'] .auto-caption {
+  background-color: var(--ifm-color-emphasis-100);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .auto-caption:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Zoom overlay improvements */
+.medium-zoom-overlay {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.medium-zoom-image {
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive image improvements */
+@media screen and (max-width: 768px) {
+  .theme-doc-markdown img,
+  .theme-doc-markdown picture img {
+    margin: 0.5rem auto;
+    border-radius: 6px;
+  }
+  
+  .auto-caption {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    margin: 6px 0 12px 0;
+    max-width: 95%;
+  }
+}
+
+/* Code block styling */
 pre code {
   white-space: pre-wrap !important;
   word-wrap: break-word !important;
   word-break: break-all !important;
 }
 
-/* Better code block styling */
 pre {
   overflow-x: auto;
   max-width: 100%;
-}
-
-/* Image zoom enhancements - ONLY in documentation */
-.theme-doc-markdown img {
-  cursor: zoom-in;
-  transition: transform 0.2s ease;
-}
-
-.theme-doc-markdown img:hover {
-  transform: scale(1.02);
-}
-
-/* Ensure zoom works with flex layouts in documentation */
-.theme-doc-markdown .markdown img,
-.theme-doc-markdown article img {
-  max-width: 100%;
-  height: auto;
-  cursor: zoom-in;
-}
-
-/* Fix for images in flex containers in documentation */
-.theme-doc-markdown div[style*="display: flex"] img,
-.theme-doc-markdown div[style*="display:flex"] img {
-  cursor: zoom-in;
 }
 
 /* Modern table styling */

@@ -191,34 +191,43 @@ const config: Config = {
         explicitSearchResultPath: true,
       },
     ],
-    // Native ideal image plugin with AVIF support
+    // Official Docusaurus ideal image plugin with modern formats
     [
-      'docusaurus-plugin-native-ideal-image',
+      '@docusaurus/plugin-ideal-image',
       {
-        quality: 70,
+        quality: 80,
         max: 1920, // max resized image width
-        min: 480,  // min resized image width  
-        steps: 4,  // number of generated widths between min and max
+        min: 640,  // min resized image width  
+        steps: 3,  // number of generated widths between min and max
         disableInDev: false, // enable in development for testing
-        formats: ['avif', 'webp', 'auto'], // AVIF first, WebP fallback, original format last
       },
     ],
-    // OG Plugin temporarily disabled due to theme conflicts
-    // [
-    //   '@acid-info/docusaurus-og',
-    //   {
-    //     path: './preview-images',
-    //     imageRenderers: {
-    //       'docusaurus-plugin-content-docs': require('./lib/ImageRenderers').docs,
-    //       'docusaurus-plugin-content-pages': require('./lib/ImageRenderers').pages,
-    //     },
-    //   },
-    // ],
-    'docusaurus-plugin-image-zoom',
+    // Image zoom plugin with better compatibility
+    [
+      'docusaurus-plugin-image-zoom',
+      {
+        // options
+        selector: '.markdown :not(em) > img, .theme-doc-markdown :not(em) > img, .theme-doc-markdown picture img',
+        config: {
+          // medium-zoom options
+          margin: 24,
+          scrollOffset: 0,
+          background: 'rgba(25, 25, 25, 0.9)',
+          container: {
+            top: 80,
+            bottom: 80,
+          }
+        },
+      },
+    ],
+    // Simple image processing and captions
     () => ({
-      name: 'auto-captions-plugin',
+      name: 'openhd-image-enhancement-plugin',
       getClientModules() {
-        return [require.resolve('./src/components/AutoCaptions.js')];
+        return [
+          require.resolve('./src/components/AutoCaptions.js'),
+          require.resolve('./src/components/ModernImageLoader.js')
+        ];
       },
     }),
   ],
@@ -233,15 +242,19 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/social-cards/openhd-default.svg',
     zoom: {
-      selector: '.theme-doc-markdown .markdown :not(em) > img',
+      selector: '.markdown :not(em) > img, .theme-doc-markdown :not(em) > img',
       background: {
-        light: 'rgb(255, 255, 255)',
-        dark: 'rgb(50, 50, 50)',
+        light: 'rgba(255, 255, 255, 0.9)',
+        dark: 'rgba(25, 25, 25, 0.9)',
       },
       config: {
         // medium-zoom options
         margin: 24,
-        scrollOffset: 0,
+        scrollOffset: 80,
+        container: {
+          top: 80,
+          bottom: 80,
+        }
       },
     },
     colorMode: {
