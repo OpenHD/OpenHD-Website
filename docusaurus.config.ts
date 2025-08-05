@@ -291,6 +291,11 @@ const config: Config = {
           position: 'left',
         },
         {
+          to: '/privacy',
+          label: 'Privacy',
+          position: 'right',
+        },
+        {
           href: 'https://github.com/OpenHD',
           label: 'GitHub',
           position: 'right',
@@ -401,7 +406,7 @@ const config: Config = {
                 <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px; line-height: 1.6;">
                   For partnership or business inquiries, simply reach out to us here.
                 </p>
-                <a href="mailto:openhd@openhdfpv.org" 
+                <a href="#" onclick="var e='developers'+'@'+'openhdfpv.org'; window.location.href='mailto:'+e; return false;" 
                    style="display: inline-flex; align-items: center; gap: 8px; 
                           background: linear-gradient(135deg, #2e8b57, #228b22); 
                           color: white; padding: 12px 20px; 
@@ -411,7 +416,7 @@ const config: Config = {
                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(46, 139, 87, 0.4)'; this.style.background='linear-gradient(135deg, #32a05f, #2e8b57)';"
                    onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.2)'; this.style.background='linear-gradient(135deg, #2e8b57, #228b22)';">
                   <i class="fas fa-envelope"></i>
-                  openhd@openhdfpv.org
+                  <span>developers@openhdfpv.org</span>
                 </a>
               `,
             },
@@ -423,6 +428,7 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ['bash', 'shell-session', 'powershell', 'yaml', 'json', 'python', 'cpp', 'c', 'cmake'],
     },
   } satisfies Preset.ThemeConfig,
 };

@@ -22,7 +22,7 @@ The below link explains how the video quality is impacted under different scenar
 
 | Brand | Antenna | Polarization | Frequency GHz | Link \* |
 | :--- | :--- | :--- | :--- | :--- |
-| DYI | PCB Maple | Omni Vertical | 5.2-5.3 | [OpenHD maple leaf PCB 3dB](https://forum.openhdfpv.org/t/maple-leaf-pcb-antenna/460) |
+| DYI | PCB Maple | Omni Vertical | 5.2-5.3 | OpenHD maple leaf PCB 3dB |
 | Maple | Flat Panel FY-05A | Directional Vertical | 5.8 | [Maple leaf 14dB](https://aliexpress.com/item/1005002007469173.html) |
 | Maple | Planar Antenna | Directional Vertical | 5.8 | [Planar 17dB - Aliexpress](https://aliexpress.com/item/32989509234.html) |
 | Interline | Panel | Directional Vertical | 5.8 | [IP-G23-F5258-HV](https://interline.pl/antennas/PANEL-23-5.2-5.8GHz) |

@@ -65,7 +65,6 @@ The ASUS AC56 adapter is currently the most popular choice for OpenHD. Its small
 
 - [FCC info](https://fccid.io/MSQ-USBAC56)
 - [WikiDevi](https://deviwiki.com/wiki/ASUS_USB-AC56)
-- [Modification Page](https://forum.openhdfpv.org/t/asus-usb-ac56-wiring-antennas-etc/103)
 
 ## Taobao Card
 

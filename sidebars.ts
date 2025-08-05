@@ -25,7 +25,6 @@ const sidebars: SidebarsConfig = {
         'general/software-faq',
         'general/contributing',
         'general/team',
-        'general/OpenHD-vs-Alternatives',
         'general/troubleshooting',
       ],
     },
@@ -37,13 +36,19 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'SBCs',
+          link: {
+            type: 'doc',
+            id: 'hardware/sbcs',
+          },
           items: [
-            'hardware/sbcs',
             {
               type: 'category',
               label: 'Raspberry',
+              link: {
+                type: 'doc',
+                id: 'hardware/raspberry',
+              },
               items: [
-                'hardware/raspberry',
                 'hardware/ochin',
                 'hardware/ochinv2',
               ],
@@ -54,8 +59,11 @@ const sidebars: SidebarsConfig = {
             {
               type: 'category',
               label: 'Discontinued Hardware',
+              link: {
+                type: 'doc',
+                id: 'hardware/discontinued',
+              },
               items: [
-                'hardware/discontinued',
                 'hardware/jetson',
               ],
             },
@@ -64,8 +72,11 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Cameras',
+          link: {
+            type: 'doc',
+            id: 'hardware/cameras',
+          },
           items: [
-            'hardware/cameras',
             'hardware/cameras/raspberry-cameras',
             'hardware/cameras/radxa-cameras',
             'hardware/cameras/usb-camera',
@@ -74,7 +85,6 @@ const sidebars: SidebarsConfig = {
             'hardware/cameras/ip-cameras',
             'hardware/cameras/special-camera',
             'hardware/cameras/custom-cameras',
-            'hardware/cameras/custom-unmanaged-camera',
             'hardware/cameras/libcamera',
             'hardware/cameras/raspicamsrc',
             'hardware/cameras/v4l2',
@@ -105,8 +115,11 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Tethering',
+          link: {
+            type: 'doc',
+            id: 'software-setup/tethering',
+          },
           items: [
-            'software-setup/tethering',
             'software-setup/ethernet-hotspot',
             'software-setup/wifi-hotspot',
           ],
@@ -132,8 +145,6 @@ const sidebars: SidebarsConfig = {
         'ground-station-software/qopenhd-osd-backup',
         'ground-station-software/qgroundcontrol',
         'ground-station-software/mission-planner',
-        'ground-station-software/tower',
-        'ground-station-software/fpv_vr',
         'ground-station-software/gstreamer',
         'ground-station-software/raspberrypi-camera-viewer',
       ],

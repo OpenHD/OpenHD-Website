@@ -206,15 +206,29 @@ function ImageWriterCard({ onOpenModal }: { onOpenModal: (platform: string) => v
   };
 
   return (
-    <div className={styles.downloadCard}>
+    <div className={`${styles.downloadCard} ${styles.recommendedCard}`}>
       <div className={styles.cardHeader}>
         <i className="fas fa-magic"></i>
         <h3>OpenHD ImageWriter</h3>
       </div>
       <p className={styles.cardDescription}>
-        The OpenHD ImageWriter is a software tool that makes it easy to install and configure OpenHD. 
-        It lets you choose and download all Images within itself, configure OpenHD, and write everything to a SD or USB-Stick.
+        The easiest way to install and configure OpenHD. 
+        Automatically downloads images, handles configuration, and writes everything to your SD card or USB stick.
       </p>
+      <div className={styles.benefitsList}>
+        <div className={styles.benefit}>
+          <i className="fas fa-check-circle"></i>
+          <span>Automatic download of all images</span>
+        </div>
+        <div className={styles.benefit}>
+          <i className="fas fa-check-circle"></i>
+          <span>Simple configuration</span>
+        </div>
+        <div className={styles.benefit}>
+          <i className="fas fa-check-circle"></i>
+          <span>Direct writing to SD card</span>
+        </div>
+      </div>
       <div className={styles.downloadList}>
         {imageWriterDownloads.map((item, index) => (
           <div key={index} className={`${styles.downloadItem} ${item.status === 'paused' ? styles.paused : ''}`}>
@@ -248,30 +262,46 @@ function ImageWriterCard({ onOpenModal }: { onOpenModal: (platform: string) => v
 
 // Images Card Component
 function ImagesCard() {
+  const [showAdvanced, setShowAdvanced] = useState(false);
+
   return (
-    <div className={styles.downloadCard}>
+    <div className={`${styles.downloadCard} ${styles.advancedCard}`}>
       <div className={styles.cardHeader}>
         <i className="fas fa-compact-disc"></i>
-        <h3>Images</h3>
+        <h3>Manual Images (Advanced)</h3>
       </div>
       <p className={styles.cardDescription}>
-        Here you can find all our latest Images for manual flashing.
+        Raw images for advanced users with specific requirements. 
+        Only use if the ImageWriter doesn't meet your needs.
       </p>
-      <div className={styles.downloadList}>
-        {imageDownloads.map((item, index) => (
-          <div key={index} className={styles.downloadItem}>
-            <a href={item.downloadUrl} target="_blank" rel="noopener noreferrer" className={styles.downloadItemLink}>
-              <div className={styles.itemIcon}>
-                <i className="far fa-check-circle"></i>
-              </div>
-              <div className={styles.itemContent}>
-                <i className={item.icon}></i>
-                <span>{item.platform}</span>
-              </div>
-            </a>
-          </div>
-        ))}
+      <div className={styles.advancedWarning}>
+        <i className="fas fa-info-circle"></i>
+        <span>Manual configuration and flashing required</span>
       </div>
+      <button 
+        className={styles.showAdvancedButton}
+        onClick={() => setShowAdvanced(!showAdvanced)}
+      >
+        {showAdvanced ? 'Hide manual downloads' : 'Show manual downloads'}
+        <i className={`fas ${showAdvanced ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+      </button>
+      {showAdvanced && (
+        <div className={styles.downloadList}>
+          {imageDownloads.map((item, index) => (
+            <div key={index} className={`${styles.downloadItem} ${styles.advancedDownloadItem}`}>
+              <a href={item.downloadUrl} target="_blank" rel="noopener noreferrer" className={styles.downloadItemLink}>
+                <div className={styles.itemIcon}>
+                  <i className="fas fa-download"></i>
+                </div>
+                <div className={styles.itemContent}>
+                  <i className={item.icon}></i>
+                  <span>{item.platform}</span>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -341,14 +371,12 @@ export default function Downloads(): ReactNode {
           <div className={styles.header}>
             <h1>Downloads</h1>
             <p>
-              Here you can find the most important OpenHD Downloads. We recommend just downloading the OpenHD ImageWriter, 
-              which can internally download all the listed files here, and let's you easily configure OpenHD.
+              Get OpenHD up and running on your system with our tools and images.
             </p>
           </div>
           
           <div className={styles.downloadGrid}>
             <ImageWriterCard onOpenModal={openDeveloperModal} />
-            <ImagesCard />
             <AppsCard onOpenModal={openDeveloperModal} />
           </div>
           
@@ -370,26 +398,26 @@ export default function Downloads(): ReactNode {
               <div className="col col--4">
                 <h3>System Requirements</h3>
                 <ul>
-                  <li>Raspberry Pi 4B or newer (recommended)</li>
-                  <li>Compatible WiFi adapter</li>
+                  <li><Link to="/hardware/raspberry">Raspberry Pi 4B</Link> or <Link to="/hardware/sbcs">compatible SBC</Link></li>
+                  <li><Link to="/hardware/wifi-adapters">Compatible WiFi adapter</Link></li>
                   <li>MicroSD card (32GB or larger)</li>
-                  <li>Camera module or USB camera</li>
+                  <li><Link to="/hardware/cameras">Camera module</Link> or USB camera</li>
                 </ul>
               </div>
               <div className="col col--4">
                 <h3>What's Included</h3>
                 <ul>
                   <li>OpenHD core system</li>
-                  <li>QOpenHD ground station</li>
-                  <li>Camera and telemetry support</li>
+                  <li><Link to="/ground-station-software/qopenhd-osd-backup">QOpenHD ground station</Link></li>
+                  <li><Link to="/hardware/cameras">Camera</Link> and <Link to="/software-setup/telemetry-and-osd">telemetry support</Link></li>
                   <li>Web-based configuration interface</li>
                 </ul>
               </div>
               <div className="col col--4">
                 <h3>Third-Party Apps</h3>
                 <ul>
-                  <li>MissionPlanner support</li>
-                  <li>QGroundControl integration</li>
+                  <li><Link to="/ground-station-software/mission-planner">MissionPlanner</Link> support</li>
+                  <li><Link to="/ground-station-software/qgroundcontrol">QGroundControl</Link> integration</li>
                   <li>Tower compatibility</li>
                   <li>FPV_VR_OS support</li>
                 </ul>
@@ -418,6 +446,10 @@ export default function Downloads(): ReactNode {
                 </Link>
               </div>
             </div>
+          </div>
+          
+          <div className={styles.advancedSection}>
+            <ImagesCard />
           </div>
         </div>
       </div>

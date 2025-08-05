@@ -8,6 +8,7 @@ import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import AppDownloadBanner from '@site/src/components/AppDownloadBanner';
 import Heading from '@theme/Heading';
+import ProtectedEmail from '@site/src/components/ProtectedEmail';
 
 // Auto-generated imports by migrate-to-native-ideal-image
 import arducamImg from '@site/static/img/arducam.png?formats=avif,webp&w=400,800,1200';
@@ -406,9 +407,11 @@ function ProfessionalFooter() {
               <p className={styles.footerDescription}>
                 For partnership or business inquiries, simply reach out to us here.
               </p>
-              <a href="mailto:openhd@openhdfpv.org" className={styles.emailButton}>
-                <i className="fas fa-envelope"></i> openhd@openhdfpv.org
-              </a>
+              <ProtectedEmail 
+                user="developers" 
+                domain="openhdfpv.org" 
+                className={styles.emailButton}
+              />
             </div>
           </div>
         </div>

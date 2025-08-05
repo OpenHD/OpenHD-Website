@@ -49,29 +49,25 @@ function addCaptions() {
     caption.className = 'auto-caption';
     caption.style.cssText = `
       text-align: center;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-style: italic;
-      color: var(--ifm-color-content-secondary);
+      color: var(--ifm-color-emphasis-700);
       margin: 8px 0 16px 0;
-      padding: 8px 12px;
-      background-color: var(--ifm-background-surface-color);
-      border-radius: 6px;
-      border-left: 3px solid var(--ifm-color-primary);
+      width: 100%;
+      box-sizing: border-box;
       line-height: 1.4;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      transition: all 0.2s ease;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
     `;
     caption.textContent = altText;
     
-    // Add hover effect
+    // Add subtle hover effect
     caption.addEventListener('mouseenter', () => {
-      caption.style.transform = 'translateY(-1px)';
-      caption.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.15)';
+      caption.style.opacity = '1';
     });
     
     caption.addEventListener('mouseleave', () => {
-      caption.style.transform = 'translateY(0)';
-      caption.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+      caption.style.opacity = '0.8';
     });
     
     // Insert caption after image or picture element

@@ -49,7 +49,6 @@ We offer a multi-platform [app](https://github.com/OpenHD/QOpenHD/releases) with
 
 If you need help or want to learn more, we offer several resources:
 
-* [OpenHD Forum](https://forum.openhdfpv.org/)
 * Public [Telegram](https://t.me/OpenHD\_User) and [Discord](https://discord.gg/P9kXs9N2RP) groups for lots of immediate interaction
 * Please document problems on [Github](https://github.com/OpenHD/OpenHD/issues)
 * First intro to Open.HD from CurryKitten on [Youtube](https://www.youtube.com/playlist?list=PL7WaECFssECJWfTc0vKYTfUdH5y8UgdI9)

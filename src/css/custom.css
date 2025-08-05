@@ -247,6 +247,7 @@
   max-width: 100%;
 }
 
+
 /* Loading state for images */
 .theme-doc-markdown img[data-enhanced] {
   background: linear-gradient(90deg, 
@@ -293,38 +294,9 @@
   border-color: var(--ifm-color-primary);
 }
 
-/* Enhanced auto-caption styling */
+/* Simple auto-caption styling */
 .auto-caption {
-  text-align: center;
-  font-size: 0.85rem;
-  font-style: italic;
-  color: var(--ifm-color-content-secondary);
-  margin: 8px 0 16px 0;
-  padding: 8px 12px;
-  background-color: var(--ifm-background-surface-color);
-  border-radius: 6px;
-  border-left: 3px solid var(--ifm-color-primary);
-  line-height: 1.4;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
-  max-width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.auto-caption:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-/* Dark theme caption adjustments */
-[data-theme='dark'] .auto-caption {
-  background-color: var(--ifm-color-emphasis-100);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme='dark'] .auto-caption:hover {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  font-family: var(--ifm-font-family-base);
 }
 
 /* Zoom overlay improvements */
