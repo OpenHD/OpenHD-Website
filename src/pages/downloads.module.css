@@ -703,6 +703,158 @@
   border-color: rgba(255, 255, 255, 0.3);
 }
 
+/* Light Theme Optimizations */
+[data-theme='light'] .downloadsPage {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #212529;
+}
+
+[data-theme='light'] .header h1 {
+  background: linear-gradient(45deg, #0066cc, #004499);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme='light'] .header p {
+  color: #6c757d;
+}
+
+[data-theme='light'] .quickStart {
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.08), rgba(0, 68, 153, 0.08));
+  border-color: rgba(0, 102, 204, 0.2);
+  backdrop-filter: none;
+}
+
+[data-theme='light'] .quickStartContent p {
+  color: #6c757d;
+}
+
+[data-theme='light'] .downloadCard {
+  background: #ffffff;
+  border-color: rgba(0, 102, 204, 0.2);
+  backdrop-filter: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='light'] .recommendedCard {
+  background: rgba(0, 102, 204, 0.02);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 8px 30px rgba(0, 102, 204, 0.15);
+}
+
+[data-theme='light'] .recommendedCard:hover {
+  box-shadow: 0 15px 40px rgba(0, 102, 204, 0.25);
+}
+
+[data-theme='light'] .cardDescription {
+  color: #6c757d;
+}
+
+[data-theme='light'] .benefit {
+  color: #495057;
+}
+
+[data-theme='light'] .downloadItem {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+}
+
+[data-theme='light'] .downloadItem:hover {
+  background: #e9ecef;
+}
+
+[data-theme='light'] .itemContent a {
+  color: #212529;
+}
+
+[data-theme='light'] .itemContent i {
+  color: #6c757d;
+}
+
+[data-theme='light'] .installationHelp {
+  background: #ffffff;
+  border-color: #e9ecef;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='light'] .installationHelp p {
+  color: #6c757d;
+}
+
+[data-theme='light'] .additionalInfo {
+  background: #f8f9fa;
+  border-color: #e9ecef;
+}
+
+[data-theme='light'] .additionalInfo li {
+  color: #495057;
+}
+
+[data-theme='light'] .versionCard {
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.05), rgba(0, 68, 153, 0.05));
+  backdrop-filter: none;
+  border-color: var(--ifm-color-primary);
+}
+
+[data-theme='light'] .versionCard p {
+  color: #6c757d;
+}
+
+[data-theme='light'] .versionLinks .button {
+  background: #ffffff !important;
+  border-color: var(--ifm-color-primary) !important;
+  color: var(--ifm-color-primary) !important;
+  backdrop-filter: none;
+  text-shadow: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='light'] .versionLinks .button:hover {
+  background: var(--ifm-color-primary) !important;
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
+}
+
+[data-theme='light'] .versionLinks .button i {
+  color: inherit !important;
+  filter: none;
+}
+
+[data-theme='light'] .modal {
+  background: #ffffff;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme='light'] .modalHeader {
+  border-bottom-color: #e9ecef;
+}
+
+[data-theme='light'] .modalHeader p {
+  color: #6c757d;
+}
+
+[data-theme='light'] .modalBody {
+  color: #495057;
+}
+
+[data-theme='light'] .telegramSection {
+  background: rgba(0, 102, 204, 0.05);
+  border-color: rgba(0, 102, 204, 0.2);
+}
+
+[data-theme='light'] .closeButton {
+  background: #f8f9fa;
+  border-color: #dee2e6;
+  color: #495057;
+}
+
+[data-theme='light'] .closeButton:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
 @media screen and (max-width: 768px) {
   .downloadsPage {
     padding: 2rem 0;

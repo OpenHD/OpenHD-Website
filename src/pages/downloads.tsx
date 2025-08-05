@@ -2,6 +2,7 @@ import type {ReactNode} from 'react';
 import {useState} from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import AdvancedDownloads from '../components/AdvancedDownloads';
 import styles from './downloads.module.css';
 
 interface ImageWriterDownload {
@@ -12,11 +13,6 @@ interface ImageWriterDownload {
   icon: string;
 }
 
-interface ImageDownload {
-  platform: string;
-  downloadUrl: string;
-  icon: string;
-}
 
 interface AppDownload {
   platform: string;
@@ -63,48 +59,6 @@ const imageWriterDownloads: ImageWriterDownload[] = [
   }
 ];
 
-const imageDownloads: ImageDownload[] = [
-  {
-    platform: 'Raspberry Pi',
-    downloadUrl: 'http://fra1.digitaloceanspaces.com/openhd-images/Downloader/release/2.6.4/OpenHD-image-pi-bullseye-2.6.4-release.img.xz',
-    icon: 'fas fa-microchip'
-  },
-  {
-    platform: 'Radxa Zero 3',
-    downloadUrl: 'http://fra1.digitaloceanspaces.com/openhd-images/Downloader/release/2.6.4/OpenHD-image-radxa-zero3w-2.6.4-release.img.xz',
-    icon: 'fas fa-microchip'
-  },
-  {
-    platform: 'Radxa CM 3',
-    downloadUrl: 'http://fra1.digitaloceanspaces.com/openhd-images/Downloader/release/2.6.4/OpenHD-image-radxa-cm3-2.6.4-release.img.xz',
-    icon: 'fas fa-microchip'
-  },
-  {
-    platform: 'Radxa Rock5A',
-    downloadUrl: 'http://fra1.digitaloceanspaces.com/openhd-images/Downloader/release/2.6.4/OpenHD-image-rock5a-2.6.4-release.img.xz',
-    icon: 'fas fa-microchip'
-  },
-  {
-    platform: 'Radxa Rock5B',
-    downloadUrl: 'http://fra1.digitaloceanspaces.com/openhd-images/Downloader/release/2.6.4/OpenHD-image-rock5b-2.6.4-release.img.xz',
-    icon: 'fas fa-microchip'
-  },
-  {
-    platform: 'X86 Full',
-    downloadUrl: 'http://fra1.digitaloceanspaces.com/openhd-images/Downloader/release/2.6.4/OpenHD-image-x86-noble-2.6.4-release.img.xz',
-    icon: 'fas fa-desktop'
-  },
-  {
-    platform: 'X86 Minimal',
-    downloadUrl: 'http://fra1.digitaloceanspaces.com/openhd-images/Downloader/release/2.6.4/OpenHD-image-x86-minimal-2.6.4-release.img.xz',
-    icon: 'fas fa-desktop'
-  },
-  {
-    platform: 'OpenHD X20 VTX',
-    downloadUrl: 'http://fra1.digitaloceanspaces.com/openhd-images/Downloader/release/2.6.4/OpenHD-image-x20-2.6.4-release.img.xz',
-    icon: 'fas fa-broadcast-tower'
-  }
-];
 
 const appDownloads: AppDownload[] = [
   {
@@ -260,52 +214,6 @@ function ImageWriterCard({ onOpenModal }: { onOpenModal: (platform: string) => v
   );
 }
 
-// Images Card Component
-function ImagesCard() {
-  const [showAdvanced, setShowAdvanced] = useState(false);
-
-  return (
-    <div className={`${styles.downloadCard} ${styles.advancedCard}`}>
-      <div className={styles.cardHeader}>
-        <i className="fas fa-compact-disc"></i>
-        <h3>Manual Images (Advanced)</h3>
-      </div>
-      <p className={styles.cardDescription}>
-        Raw images for advanced users with specific requirements. 
-        Only use if the ImageWriter doesn't meet your needs.
-      </p>
-      <div className={styles.advancedWarning}>
-        <i className="fas fa-info-circle"></i>
-        <span>Manual configuration and flashing required</span>
-      </div>
-      <button 
-        className={styles.showAdvancedButton}
-        onClick={() => setShowAdvanced(!showAdvanced)}
-      >
-        {showAdvanced ? 'Hide manual downloads' : 'Show manual downloads'}
-        <i className={`fas ${showAdvanced ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
-      </button>
-      {showAdvanced && (
-        <div className={styles.downloadList}>
-          {imageDownloads.map((item, index) => (
-            <div key={index} className={`${styles.downloadItem} ${styles.advancedDownloadItem}`}>
-              <a href={item.downloadUrl} target="_blank" rel="noopener noreferrer" className={styles.downloadItemLink}>
-                <div className={styles.itemIcon}>
-                  <i className="fas fa-download"></i>
-                </div>
-                <div className={styles.itemContent}>
-                  <i className={item.icon}></i>
-                  <span>{item.platform}</span>
-                </div>
-              </a>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
 // Apps Card Component
 function AppsCard({ onOpenModal }: { onOpenModal: (platform: string) => void }) {
   const handlePausedDownload = (platform: string) => {
@@ -449,7 +357,7 @@ export default function Downloads(): ReactNode {
           </div>
           
           <div className={styles.advancedSection}>
-            <ImagesCard />
+            <AdvancedDownloads />
           </div>
         </div>
       </div>
