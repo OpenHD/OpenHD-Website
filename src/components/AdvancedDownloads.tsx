@@ -75,13 +75,18 @@ export default function AdvancedDownloads(): JSX.Element {
         
         for (const proxyUrl of proxies) {
           try {
-            const [stableResponse, devResponse] = await Promise.all([
-              fetch(proxyUrl + 'https://github.com/OpenHD/OpenHD-ImageWriter/releases/download/Json/OpenHD-download-index.json'),
-              fetch(proxyUrl + 'https://github.com/OpenHD/OpenHD-ImageWriter/releases/download/Json/OpenHD-development-releases.json')
+            // Try to fetch all available JSON files
+            const [stableResponse, stableResponse2, devResponse] = await Promise.all([
+              fetch(proxyUrl + 'https://github.com/OpenHD/OpenHD-ImageWriter/releases/download/Json/OpenHD-download-index.json').catch(() => ({ ok: false })),
+              fetch(proxyUrl + 'https://github.com/OpenHD/OpenHD-ImageWriter/releases/download/Json/OpenHD-download-index.json_1.json').catch(() => ({ ok: false })),
+              fetch(proxyUrl + 'https://github.com/OpenHD/OpenHD-ImageWriter/releases/download/Json/OpenHD-development-releases.json').catch(() => ({ ok: false }))
             ]);
 
-            if (stableResponse.ok && devResponse.ok) {
-              stableData = await stableResponse.json();
+            // Use whichever stable response is successful
+            const workingStableResponse = stableResponse.ok ? stableResponse : (stableResponse2.ok ? stableResponse2 : null);
+            
+            if (workingStableResponse && devResponse.ok) {
+              stableData = await workingStableResponse.json();
               devData = await devResponse.json();
               break; // Success, exit loop
             }

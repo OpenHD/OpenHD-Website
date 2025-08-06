@@ -15,7 +15,7 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'http://localhost:3000',
+  url: 'https://openhdfpv.org',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -57,7 +57,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:image',
-        content: 'https://openhd.github.io/OpenHD-Website/img/social-cards/openhd-default.svg',
+        content: 'https://openhdfpv.org/img/social-cards/openhd-default.svg',
       },
     },
     {
@@ -85,7 +85,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:url',
-        content: 'https://openhd.github.io/OpenHD-Website/',
+        content: 'https://openhdfpv.org/',
       },
     },
     {
@@ -121,7 +121,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'twitter:image',
-        content: 'https://openhd.github.io/OpenHD-Website/img/social-cards/openhd-default.svg',
+        content: 'https://openhdfpv.org/img/social-cards/openhd-default.svg',
       },
     },
     // Additional meta tags
@@ -137,6 +137,65 @@ const config: Config = {
       attributes: {
         name: 'keywords',
         content: 'OpenHD, FPV, digital video transmission, drone, RC aircraft, open source, telemetry, ground station, HD video, WiFi FPV',
+      },
+    },
+    // Add structured data for better SEO
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "OpenHD",
+        "description": "Open source digital FPV ecosystem for professional drone and RC aircraft applications",
+        "url": "https://openhdfpv.org",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": ["Linux", "Windows", "Android"],
+        "softwareVersion": "2.6.4-evo",
+        "author": {
+          "@type": "Organization",
+          "name": "OpenHD Community"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "screenshot": "https://openhdfpv.org/img/social-cards/openhd-default.svg"
+      }),
+    },
+    // Add canonical link
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'canonical',
+        href: 'https://openhdfpv.org/',
+      },
+    },
+    // Add manifest for PWA
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'manifest',
+        href: '/site.webmanifest',
+      },
+    },
+    // Theme color for mobile browsers
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'theme-color',
+        content: '#00a6f2',
+      },
+    },
+    // Robots meta
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'robots',
+        content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
       },
     },
   ],
