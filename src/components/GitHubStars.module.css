@@ -1,0 +1,169 @@
+/* GitHub Stars Component Styling */
+.githubStars {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--ifm-navbar-background-color);
+  color: var(--ifm-navbar-link-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: 32px;
+}
+
+.githubStars:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.githubStars:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.githubStars:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* GitHub Icon */
+.githubIcon {
+  font-size: 1rem;
+  color: inherit;
+}
+
+/* GitHub Text */
+.githubText {
+  color: inherit;
+  font-weight: 500;
+}
+
+/* Stars Count */
+.starsCount {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  background: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-dark);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  min-width: 40px;
+  justify-content: center;
+}
+
+.starsCount i {
+  font-size: 0.7rem;
+  color: var(--ifm-color-primary);
+}
+
+/* Loading Spinner */
+.loadingSpinner {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.75rem;
+}
+
+.loadingSpinner i {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Error State */
+.errorText {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  color: var(--ifm-color-warning);
+  font-size: 0.75rem;
+}
+
+/* Dark Theme Adjustments */
+[data-theme='dark'] .githubStars {
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .githubStars:hover {
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-primary-light);
+  color: var(--ifm-color-primary-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .starsCount {
+  background: var(--ifm-color-primary-darkest);
+  color: var(--ifm-color-primary-lightest);
+}
+
+[data-theme='dark'] .starsCount i {
+  color: var(--ifm-color-primary-light);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .githubStars {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    gap: 4px;
+    min-height: 28px;
+  }
+  
+  .githubText {
+    display: none; /* Hide text on mobile to save space */
+  }
+  
+  .starsCount {
+    padding: 1px 4px;
+    font-size: 0.7rem;
+    min-width: 35px;
+  }
+  
+  .githubIcon {
+    font-size: 0.9rem;
+  }
+}
+
+/* Alternative compact style */
+.githubStars.compact {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  gap: 4px;
+  min-height: 28px;
+}
+
+.githubStars.compact .githubText {
+  display: none;
+}
+
+/* Animation for stars count update */
+.starsCount {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

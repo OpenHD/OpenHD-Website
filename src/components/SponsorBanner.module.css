@@ -1,0 +1,678 @@
+/* Global Sponsor Corner - Klein mit Hover-Animation */
+.globalSponsorCorner {
+  position: fixed;
+  cursor: pointer;
+  z-index: 999; /* Unter navbar, aber über content */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.2));
+}
+
+.globalSponsorCorner.topright {
+  top: var(--ifm-navbar-height, 60px);
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(225deg, 
+    #ffd700 0%,
+    #ffed4e 30%,
+    #ffc107 70%,
+    #ff8f00 100%
+  );
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  border-bottom-left-radius: 6px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.globalSponsorCorner.topleft {
+  top: var(--ifm-navbar-height, 60px);
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(315deg, 
+    #ffd700 0%,
+    #ffed4e 30%,
+    #ffc107 70%,
+    #ff8f00 100%
+  );
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  border-bottom-right-radius: 6px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.globalSponsorCorner.bottomright {
+  bottom: 20px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, 
+    #ffd700 0%,
+    #ffed4e 30%,
+    #ffc107 70%,
+    #ff8f00 100%
+  );
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  border-top-left-radius: 6px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.globalSponsorCorner.bottomleft {
+  bottom: 20px;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(45deg, 
+    #ffd700 0%,
+    #ffed4e 30%,
+    #ffc107 70%,
+    #ff8f00 100%
+  );
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+  border-top-right-radius: 6px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover-Expansion */
+.globalSponsorCorner:hover.topright {
+  width: 75px;
+  height: 75px;
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  filter: drop-shadow(0 8px 24px rgba(255, 215, 0, 0.3));
+}
+
+.globalSponsorCorner:hover.topleft {
+  width: 80px;
+  height: 50px;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  filter: drop-shadow(0 8px 24px rgba(255, 215, 0, 0.3));
+}
+
+.globalSponsorCorner:hover.bottomright {
+  width: 80px;
+  height: 50px;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0 8px 24px rgba(255, 215, 0, 0.3));
+}
+
+.globalSponsorCorner:hover.bottomleft {
+  width: 80px;
+  height: 50px;
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+  filter: drop-shadow(0 8px 24px rgba(255, 215, 0, 0.3));
+}
+
+.globalCornerContent {
+  position: absolute;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 1;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.topright .globalCornerContent {
+  /* Mathematisch berechneter Schwerpunkt: ((0+100+100)/3, (0+0+100)/3) = (66.67%, 33.33%) */
+  top: 33.33%;
+  right: calc(100% - 66.67%); /* = right: 33.33% */
+  transform: translate(50%, -50%); /* ROTATION ENTFERNT */
+  transform-origin: center;
+}
+
+.topleft .globalCornerContent {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  transform-origin: center;
+}
+
+.bottomright .globalCornerContent {
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%) rotate(-45deg);
+  transform-origin: center;
+}
+
+.bottomleft .globalCornerContent {
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%) rotate(45deg);
+  transform-origin: center;
+}
+
+/* Expanded State - Herz rutscht in die Ecke */
+.globalCornerContent.expanded.topright {
+  top: 20%;  /* Näher zur oberen Kante */
+  right: 20%; /* Näher zur rechten Kante */
+  transform: translate(50%, -50%); /* Keine Rotation */
+}
+
+.globalCornerContent.expanded.topleft {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.globalCornerContent.expanded.bottomright {
+  transform: translate(50%, 50%) rotate(-45deg);
+}
+
+.globalCornerContent.expanded.bottomleft {
+  transform: translate(-50%, 50%) rotate(45deg);
+}
+
+.globalCornerContent i {
+  font-size: 1em;
+  color: #d32f2f;
+  filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.9));
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important; /* Gleiche Geschwindigkeit wie Triangle */
+}
+
+.globalCornerContent.expanded i {
+  font-size: 0.9em;
+}
+
+.sponsorText {
+  /* Positionierung weiter im Triangle, weg von den Kanten */
+  position: absolute;
+  top: 70%;  /* Startet weiter unten (außerhalb) */
+  right: 5%; /* Startet weiter rechts (außerhalb) */
+  transform: translate(50%, -50%) rotate(45deg); /* Parallel zur Hypotenuse */
+  opacity: 0; /* Unsichtbar per default */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Gleiche Kurve wie Triangle */
+  white-space: nowrap;
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.65rem;
+  text-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.8),
+    0 0 10px rgba(255, 255, 255, 0.6),
+    0 0 15px rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+  pointer-events: none;
+  z-index: 999; /* Über alles andere */
+}
+
+.sponsorText.visible {
+  opacity: 1;
+}
+
+/* CSS-Hover für Triangle - macht Text sichtbar und repositioniert ihn */
+.globalSponsorCorner:hover .sponsorText {
+  opacity: 1;
+  top: 40% !important; /* Weiter weg von der Hypotenuse */
+  right: 40% !important; /* Mehr Abstand zur Hypotenuse */
+}
+
+/* Herz im Hover-Zustand in die Ecke verschieben */
+.globalSponsorCorner:hover .globalCornerContent {
+  top: 25% !important; /* Nicht ganz in die Ecke */
+  right: 25% !important; /* Etwas zur Mitte */
+}
+
+/* Herz-Icon beim Hover größer und senkrecht zur Hypotenuse */
+.globalSponsorCorner:hover .globalCornerContent i {
+  font-size: 1.5em !important; /* Größer */
+  transform: rotate(45deg) scale(1.2) !important; /* Andere Richtung + Größe */
+}
+
+/* Heartbeat nur im nicht-hover Zustand - via Pseudo-Element für Glow-Effekt */
+.globalCornerContent i::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(211, 47, 47, 0.3) 0%, transparent 70%);
+  animation: heartbeat-glow 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.globalSponsorCorner:hover .globalCornerContent i::after {
+  animation: none; /* Glow-Effekt beim Hover stoppen */
+}
+
+@keyframes heartbeat-glow {
+  0%, 70%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  35% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+/* Shimmer-Effekt */
+.globalSponsorCorner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(255, 255, 255, 0.0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.0) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: shimmerMove 4s ease-in-out infinite;
+  clip-path: inherit;
+}
+
+.globalSponsorCorner:hover::before {
+  opacity: 1;
+}
+
+@keyframes shimmerMove {
+  0%, 100% { 
+    transform: translateX(-100%); 
+    opacity: 0;
+  }
+  50% { 
+    transform: translateX(100%); 
+    opacity: 0.6;
+  }
+}
+
+/* Mobile Anpassungen */
+@media screen and (max-width: 768px) {
+  .globalSponsorCorner.topright,
+  .globalSponsorCorner.topleft {
+    top: var(--ifm-navbar-height, 60px);
+  }
+  
+  .globalSponsorCorner {
+    width: 35px !important;
+    height: 35px !important;
+  }
+  
+  .globalSponsorCorner:hover.topright {
+    width: 60px !important;
+    height: 60px !important; /* Quadratisch wie Desktop */
+  }
+  
+  .globalCornerContent {
+    font-size: 0.65rem;
+  }
+}
+
+/* Premium Floating Style */
+.sponsorFloating {
+  position: fixed;
+  background: linear-gradient(135deg, 
+    #ffd700 0%,
+    #ffed4e 30%,
+    #ffc107 70%,
+    #ff8f00 100%
+  );
+  border-radius: 50px;
+  padding: 14px 24px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 8px 32px rgba(255, 215, 0, 0.2),
+    0 4px 16px rgba(255, 215, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sponsorFloating.topright {
+  top: 24px;
+  right: 24px;
+}
+
+.sponsorFloating.topleft {
+  top: 24px;
+  left: 24px;
+}
+
+.sponsorFloating.bottomright {
+  bottom: 24px;
+  right: 24px;
+}
+
+.sponsorFloating.bottomleft {
+  bottom: 24px;
+  left: 24px;
+}
+
+.floatingIcon {
+  color: #d32f2f;
+  font-size: 1.3em;
+  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.8));
+  animation: heartbeat 2.5s ease-in-out infinite;
+}
+
+.floatingText {
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.sponsorFloating::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent
+  );
+  transition: left 0.8s ease;
+  border-radius: inherit;
+}
+
+.sponsorFloating:hover::before {
+  left: 100%;
+}
+
+.sponsorFloating:hover {
+  transform: translateY(-4px) scale(1.02);
+  background: linear-gradient(135deg, 
+    #ffed4e 0%,
+    #fff176 30%,
+    #ffd54f 70%,
+    #ffb300 100%
+  );
+  box-shadow: 
+    0 12px 48px rgba(255, 215, 0, 0.3),
+    0 8px 24px rgba(255, 215, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.sponsorFloating:active {
+  transform: translateY(-2px) scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Premium Banner Style */
+.sponsorBanner {
+  background: linear-gradient(135deg, 
+    rgba(255, 215, 0, 0.05) 0%,
+    rgba(255, 215, 0, 0.1) 50%,
+    rgba(255, 215, 0, 0.05) 100%
+  );
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 16px;
+  margin: 2.5rem 0;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.sponsorBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(135deg, 
+    #ffd700 0%,
+    #ffed4e 25%,
+    #ffc107 50%,
+    #ff8f00 75%,
+    #ffd700 100%
+  );
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: subtract;
+  animation: borderShine 3s ease-in-out infinite;
+}
+
+@keyframes borderShine {
+  0%, 100% {
+    background: linear-gradient(135deg, 
+      #ffd700 0%, #ffed4e 25%, #ffc107 50%, #ff8f00 75%, #ffd700 100%);
+  }
+  50% {
+    background: linear-gradient(135deg, 
+      #ffed4e 0%, #fff176 25%, #ffd54f 50%, #ffb300 75%, #ffed4e 100%);
+  }
+}
+
+.sponsorBanner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.1), 
+    transparent
+  );
+  animation: bannerShine 4s ease-in-out infinite;
+}
+
+@keyframes bannerShine {
+  0% { left: -100%; }
+  50% { left: 150%; }
+  100% { left: 150%; }
+}
+
+.bannerContent {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 14px;
+}
+
+.bannerIcon {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #ffd700, #ff8f00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.3));
+  animation: heartbeat 2.5s ease-in-out infinite;
+}
+
+.bannerText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bannerTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--ifm-color-content-primary);
+  margin: 0;
+  background: linear-gradient(135deg, 
+    var(--ifm-color-content-primary) 0%,
+    var(--ifm-color-primary) 50%,
+    var(--ifm-color-content-primary) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.bannerSubtitle {
+  font-size: 1.1rem;
+  color: var(--ifm-color-content-secondary);
+  font-weight: 400;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.bannerButton {
+  background: linear-gradient(135deg, 
+    #ffd700 0%,
+    #ffed4e 30%,
+    #ffc107 70%,
+    #ff8f00 100%
+  );
+  border: none;
+  border-radius: 12px;
+  padding: 16px 32px;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 
+    0 8px 32px rgba(255, 215, 0, 0.2),
+    0 4px 16px rgba(255, 215, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.bannerButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.bannerButton:hover::before {
+  left: 100%;
+}
+
+.bannerButton:hover {
+  background: linear-gradient(135deg, 
+    #ffed4e 0%,
+    #fff176 30%,
+    #ffd54f 70%,
+    #ffb300 100%
+  );
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 48px rgba(255, 215, 0, 0.3),
+    0 8px 24px rgba(255, 215, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.bannerButton:active {
+  transform: translateY(-1px);
+  transition: transform 0.1s ease;
+}
+
+.bannerButton i {
+  font-size: 1.2em;
+}
+
+.compact .bannerContent {
+  padding: 1rem;
+}
+
+.compact .bannerIcon {
+  font-size: 1.5rem;
+}
+
+.compact .bannerTitle {
+  font-size: 1.1rem;
+}
+
+.compact .bannerSubtitle {
+  font-size: 0.9rem;
+}
+
+.compact .bannerButton {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+
+/* Dark theme adjustments */
+[data-theme='dark'] .sponsorBanner {
+  background: linear-gradient(90deg, 
+    rgba(255, 215, 0, 0.08) 0%,
+    rgba(255, 193, 7, 0.12) 50%,
+    rgba(255, 215, 0, 0.08) 100%
+  );
+  border-color: #ffb300;
+}
+
+[data-theme='dark'] .bannerIcon {
+  color: #ffb300;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .sponsorCorner {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .cornerContent {
+    font-size: 0.7rem;
+  }
+  
+  .sponsorFloating {
+    padding: 8px 12px;
+  }
+  
+  .floatingText {
+    font-size: 0.8rem;
+  }
+  
+  .bannerContent {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .bannerButton {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Accessibility improvements */
+.sponsorCorner:focus,
+.sponsorFloating:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.bannerButton:focus {
+  outline: 2px solid #ff8f00;
+  outline-offset: 2px;
+}

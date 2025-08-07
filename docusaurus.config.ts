@@ -250,6 +250,18 @@ const config: Config = {
         explicitSearchResultPath: true,
       },
     ],
+    // OpenHD Social Cards Plugin
+    [
+      '@acid-info/docusaurus-og',
+      {
+        path: './social-cards', // relative to the build directory
+        imageRenderers: {
+          'docusaurus-plugin-content-docs': require('./src/lib/ImageRenderers').docs,
+          'docusaurus-plugin-content-pages': require('./src/lib/ImageRenderers').pages,
+          // 'docusaurus-plugin-content-blog': require('./src/lib/ImageRenderers').blog,
+        },
+      },
+    ],
     // Official Docusaurus ideal image plugin with modern formats
     [
       '@docusaurus/plugin-ideal-image',
@@ -285,7 +297,13 @@ const config: Config = {
       getClientModules() {
         return [
           require.resolve('./src/components/AutoCaptions.js'),
-          require.resolve('./src/components/ModernImageLoader.js')
+          require.resolve('./src/components/ModernImageLoader.js'),
+          require.resolve('./src/components/EnhancedMobileSearch.js'),
+          require.resolve('./src/components/NavbarOverflowMenu.js'),
+          require.resolve('./src/components/IntelligentNavbar.js'),
+          require.resolve('./src/client/footerInit.ts')
+          // REMOVED: SimpleSponsorCorner.js - using React component in Root.tsx instead
+          // REMOVED: NavbarGitHubStars.js - using React hook in Root.tsx instead
         ];
       },
     }),
@@ -355,25 +373,19 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://github.com/OpenHD',
-          label: 'GitHub',
+          type: 'html',
           position: 'right',
+          value: '<div id="github-stars-navbar"></div>',
         },
         {
-          href: 'https://www.youtube.com/@OpenHD-Official',
-          label: 'YouTube',
+          href: 'https://t.me/OpenHD_User',
+          label: 'Telegram',
           position: 'right',
         },
       ],
     },
     footer: {
       style: 'dark',
-      logo: {
-        alt: 'OpenHD Logo',
-        src: 'img/OpenHD-Logo.png',
-        href: '/',
-        width: 180,
-      },
       links: [
         {
           title: 'OpenHD',
@@ -482,7 +494,41 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} OpenHD Project. Built with Docusaurus.`,
+      copyright: `
+        <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 20px;">
+          <!-- Support OpenHD Section -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 25px; background: rgba(255,255,255,0.05); border-radius: 12px; margin: 0 20px;">
+            <h3 style="color: #00a6f2; margin: 0; font-size: 1.2rem; font-weight: 600;">Support OpenHD</h3>
+            <p style="color: rgba(255,255,255,0.8); text-align: center; margin: 0; line-height: 1.5; max-width: 500px;">
+              Help us continue developing OpenHD with your support. Every contribution helps us improve the platform for the entire FPV community.
+            </p>
+            <!-- Funding widget and donate button side by side -->
+            <div style="display: flex; align-items: center; gap: 25px; width: 100%; max-width: 600px; flex-wrap: wrap; justify-content: center;">
+              <div id="footer-funding-widget-main" style="flex: 1; min-width: 300px; max-width: 400px;">
+                <!-- Main funding widget will be rendered here by React -->
+              </div>
+              <a href="https://opencollective.com/openhd" target="_blank" rel="noopener noreferrer" 
+                 style="display: inline-flex; align-items: center; gap: 10px; 
+                        background: linear-gradient(135deg, #00a6f2, #0095d9); 
+                        color: white; padding: 16px 28px; 
+                        border-radius: 8px; text-decoration: none; font-weight: 600;
+                        transition: all 0.3s ease; box-shadow: 0 3px 12px rgba(0, 166, 242, 0.3);
+                        transform: translateY(0px); font-size: 1.1rem; white-space: nowrap;"
+                 onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0, 166, 242, 0.4)'; this.style.background='linear-gradient(135deg, #0095d9, #0085c9)';"
+                 onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 3px 12px rgba(0, 166, 242, 0.3)'; this.style.background='linear-gradient(135deg, #00a6f2, #0095d9)';">
+                <i class="fas fa-heart"></i>
+                <span>Donate</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- OpenHD Logo Section -->
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+          <a href="/" style="text-decoration: none;">
+            <img src="img/OpenHD-Logo.png" alt="OpenHD Logo" style="width: 180px; height: auto;" />
+          </a>
+        </div>
+        Copyright © ${new Date().getFullYear()} OpenHD Project. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

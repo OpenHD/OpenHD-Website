@@ -26,11 +26,26 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 20px;
-  background: transparent;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  height: 30px; /* Increased height for smoother transition */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.05), transparent);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); /* Reduced opacity */
   z-index: 5;
   pointer-events: none;
+}
+
+/* Responsive fade line adjustments */
+@media (max-width: 768px) {
+  .fadeToContent {
+    height: 25px; /* Slightly smaller on mobile */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
+  }
+}
+
+@media (max-height: 700px) {
+  .fadeToContent {
+    height: 20px; /* Even smaller on short screens */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  }
 }
 
 /* Modern FPV HUD Overlay System */
@@ -466,6 +481,83 @@
   transform: scale(1.1);
 }
 
+/* Support CTA Section */
+.supportCTA {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: transparent;
+  animation: fadeInUp 1s ease-out 0.8s both;
+  position: relative;
+  z-index: 20;
+  /* Ensure minimum distance from fadeToContent line */
+  margin-bottom: 2rem;
+  min-height: 120px; /* Ensure consistent height */
+}
+
+.supportText {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: heartbeat 3s ease-in-out infinite;
+}
+
+/* Force override with highest specificity */
+.supportCTA a.button.button--success.button--lg {
+  background: linear-gradient(135deg, rgba(40, 167, 69, 0.2), rgba(40, 167, 69, 0.1)) !important;
+  border: 2px solid rgba(40, 167, 69, 0.6) !important;
+  color: white !important;
+  padding: 16px 32px !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  font-family: 'Poppins', sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  border-radius: 0 !important;
+  position: relative !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 
+    0 0 20px rgba(40, 167, 69, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.supportCTA .button--success.button--lg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid rgba(40, 167, 69, 0.4);
+  transition: all 0.4s ease;
+  z-index: -1;
+  box-shadow: 
+    0 0 15px rgba(40, 167, 69, 0.4),
+    inset 0 0 15px rgba(40, 167, 69, 0.1);
+}
+
+.supportCTA .button--success.button--lg:hover {
+  background: linear-gradient(135deg, rgba(40, 167, 69, 0.4), rgba(40, 167, 69, 0.2)) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(40, 167, 69, 0.4) !important;
+}
+
+.supportCTA .button--success.button--lg:hover::before {
+  border-color: #00d854;
+  box-shadow: 
+    0 0 25px rgba(40, 167, 69, 0.6),
+    inset 0 0 20px rgba(40, 167, 69, 0.1);
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .buttons {
@@ -473,10 +565,67 @@
     margin-top: 2rem;
   }
   
+  .supportCTA {
+    margin-top: 2.5rem; /* Increased for better spacing */
+    margin-bottom: 2.5rem; /* Increased for better distance from fade line */
+    padding: 1.5rem 1rem; /* Reduced horizontal padding */
+    min-height: 100px; /* Slightly reduced for mobile */
+  }
+  
+  /* Hide only the support text on mobile devices, keep the button */
+  .supportText {
+    display: none;
+  }
+  
   .buttons a {
     min-width: 160px;
     padding: 14px 24px !important;
     font-size: 1rem !important;
+  }
+}
+
+/* Medium screens - tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .supportCTA {
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+    padding: 1.8rem;
+    min-height: 110px;
+  }
+}
+
+/* Large screens - desktops */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .supportCTA {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    min-height: 120px;
+  }
+}
+
+/* Extra large screens */
+@media (min-width: 1441px) {
+  .supportCTA {
+    margin-top: 3.5rem;
+    margin-bottom: 2.5rem;
+    min-height: 130px;
+  }
+}
+
+/* Specific viewport height adjustments */
+@media (max-height: 700px) {
+  .supportCTA {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    padding: 1rem !important;
+    min-height: 80px !important;
+  }
+}
+
+@media (min-height: 900px) {
+  .supportCTA {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
   }
 }
 

@@ -432,3 +432,376 @@ table tr:hover {
   background-color: var(--ifm-color-emphasis-200);
 }
 
+/* GitHub Stars Navbar Integration */
+#github-stars-navbar {
+  display: flex;
+  align-items: center;
+  margin: 0 8px;
+}
+
+.navbar-github-stars {
+  background: transparent;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-navbar-link-color);
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  height: 32px;
+}
+
+.navbar-github-stars:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+/* Dark theme adjustments for navbar integration */
+[data-theme='dark'] .navbar-github-stars {
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .navbar-github-stars:hover {
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-primary-light);
+  color: var(--ifm-color-primary-light);
+}
+
+/* Mobile navbar adjustments */
+@media screen and (max-width: 996px) {
+  #github-stars-navbar {
+    margin: 4px;
+  }
+  
+  .navbar-github-stars {
+    height: 28px;
+    font-size: 0.8rem;
+    padding: 2px 6px;
+  }
+}
+
+/* Enhanced Mobile Search Bar */
+@media (max-width: 576px) {
+  /* Search container styling */
+  :global(.navbar__search) {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Default collapsed state - just show search icon */
+  :global(.navbar__search-input):not(:focus):not(.search-expanded) {
+    width: 2.5rem !important;
+    padding: 0.375rem 0.5rem !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='m13.5 11.5-3.25-3.25a5 5 0 1 0-.75.75l3.25 3.25a.5.5 0 0 0 .708-.708ZM2.5 6.5a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 1rem !important;
+    text-indent: -9999px !important;
+    cursor: pointer !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--ifm-color-emphasis-300) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  
+  /* Hover state for collapsed search */
+  :global(.navbar__search-input):not(:focus):not(.search-expanded):hover {
+    background-color: var(--ifm-color-emphasis-100) !important;
+    border-color: var(--ifm-color-primary) !important;
+    transform: scale(1.05) !important;
+  }
+  
+  /* Expanded state - full width */
+  :global(.navbar__search-input):focus,
+  :global(.navbar__search-input).search-expanded {
+    position: fixed !important;
+    top: var(--ifm-navbar-height) !important;
+    left: var(--ifm-navbar-padding-horizontal) !important;
+    right: var(--ifm-navbar-padding-horizontal) !important;
+    width: calc(100vw - var(--ifm-navbar-padding-horizontal) * 2) !important;
+    z-index: 9999 !important;
+    background: var(--ifm-background-color) !important;
+    border: 2px solid var(--ifm-color-primary) !important;
+    border-radius: 12px !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 1rem !important;
+    text-indent: 0 !important;
+    background-image: none !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+    animation: searchExpand 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  
+  /* Dark theme adjustments for expanded search */
+  [data-theme='dark'] :global(.navbar__search-input):focus,
+  [data-theme='dark'] :global(.navbar__search-input).search-expanded {
+    background: var(--ifm-background-color) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  }
+  
+  /* Backdrop overlay when search is expanded */
+  :global(.navbar__search):has(.navbar__search-input:focus)::before,
+  :global(.navbar__search):has(.navbar__search-input.search-expanded)::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    animation: backdropFadeIn 0.3s ease-out;
+  }
+  
+  /* Search dropdown positioning for mobile */
+  :global(.searchBar .dropdownMenu) {
+    position: fixed !important;
+    top: calc(var(--ifm-navbar-height) + 60px) !important;
+    left: var(--ifm-navbar-padding-horizontal) !important;
+    right: var(--ifm-navbar-padding-horizontal) !important;
+    width: calc(100vw - var(--ifm-navbar-padding-horizontal) * 2) !important;
+    max-width: none !important;
+    z-index: 10000 !important;
+    animation: dropdownSlideDown 0.2s ease-out !important;
+  }
+  
+  /* Hide other navbar elements when search is expanded */
+  :global(.navbar__search-input):focus ~ * {
+    opacity: 0.3;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+}
+
+/* Search expand animation */
+@keyframes searchExpand {
+  from {
+    width: 2.5rem;
+    transform: scale(1.05);
+  }
+  to {
+    width: calc(100vw - var(--ifm-navbar-padding-horizontal) * 2);
+    transform: scale(1);
+  }
+}
+
+/* Backdrop fade in animation */
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Dropdown slide down animation */
+@keyframes dropdownSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced search icon for dark theme */
+[data-theme='dark'] :global(.navbar__search-input):not(:focus):not(.search-expanded) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath fill='%23ffffff' d='m13.5 11.5-3.25-3.25a5 5 0 1 0-.75.75l3.25 3.25a.5.5 0 0 0 .708-.708ZM2.5 6.5a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z'/%3E%3C/svg%3E") !important;
+}
+
+/* Close button styles are now handled in JavaScript */
+
+/* Intelligent Navbar Responsive System */
+
+/* iPad Pro specific optimizations */
+.navbar-adaptive-ipad-pro {
+  --ifm-navbar-padding-horizontal: 0.75rem;
+}
+
+.navbar-adaptive-ipad-pro .navbar__items {
+  gap: 0.5rem;
+}
+
+.navbar-adaptive-ipad-pro .navbar__item {
+  margin: 0 0.25rem;
+}
+
+.navbar-adaptive-ipad-pro .navbar__link {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+.navbar-adaptive-ipad-pro .dropdown__toggle {
+  font-size: 0.85rem;
+  padding: 0.5rem 0.6rem;
+}
+
+/* Tablet optimizations */
+.navbar-adaptive-tablet {
+  --ifm-navbar-padding-horizontal: 1rem;
+}
+
+.navbar-adaptive-tablet .navbar__items {
+  gap: 0.75rem;
+}
+
+.navbar-adaptive-tablet .navbar__link {
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
+}
+
+/* Overflow handling */
+.navbar-adaptive-overflow .navbar__items {
+  justify-content: space-between;
+}
+
+.navbar-adaptive-overflow .navbar__item {
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.navbar-adaptive-overflow .navbar__link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Overflow indicator */
+.navbar-overflow-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--ifm-navbar-link-color);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  margin-left: 0.5rem;
+}
+
+.navbar-overflow-indicator:hover {
+  background-color: var(--ifm-color-emphasis-200);
+}
+
+.navbar-overflow-indicator span {
+  font-size: 1.2rem;
+  line-height: 1;
+  letter-spacing: 0.1em;
+}
+
+/* Compact mode for very tight spaces */
+.navbar-adaptive-compact {
+  --ifm-navbar-padding-horizontal: 0.5rem;
+}
+
+.navbar-adaptive-compact .navbar__brand {
+  margin-right: 0.5rem;
+}
+
+.navbar-adaptive-compact .navbar__item {
+  margin: 0 0.1rem;
+}
+
+.navbar-adaptive-compact .navbar__link {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+.navbar-adaptive-compact .navbar-github-stars {
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  height: 28px;
+}
+
+/* Responsive improvements for specific breakpoints */
+
+/* iPad Pro Portrait (768px x 1024px) and Landscape (1024px x 768px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .navbar__items--right {
+    margin-left: auto;
+  }
+  
+  .navbar__link {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.7rem;
+  }
+  
+  .dropdown__toggle {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.6rem;
+  }
+  
+  .navbar-github-stars {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    height: 30px;
+  }
+  
+  .navbar__search .searchBarContainer {
+    margin-left: 0.5rem;
+  }
+}
+
+/* iPad Pro Landscape mode specific fixes */
+@media screen and (min-width: 1024px) and (max-width: 1112px) and (min-height: 834px) and (max-height: 834px) {
+  .navbar {
+    --ifm-navbar-padding-horizontal: 1rem;
+  }
+  
+  .navbar__items {
+    gap: 0.5rem;
+  }
+  
+  .navbar__link {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Ultra-wide iPad Pro (1194px x 834px) */
+@media screen and (min-width: 1112px) and (max-width: 1194px) and (max-height: 834px) {
+  .navbar__link {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.8rem;
+  }
+}
+
+/* Small tablets and large phones in landscape */
+@media screen and (min-width: 576px) and (max-width: 768px) and (max-height: 428px) {
+  .navbar {
+    --ifm-navbar-height: 50px;
+  }
+  
+  .navbar__link {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .navbar-github-stars {
+    height: 26px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Fallback for very narrow screens */
+@media screen and (max-width: 400px) {
+  .navbar-adaptive-ipad-pro,
+  .navbar-adaptive-tablet,
+  .navbar-adaptive-overflow {
+    --ifm-navbar-padding-horizontal: 0.5rem;
+  }
+}
+
+/* Dark theme adjustments */
+[data-theme='dark'] .navbar-overflow-indicator:hover {
+  background-color: var(--ifm-color-emphasis-300);
+}
+
+/* Animation for adaptive changes */
+.navbar__items,
+.navbar__item,
+.navbar__link {
+  transition: all 0.2s ease;
+}
+

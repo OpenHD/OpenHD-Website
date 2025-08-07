@@ -1,0 +1,23 @@
+/* Help Us Concept Page - using original help-us styles with minimal additions */
+
+/* Active tab indicator for help cards */
+.activeCard {
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-dark)) !important;
+  color: white !important;
+  border-color: var(--ifm-color-primary) !important;
+  box-shadow: 0 8px 25px rgba(var(--ifm-color-primary-rgb), 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+.activeCard .helpIcon {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}
+
+.activeCard h3 {
+  color: white !important;
+}
+
+.activeCard p {
+  color: rgba(255, 255, 255, 0.9) !important;
+}

@@ -7,6 +7,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import AppDownloadBanner from '@site/src/components/AppDownloadBanner';
+import SponsorBanner from '@site/src/components/SponsorBanner';
 import Heading from '@theme/Heading';
 import ProtectedEmail from '@site/src/components/ProtectedEmail';
 
@@ -69,6 +70,16 @@ function HomepageHeader() {
             <i className="fab fa-telegram" style={{marginRight: '8px'}}></i>
             Join Community
           </a>
+        </div>
+        
+        <div className={styles.supportCTA}>
+          <p className={styles.supportText}>❤️ Love OpenHD?</p>
+          <Link 
+            className="button button--success button--lg" 
+            to="/help-us">
+            <i className="fas fa-heart" style={{marginRight: '8px'}}></i>
+            Support Our Mission
+          </Link>
         </div>
       </div>
       
@@ -336,9 +347,15 @@ function SocialLinksSection() {
                   <i className={social.icon}></i>
                 </div>
                 <div className={styles.socialContent}>
-                  <a href={social.url} target="_blank" rel="noopener noreferrer">
-                    <h6>{social.name}</h6>
-                  </a>
+                  {social.url.startsWith('/') ? (
+                    <Link to={social.url}>
+                      <h6>{social.name}</h6>
+                    </Link>
+                  ) : (
+                    <a href={social.url} target="_blank" rel="noopener noreferrer">
+                      <h6>{social.name}</h6>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
