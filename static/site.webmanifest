@@ -1,0 +1,27 @@
+{
+  "name": "OpenHD - Open Source Digital FPV Ecosystem",
+  "short_name": "OpenHD",
+  "description": "Professional digital FPV system for drones and RC aircraft. High-quality video transmission, telemetry, and ground station software.",
+  "icons": [
+    {
+      "src": "/img/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/OpenHD-Logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/OpenHD-Logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#00a6f2",
+  "background_color": "#1b1b1d",
+  "categories": ["utilities", "developer", "fpv", "drone"]
+}
