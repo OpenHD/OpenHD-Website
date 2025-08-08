@@ -321,6 +321,74 @@
   }
 }
 
+/* Patreon Info Section */
+.patreonInfoSection {
+  padding: 2rem 0;
+  background: var(--ifm-background-color);
+}
+
+.patreonBanner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.2rem 1.5rem;
+  background: rgba(255, 165, 0, 0.1);
+  border: 1px solid rgba(255, 165, 0, 0.3);
+  border-radius: 8px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+[data-theme='dark'] .patreonBanner {
+  background: rgba(255, 165, 0, 0.15);
+  border-color: rgba(255, 165, 0, 0.4);
+}
+
+.patreonIcon {
+  font-size: 1.2rem;
+  color: #ffa500;
+  min-width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.patreonContent p {
+  margin: 0;
+  color: var(--ifm-color-content);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.patreonContent a {
+  color: #ffa500;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.patreonContent a:hover {
+  color: #ff8c00;
+  text-decoration: underline;
+}
+
+/* Mobile adjustments for Patreon banner */
+@media (max-width: 768px) {
+  .patreonBanner {
+    padding: 1rem 1.2rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.8rem;
+  }
+  
+  .patreonContent p {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}
+
 /* Donation CTA Section */
 .donationCTASection {
   padding: 4rem 0;

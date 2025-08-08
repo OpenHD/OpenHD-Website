@@ -7,6 +7,8 @@
 /* FontAwesome CDN Import */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
+/* Removed navbar.css import - using Docusaurus defaults */
+
 /* OpenHD Theme Colors */
 :root {
   /* OpenHD Primary Colors */
@@ -570,85 +572,22 @@ table tr:hover {
    Minimal Navbar Improvements (Docusaurus-compliant)
 ======================================== */
 
-/* GitHub Stars styling for navbar integration */
+/* REMOVED - Will be replaced by React navbar component with proper styling */
 
-.navbar-github-stars {
-  /* Ensure button is always visible */
-  display: inline-flex !important;
-  align-items: center !important;
-  /* Override only necessary properties, let GitHubStars.module.css handle the rest */
-  font-size: 0.85rem;
-  transition: all 0.2s ease;
-}
+/* REMOVED - replaced by .navbar__items--right specific rules */
 
-.navbar-github-stars:hover {
-  background: var(--ifm-color-primary);
-  border-color: var(--ifm-color-primary);
-  color: white;
-  transform: translateY(-1px);
-}
-
-/* Dark theme adjustments */
-[data-theme='dark'] .navbar-github-stars {
-  border-color: var(--ifm-color-emphasis-400);
-}
-
-[data-theme='dark'] .navbar-github-stars:hover {
-  background: var(--ifm-color-primary);
-  border-color: var(--ifm-color-primary);
-  color: white;
-}
-
-/* Navbar link hover improvements */
-.navbar__link:hover {
-  color: var(--ifm-color-primary);
-  background-color: var(--ifm-color-primary-lightest);
-  border-radius: 4px;
-  transform: translateY(-1px);
-}
-
-/* Version dropdown styling */
-.navbar .dropdown__toggle {
-  background: var(--ifm-color-primary);
-  color: white;
-  border: none;
-  font-weight: 600;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.navbar .dropdown__toggle:hover {
-  background: var(--ifm-color-primary-dark);
-  transform: translateY(-1px);
-}
-
-/* Ensure dropdown menu is visible */
-.navbar .dropdown__menu {
-  min-width: 150px;
-  background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 9999;
-}
-
-.navbar .dropdown__link {
-  padding: 8px 16px;
-  color: var(--ifm-font-color-base);
-  text-decoration: none;
-}
-
-.navbar .dropdown__link:hover {
-  background-color: var(--ifm-color-emphasis-100);
-  color: var(--ifm-color-primary);
-}
+/* REMOVED - replaced by more specific rules below */
 
 /* Dark theme dropdown adjustments */
-[data-theme='dark'] .navbar .dropdown__menu {
+[data-theme='dark'] .navbar__items--right .dropdown__menu {
   background: var(--ifm-background-color);
   border-color: var(--ifm-color-emphasis-400);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
+
+/* REMOVED - Will be replaced by swizzled React navbar component */
+
+/* REMOVED - Will be replaced by swizzled React navbar component */
 
 /* Mobile dropdown fixes */
 @media screen and (max-width: 996px) {
@@ -711,154 +650,17 @@ table tr:hover {
   }
 }
 
-/* ========================================
-   Modern Horizontal Scrollable Navbar
-======================================== */
+/* REMOVED - Will be replaced by React-based navbar with proper responsive design */
 
-/* Enable horizontal scrolling for navbar items */
-.navbar__inner {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  overflow-x: auto;
-  overflow-y: visible; /* Allow dropdown to be visible */
-  -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-}
+/* REMOVED - Will be replaced by React-based responsive navbar */
 
-/* Hide scrollbar for Webkit browsers */
-.navbar__inner::-webkit-scrollbar {
-  display: none;
-}
+/* REMOVED - Will be replaced by React-based responsive navbar */
 
-/* Left items - scrollable container */
-.navbar__items--left {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0; /* Don't shrink, allow scroll instead */
-  min-width: max-content; /* Maintain natural width */
-}
+/* REMOVED - Will be replaced by React-based responsive navbar */
 
-/* Right items - always visible, compact */
-.navbar__items--right {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  flex-shrink: 0;
-  margin-left: auto;
-  
-  /* Sticky position to stay visible during horizontal scroll */
-  position: sticky;
-  right: 0;
-  background: var(--ifm-navbar-background-color);
-  padding-left: 1rem;
-  
-  /* Subtle gradient to indicate more content */
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    var(--ifm-navbar-background-color) 20%,
-    var(--ifm-navbar-background-color) 100%
-  );
-}
+/* REMOVED - Will be replaced by React-based responsive navbar */
 
-/* Brand section - always visible */
-.navbar__brand {
-  flex-shrink: 0;
-  margin-right: 1rem;
-  position: sticky;
-  left: 0;
-  z-index: 1;
-  background: var(--ifm-navbar-background-color);
-  padding-right: 1rem;
-  
-  /* Subtle gradient to indicate more content */
-  background: linear-gradient(
-    to left, 
-    transparent 0%,
-    var(--ifm-navbar-background-color) 20%,
-    var(--ifm-navbar-background-color) 100%
-  );
-}
-
-/* Navbar items styling for horizontal scroll */
-.navbar__item {
-  flex-shrink: 0; /* Prevent shrinking */
-  white-space: nowrap;
-}
-
-.navbar__link {
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  /* Remove max-width to allow natural sizing */
-}
-
-/* ========================================
-   Priority-Based Responsive Strategy
-======================================== */
-
-/* Large screens - show everything */
-@media screen and (min-width: 1201px) {
-  .navbar__inner {
-    overflow-x: visible; /* No scroll needed on large screens */
-  }
-  
-  .navbar__items--left {
-    gap: 1rem;
-  }
-  
-  .navbar__items--right {
-    gap: 0.5rem;
-    background: transparent;
-    padding-left: 0;
-  }
-  
-  .navbar__brand {
-    background: transparent;
-    padding-right: 0;
-  }
-}
-
-/* Medium screens - enable horizontal scroll, hide low priority items */
-@media screen and (max-width: 1200px) and (min-width: 997px) {
-  /* Hide lowest priority items first */
-  .navbar__item a[href="/privacy"] {
-    display: none;
-  }
-  
-  /* Compact styling */
-  .navbar__link {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.9rem;
-  }
-  
-  .navbar-github-stars {
-    font-size: 0.8rem;
-    padding: 3px 6px;
-  }
-  
-  .navbar .dropdown__toggle {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.85rem;
-  }
-}
-
-/* Smaller screens - hide more items, keep horizontal scroll */
-@media screen and (max-width: 1100px) and (min-width: 997px) {
-  /* Hide Telegram link (second priority) */
-  .navbar__item a[href="https://t.me/OpenHD_User"] {
-    display: none;
-  }
-  
-  .navbar__link {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.85rem;
-  }
-}
+/* REMOVED - Will be replaced by React-based responsive navbar */
 
 /* Docusaurus mobile breakpoint - let mobile menu handle everything */
 @media screen and (max-width: 996px) {
@@ -936,6 +738,64 @@ table tr:hover {
     );
     pointer-events: none;
     z-index: 1;
+  }
+}
+
+/* ========================================
+   OpenHD Logo Glow Effect
+======================================== */
+
+/* Subtle glow effect for navbar logo */
+.navbar__brand img {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 6px rgba(0, 166, 242, 0.2));
+}
+
+.navbar__brand:hover img {
+  filter: drop-shadow(0 0 12px rgba(0, 166, 242, 0.5)) drop-shadow(0 0 24px rgba(0, 166, 242, 0.2));
+  transform: scale(1.02);
+}
+
+/* Subtle breathing animation */
+@keyframes logoGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(0, 166, 242, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(0, 166, 242, 0.3));
+  }
+}
+
+.navbar__brand img {
+  animation: logoGlow 4s ease-in-out infinite;
+}
+
+/* Enhanced glow for dark theme */
+[data-theme='dark'] .navbar__brand img {
+  filter: drop-shadow(0 0 8px rgba(0, 166, 242, 0.3));
+}
+
+[data-theme='dark'] .navbar__brand:hover img {
+  filter: drop-shadow(0 0 16px rgba(0, 166, 242, 0.6)) drop-shadow(0 0 32px rgba(0, 166, 242, 0.3));
+}
+
+@keyframes logoDarkGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(0, 166, 242, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(0, 166, 242, 0.4));
+  }
+}
+
+[data-theme='dark'] .navbar__brand img {
+  animation: logoDarkGlow 4s ease-in-out infinite;
+}
+
+/* Disable animation for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .navbar__brand img {
+    animation: none;
   }
 }
 

@@ -408,6 +408,22 @@ export default function HelpUs() {
         {/* DONATE TAB CONTENT */}
         {activeTab === 'donate' && (
           <>
+            {/* Patreon Info Banner */}
+            <section className={styles.patreonInfoSection}>
+              <div className="container">
+                <div className={styles.patreonBanner}>
+                  <div className={styles.patreonIcon}>
+                    <i className="fas fa-info-circle"></i>
+                  </div>
+                  <div className={styles.patreonContent}>
+                    <p>
+                      There is also a <a href="https://www.patreon.com/OpenHD" target="_blank" rel="noopener noreferrer">Patreon campaign</a> available, but this exclusively targets the creation of specialized hardware.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             {/* Call to Action for Donations - moved to top */}
             <section className={styles.donationCTASection}>
               <div className="container">

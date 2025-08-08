@@ -348,6 +348,7 @@ const config: Config = {
         alt: 'OpenHD Logo',
         src: 'img/OpenHD-Logo.png',
       },
+      hideOnScroll: false,
       items: [
         {
           type: 'docSidebar',
@@ -370,18 +371,32 @@ const config: Config = {
           position: 'right',
         },
         {
-          to: '/privacy',
-          label: 'Privacy',
+          href: 'https://github.com/OpenHD/OpenHD',
+          label: 'GitHub',
           position: 'right',
         },
         {
-          type: 'custom-github-stars',
+          type: 'dropdown',
+          label: 'Community',
           position: 'right',
-        },
-        {
-          href: 'https://t.me/OpenHD_User',
-          label: 'Telegram',
-          position: 'right',
+          items: [
+            {
+              html: '<i class="fab fa-telegram"></i> Telegram',
+              href: 'https://t.me/OpenHD_User',
+            },
+            {
+              html: '<i class="fab fa-discord"></i> Discord', 
+              href: 'https://discord.gg/P9kXs9N2RP',
+            },
+            {
+              html: '<i class="fab fa-youtube"></i> YouTube',
+              href: 'https://www.youtube.com/@OpenHD-Official',
+            },
+            {
+              html: '<i class="fab fa-facebook"></i> Facebook',
+              href: 'https://www.facebook.com/groups/openhd',
+            },
+          ],
         },
       ],
     },
@@ -468,6 +483,10 @@ const config: Config = {
               label: 'Changelog',
               to: '/changelog',
             },
+            {
+              label: 'Privacy',
+              to: '/privacy',
+            },
           ],
         },
         {
@@ -503,6 +522,7 @@ const config: Config = {
             <p style="color: rgba(255,255,255,0.8); text-align: center; margin: 0; line-height: 1.5; max-width: 500px;">
               Help us continue developing OpenHD with your support. Every contribution helps us improve the platform for the entire FPV community.
             </p>
+            
             <!-- Funding widget and buttons layout -->
             <div style="display: flex; align-items: center; gap: 25px; width: 100%; max-width: 650px; flex-wrap: wrap; justify-content: center;">
               <div id="footer-funding-widget-main" style="flex: 1; min-width: 300px; max-width: 400px;">
