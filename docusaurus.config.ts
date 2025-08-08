@@ -57,7 +57,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:image',
-        content: 'https://openhdfpv.org/img/social-cards/openhd-default.svg',
+        content: 'https://openhdfpv.org/img/social-cards/openhd-default.png',
       },
     },
     {
@@ -121,7 +121,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'twitter:image',
-        content: 'https://openhdfpv.org/img/social-cards/openhd-default.svg',
+        content: 'https://openhdfpv.org/img/social-cards/openhd-default.png',
       },
     },
     // Additional meta tags
@@ -320,7 +320,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/social-cards/openhd-default.svg',
+    image: 'img/social-cards/openhd-default.png',
     zoom: {
       selector: '.markdown :not(em) > img, .theme-doc-markdown :not(em) > img',
       background: {
