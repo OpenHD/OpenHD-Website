@@ -430,10 +430,10 @@ export default function HelpUs() {
                 <h2>Support OpenHD Financially</h2>
                 <div className={styles.donationCTAContent}>
                   <div className={styles.donationText}>
-                    <h3>Why We Need Your Support</h3>
+                    <h3>Monthly Funding Status</h3>
                     
                     {/* Use the reusable FundingWidget */}
-                    <FundingWidget variant="inline" showDescription={false} showDonateButton={false} />
+                    <FundingWidget variant="inline" showDescription={true} showDonateButton={false} />
                     
                     <ul className={styles.needsList}>
                       <li><strong>Server & Infrastructure:</strong> $34/month for hosting and distribution services</li>
