@@ -30,6 +30,7 @@
 .progressContainer {
   position: relative;
   margin-bottom: 1rem;
+  padding-top: 2.5rem; /* More space for marker labels */
 }
 
 .progressTrack {
@@ -47,13 +48,13 @@
 
 .progressIndicator {
   height: 100%;
-  background: linear-gradient(90deg, #ff6b6b 0%, #ff6b6b 20%, #ffd700 50%, #00a6f2 100%);
+  background: linear-gradient(90deg, #ff6b6b 0%, #ff6b6b 33%, #ffd700 58%, #51cf66 83%, #00a6f2 100%);
   background-size: calc(100% / var(--progress-ratio, 1)) 100%;
   background-repeat: no-repeat;
   border-radius: 6px;
   transition: width 1.5s ease-out;
   position: relative;
-  box-shadow: 0 0 6px rgba(0, 166, 242, 0.4);
+  box-shadow: 0 0 6px var(--status-color, rgba(0, 166, 242, 0.4));
 }
 
 /* Goal Markers (for inline variant) */
@@ -84,17 +85,33 @@
 
 .markerLabel {
   position: absolute;
-  top: -20px;
+  top: -44px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.65rem;
   color: rgba(255, 255, 255, 0.9);
   font-weight: 600;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 1px 4px;
-  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 3px 6px;
+  border-radius: 4px;
   white-space: nowrap;
   backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  z-index: 10;
+}
+
+.labelText {
+  font-size: 0.6rem;
+  opacity: 0.9;
+}
+
+.labelAmount {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #00a6f2;
 }
 
 /* Current Amount Display */
@@ -108,6 +125,55 @@
   white-space: nowrap;
   z-index: 10;
   pointer-events: none;
+}
+
+/* Status Container and Badge */
+.statusContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.statusBadge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.statusCritical {
+  background: linear-gradient(135deg, #ff6b6b, #ff5252);
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.statusBasic {
+  background: linear-gradient(135deg, #ffd700, #ffc107);
+  color: #1c262f;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.statusStable {
+  background: linear-gradient(135deg, #51cf66, #40c057);
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.statusThriving {
+  background: linear-gradient(135deg, #00a6f2, #0095d9);
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.statusMessage {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+  opacity: 0.9;
 }
 
 /* Action Container */
@@ -167,6 +233,10 @@
 
 .footer .widgetAmount {
   font-size: 0.9rem;
+}
+
+.footer .progressContainer {
+  padding-top: 0; /* No marker labels in footer variant */
 }
 
 .footer .progressTrack {

@@ -1,19 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import type { ReactNode } from 'react';
 import styles from './GitHubStars.module.css';
+import { useGitHubStars } from '@site/src/contexts/AppContext';
 
 interface GitHubStarsProps {
   repo: string; // Format: "OpenHD/OpenHD"
   className?: string;
   showIcon?: boolean;
   showText?: boolean;
-}
-
-interface GitHubApiResponse {
-  stargazers_count: number;
-  watchers_count: number;
-  forks_count: number;
-  html_url: string;
 }
 
 const formatNumber = (num: number): string => {
@@ -29,32 +23,12 @@ export default function GitHubStars({
   showIcon = true, 
   showText = true 
 }: GitHubStarsProps): ReactNode {
-  const [stars, setStars] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, fetchStars } = useGitHubStars();
+  const { stars, isLoading } = data;
 
   useEffect(() => {
-    const fetchGitHubStats = async () => {
-      try {
-        // Use CORS proxy for client-side requests to avoid CORS issues
-        const response = await fetch(`https://api.github.com/repos/${repo}`);
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch GitHub data');
-        }
-
-        const data: GitHubApiResponse = await response.json();
-        setStars(data.stargazers_count);
-        setIsLoading(false);
-      } catch (err) {
-        console.warn('Failed to fetch GitHub stars:', err);
-        setError('Failed to load');
-        setIsLoading(false);
-      }
-    };
-
-    fetchGitHubStats();
-  }, [repo]);
+    fetchStars(repo);
+  }, [repo, fetchStars]);
 
   const handleClick = () => {
     window.open(`https://github.com/${repo}`, '_blank', 'noopener,noreferrer');
@@ -75,20 +49,18 @@ export default function GitHubStars({
         <span className={styles.githubText}>GitHub</span>
       )}
       
+      {/* Only show star count if we have stars, but always show the button */}
       {isLoading ? (
         <span className={styles.loadingSpinner} aria-label="Loading stars">
           <i className="fas fa-spinner fa-spin" />
         </span>
-      ) : error ? (
-        <span className={styles.errorText} aria-label="Could not load stars">
-          <i className="fas fa-exclamation-triangle" />
-        </span>
-      ) : stars !== null ? (
+      ) : stars !== null && stars > 0 ? (
         <span className={styles.starsCount} aria-label={`${stars} stars`}>
           <i className="fas fa-star" aria-hidden="true" />
           {formatNumber(stars)}
         </span>
       ) : null}
+      {/* Button always shows, stars only if available */}
     </button>
   );
 }

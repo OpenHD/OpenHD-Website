@@ -211,14 +211,17 @@ const config: Config = {
           editUrl: 'https://github.com/OpenHD/OpenHD-Website/edit/main/docusaurus-website/',
           // Versioning configuration
           lastVersion: 'current',
+          includeCurrentVersion: true,
           versions: {
             current: {
               label: 'Evo (Latest)',
               path: '/',
+              banner: 'none',
             },
             '2.0': {
-              label: '2.0',
+              label: '2.0 (Legacy)',
               path: '/2.0',
+              banner: 'unmaintained',
             },
           },
           // Show h4 headings in table of contents (perfect for FAQ)
@@ -299,11 +302,11 @@ const config: Config = {
           require.resolve('./src/components/AutoCaptions.js'),
           require.resolve('./src/components/ModernImageLoader.js'),
           require.resolve('./src/components/EnhancedMobileSearch.js'),
-          require.resolve('./src/components/NavbarOverflowMenu.js'),
-          require.resolve('./src/components/IntelligentNavbar.js'),
-          require.resolve('./src/client/footerInit.ts')
-          // REMOVED: SimpleSponsorCorner.js - using React component in Root.tsx instead
-          // REMOVED: NavbarGitHubStars.js - using React hook in Root.tsx instead
+          require.resolve('./src/components/FooterFunding/FooterFunding.tsx'),
+          require.resolve('./src/components/FooterButtons/FooterButtonsInjector.tsx')
+          // GitHub Stars handled by React Context in Root.tsx
+          // Funding Widget uses optimized DOM injection
+          // Footer Buttons use proper React Links for SPA navigation
         ];
       },
     }),
@@ -353,11 +356,6 @@ const config: Config = {
           label: 'Documentation',
         },
         {
-          type: 'docsVersionDropdown',
-          position: 'right',
-          dropdownActiveClassDisabled: true,
-        },
-        {
           to: '/downloads',
           label: 'Downloads',
           position: 'left',
@@ -368,14 +366,17 @@ const config: Config = {
           position: 'left',
         },
         {
+          type: 'docsVersionDropdown',
+          position: 'right',
+        },
+        {
           to: '/privacy',
           label: 'Privacy',
           position: 'right',
         },
         {
-          type: 'html',
+          type: 'custom-github-stars',
           position: 'right',
-          value: '<div id="github-stars-navbar"></div>',
         },
         {
           href: 'https://t.me/OpenHD_User',
@@ -502,30 +503,21 @@ const config: Config = {
             <p style="color: rgba(255,255,255,0.8); text-align: center; margin: 0; line-height: 1.5; max-width: 500px;">
               Help us continue developing OpenHD with your support. Every contribution helps us improve the platform for the entire FPV community.
             </p>
-            <!-- Funding widget and donate button side by side -->
-            <div style="display: flex; align-items: center; gap: 25px; width: 100%; max-width: 600px; flex-wrap: wrap; justify-content: center;">
+            <!-- Funding widget and buttons layout -->
+            <div style="display: flex; align-items: center; gap: 25px; width: 100%; max-width: 650px; flex-wrap: wrap; justify-content: center;">
               <div id="footer-funding-widget-main" style="flex: 1; min-width: 300px; max-width: 400px;">
                 <!-- Main funding widget will be rendered here by React -->
               </div>
-              <a href="https://opencollective.com/openhd" target="_blank" rel="noopener noreferrer" 
-                 style="display: inline-flex; align-items: center; gap: 10px; 
-                        background: linear-gradient(135deg, #00a6f2, #0095d9); 
-                        color: white; padding: 16px 28px; 
-                        border-radius: 8px; text-decoration: none; font-weight: 600;
-                        transition: all 0.3s ease; box-shadow: 0 3px 12px rgba(0, 166, 242, 0.3);
-                        transform: translateY(0px); font-size: 1.1rem; white-space: nowrap;"
-                 onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0, 166, 242, 0.4)'; this.style.background='linear-gradient(135deg, #0095d9, #0085c9)';"
-                 onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 3px 12px rgba(0, 166, 242, 0.3)'; this.style.background='linear-gradient(135deg, #00a6f2, #0095d9)';">
-                <i class="fas fa-heart"></i>
-                <span>Donate</span>
-              </a>
+              <div id="footer-buttons-container">
+                <!-- Footer buttons will be rendered here by React -->
+              </div>
             </div>
           </div>
         </div>
         <!-- OpenHD Logo Section -->
         <div style="display: flex; justify-content: center; margin-bottom: 20px;">
           <a href="/" style="text-decoration: none;">
-            <img src="img/OpenHD-Logo.png" alt="OpenHD Logo" style="width: 180px; height: auto;" />
+            <img src="/img/OpenHD-Logo.png" alt="OpenHD Logo" style="width: 180px; height: auto;" />
           </a>
         </div>
         Copyright © ${new Date().getFullYear()} OpenHD Project. Built with Docusaurus.`,

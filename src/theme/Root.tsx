@@ -1,17 +1,14 @@
 import React from 'react';
 import GlobalSponsorCorner from '@site/src/components/GlobalSponsorCorner';
-import { useNavbarGitHubStars } from '@site/src/hooks/useNavbarGitHubStars';
+import { AppProvider } from '@site/src/contexts/AppContext';
 
 // Client-side React component that renders on all pages
 function Root({children}) {
-  // Initialize GitHub Stars integration
-  useNavbarGitHubStars();
-
   return (
-    <>
+    <AppProvider>
       {children}
       <GlobalSponsorCorner />
-    </>
+    </AppProvider>
   );
 }
 

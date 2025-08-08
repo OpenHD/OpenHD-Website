@@ -149,13 +149,28 @@ export default function FundingWidget({ variant = 'inline', showDescription = tr
   }
 
   const progressPercentage = Math.min(((stats.monthlyBudget || 0) / 240) * 100, 100);
+  
+  // Determine funding status and message
+  const getFundingStatus = (amount: number) => {
+    if (amount < 80) return { level: 'critical', message: 'At Risk - Minimal support', color: '#ff6b6b' };
+    if (amount < 140) return { level: 'basic', message: 'Surviving - Essential costs covered', color: '#ffd700' };
+    if (amount < 200) return { level: 'stable', message: 'Growing - Active development', color: '#51cf66' };
+    return { level: 'thriving', message: 'Thriving - Full potential', color: '#00a6f2' };
+  };
+
+  const status = getFundingStatus(stats.monthlyBudget || 0);
 
   return (
     <div className={`${styles.fundingWidget} ${styles[variant]}`}>
       {showDescription && (
         <div className={styles.widgetHeader}>
           <span className={styles.widgetTitle}>Monthly Funding</span>
-          <span className={styles.widgetAmount}>${stats.monthlyBudget}</span>
+          <div className={styles.statusContainer}>
+            <span className={styles.widgetAmount}>${stats.monthlyBudget}</span>
+            <span className={`${styles.statusBadge} ${styles[`status${status.level.charAt(0).toUpperCase() + status.level.slice(1)}`]}`}>
+              {status.level.toUpperCase()}
+            </span>
+          </div>
         </div>
       )}
       
@@ -165,27 +180,43 @@ export default function FundingWidget({ variant = 'inline', showDescription = tr
             className={styles.progressIndicator}
             style={{ 
               width: `${progressPercentage}%`,
-              '--progress-ratio': `${Math.max(0.01, (stats.monthlyBudget || 0) / 240)}`
+              '--progress-ratio': `${Math.max(0.01, (stats.monthlyBudget || 0) / 240)}`,
+              '--status-color': status.color
             } as React.CSSProperties}
           ></div>
           
-          {/* Goal markers */}
+          {/* Goal markers with meaningful labels */}
           <div className={styles.goalMarkers}>
-            <div className={styles.goalMarker} style={{ left: '50%' }} title="Basic: $120/month">
+            <div className={styles.goalMarker} style={{ left: '33%' }} title="At risk threshold: $80/month">
               <div className={styles.markerLine}></div>
-              {variant === 'inline' && <div className={styles.markerLabel}>$120</div>}
+              {variant === 'inline' && (
+                <div className={styles.markerLabel}>
+                  <span className={styles.labelText}>At Risk</span>
+                  <span className={styles.labelAmount}>$80</span>
+                </div>
+              )}
             </div>
-            <div className={styles.goalMarker} style={{ left: '75%' }} title="Growth: $180/month">
+            <div className={styles.goalMarker} style={{ left: '58%' }} title="Surviving: $140/month">
               <div className={styles.markerLine}></div>
-              {variant === 'inline' && <div className={styles.markerLabel}>$180</div>}
+              {variant === 'inline' && (
+                <div className={styles.markerLabel}>
+                  <span className={styles.labelText}>Surviving</span>
+                  <span className={styles.labelAmount}>$140</span>
+                </div>
+              )}
             </div>
-            <div className={styles.goalMarker} style={{ left: '95%' }} title="Sustainable: $240/month">
+            <div className={styles.goalMarker} style={{ left: '83%' }} title="Growing: $200/month">
               <div className={styles.markerLine}></div>
-              {variant === 'inline' && <div className={styles.markerLabel}>$240</div>}
+              {variant === 'inline' && (
+                <div className={styles.markerLabel}>
+                  <span className={styles.labelText}>Growing</span>
+                  <span className={styles.labelAmount}>$200</span>
+                </div>
+              )}
             </div>
           </div>
           
-          {/* Current amount indicator */}
+          {/* Current amount and status */}
           <div 
             className={styles.currentAmount}
             style={{ 
@@ -195,6 +226,13 @@ export default function FundingWidget({ variant = 'inline', showDescription = tr
             ${stats.monthlyBudget}
           </div>
         </div>
+        
+        {/* Status message */}
+        {showDescription && (
+          <div className={styles.statusMessage} style={{ color: status.color }}>
+            {status.message}
+          </div>
+        )}
       </div>
 
       {showDonateButton && (
