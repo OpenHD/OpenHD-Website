@@ -64,7 +64,6 @@ This wifi chip/module doesnt have FCC and CE certification to use or buy in EU s
 The ASUS AC56 adapter is currently the most popular choice for OpenHD. Its small size makes it easy to fit into many builds, it uses 5.8GHz, and it is widely available. While the retail price can be high, it is often available used or on sale for $30 or less. It has one internal antenna, and the second antenna is optional, connecting with RP-SMA.
 
 - [FCC info](https://fccid.io/MSQ-USBAC56)
-- [WikiDevi](https://deviwiki.com/wiki/ASUS_USB-AC56)
 
 ## Taobao Card
 
@@ -81,7 +80,6 @@ For affordable alternatives, check out computer stores and consider Aliexpress. 
 To discover more about WiFi sticks and modules offered online, look for product numbers, chipsets, or FCC IDs. Search for high-resolution internal photos of the cards to identify the chipset and amplifiers used. You can also use helpful websites like:
 
 - [FCC ID](https://fccid.io/) (FCC documents with internal photos)
-- [WikiDevi](https://wikidevi.com/wiki/) (General information and sometimes photos)
 
 When you find photos, search for the amplifier numbers to find datasheets that provide rough estimates of the expected output power.
 

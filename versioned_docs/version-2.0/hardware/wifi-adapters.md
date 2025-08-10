@@ -25,28 +25,24 @@ Please use this [form](https://docs.google.com/forms/d/e/1FAIpQLSd_03vS1duD0oFZp
 This adapter is currently the most popular for OpenHD. Its small size makes it easy to fit into many builds, it uses 5.8ghz, and it is widely available. The retail price can be high, but it can often be found used or on sale for $30 or less. One antenna is internal, the 2nd is optional, and connects with RP-SMA.
 
 * [FCC info](https://fccid.io/MSQ-USBAC56)
-* [WikiDevi](https://deviwiki.com/wiki/ASUS_USB-AC56)
 
 #### **AWUS036NHA**
 
 This adapter is highly recommended as it is easy to find and works well. Ideal for long range as it will provide around 280mW output power. Ranges of several kilometers have been reported (with directional antennas though).
 
 * [FCC info](https://apps.fcc.gov/oetcf/eas/reports/ViewExhibitReport.cfm?mode=Exhibits&RequestTimeout=500&calledFromFrame=Y&application_id=G%2Bnb%2FcnfLEByfpIAnz2OrQ%3D%3D&fcc_id=UQ23668)
-* [WikiDevi](https://wikidevi.com/wiki/ALFA_Network_AWUS036NHA)
 
 #### **Ubiquit Wifistations**
 
 This adapter is quite large, but seems to have a good quality amp on it. Useable TXPower is not yet determined, but should be slightly higher than the AWUSH036NHA.
 
 * [FCC info](https://apps.fcc.gov/oetcf/eas/reports/ViewExhibitReport.cfm?mode=Exhibits&RequestTimeout=500&calledFromFrame=Y&application_id=KhauP%2FSwGKHZGHiW1vSYvA%3D%3D&fcc_id=SWX-M2USB)
-* [WikiDevi](https://wikidevi.com/wiki/Ubiquiti_Networks_WiFiStation_EXT)
 
 #### **TL-WN722N V1**
 
 This adapter will provide around 60mW output power. Range should be roughly around 800-1000m with 2.1dbi stock antennas.
 
 * [FCC info](https://apps.fcc.gov/oetcf/eas/reports/ViewExhibitReport.cfm?mode=Exhibits&RequestTimeout=500&calledFromFrame=Y&application_id=%2BnZ3HSATHmzb0LSclLcZxA%3D%3D&fcc_id=TE7WN722NV2)
-* [WikiDevi](https://wikidevi.com/wiki/TP-LINK_TL-WN722N_v1.x)
 
 _**NOTE:**_ There have been reports that the TL-WN722N V1 seems to be replaced by V2 and V3 versions. These new versions use a completely different chipset and are _not_ compatible. Consider asking the seller for the version, if it says "V2" or "V3" on the back of the dongle it's the wrong chipset!
 
@@ -59,14 +55,12 @@ _**NOTE:**_ The PCB antenna causes packetloss and bad reception under certain ci
 This adapter is very small, output power about 50mW. The internal antenna can be de-soldered and replaced with an external antenna. Since it's very small it runs quite warm, good cooling is needed.
 
 * [FCC info](https://apps.fcc.gov/oetcf/eas/reports/ViewExhibitReport.cfm?mode=Exhibits&RequestTimeout=500&calledFromFrame=Y&application_id=ykivyt9MWET01uFkCm0wFQ%3D%3D&fcc_id=TLZ-NU138)
-* [WikiDevi](https://wikidevi.com/wiki/AzureWave_AW-NU138)
 
 #### AW-NU137
 
 Very similar to the NU138. Reported power is 70mW. I-PEX antenna connector allows for light weight build.
 
 * [FCC info](https://apps.fcc.gov/oetcf/eas/reports/ViewExhibitReport.cfm?mode=Exhibits&RequestTimeout=500&calledFromFrame=Y&application_id=jytSwagyYGHU0hdXERQMgw%3D%3D&fcc_id=TLZ-NU137)
-* [WikiDevi](https://wikidevi.com/wiki/AzureWave_AW-NU137)
 
 #### Taobao Card
 
@@ -79,16 +73,6 @@ This is a generic RTL8812au card sold on Taobao, which is where the name comes f
 It is a widely used card and known to work well, but it does tend to get hot. Reported power output is 500mW. This card _requires_ soldered wiring or the USB connection may disconnect before or even during flight.
 
 It supports 2x u.fl antenna connectors.
-
-#### re3332r0115
-
-![re3332r0115.jpg](/img/assets/v2-0/re3332r0115.jpg)
-
-These are spare parts for an RCA smart television, and contain a Mediatek mt7601u chipset along with a single u.fl connector. They are extremely small, barely larger than a few microSD cards lined up, and only weigh 2.7 grams.
-
-These are not high powered cards and should not require a heatsink, but do not produce anywhere near the power output of some of the other cards.
-
-They do not currently work with the Open.HD RC system but that should be resolved soon (it's a bug not a problem with the card).
 
 ### Finding alternatives
 
@@ -104,7 +88,6 @@ A good way to find out more about wifi sticks and modules offered online is to l
 Search the web for those numbers and also these two very helpful sites:
 
 * [https://fccid.io/](https://fccid.io/) (FCC documents which contain internal photos)
-* [https://wikidevi.com/wiki/](https://wikidevi.com/wiki/) (general infos and sometimes photos)
 
 When you have found photos, google for the numbers on the amps to find a datasheet giving a rough estimate about the expectable output power.
 
