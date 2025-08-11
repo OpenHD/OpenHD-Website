@@ -208,7 +208,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/',
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/OpenHD/OpenHD-Website/edit/main/docusaurus-website/',
+          editUrl: 'https://github.com/OpenHD/OpenHD-Website/edit/main/',
           // Versioning configuration
           lastVersion: 'current',
           includeCurrentVersion: true,
