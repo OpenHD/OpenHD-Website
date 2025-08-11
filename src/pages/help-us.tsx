@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '@theme/Layout';
 import Head from '@docusaurus/Head';
+import Link from '@docusaurus/Link';
 import FundingWidget from '@site/src/components/FundingWidget';
 import styles from './help-us.module.css';
 
@@ -417,7 +418,7 @@ export default function HelpUs() {
                   </div>
                   <div className={styles.patreonContent}>
                     <p>
-                      There is also a <a href="https://www.patreon.com/OpenHD" target="_blank" rel="noopener noreferrer">Patreon campaign</a> available, but this exclusively targets the creation of specialized hardware.
+                      There is also a <a href="https://www.patreon.com/OpenHD" target="_blank" rel="noopener noreferrer">Patreon campaign</a> available, but this exclusively targets the creation of specialized hardware. Learn more about our <Link to="/hardware/custom-hardware">custom hardware platform</Link> development.
                     </p>
                   </div>
                 </div>
