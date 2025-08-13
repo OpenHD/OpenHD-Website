@@ -4,7 +4,7 @@ import FundingWidget from '../FundingWidget';
 
 // This function will be called on the client side to render the funding widget in the footer
 export function initializeFooterFundingWidgets() {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') return; // Skip on server side
   
   // Initialize only the main funding widget (support section)
   const mainContainer = document.getElementById('footer-funding-widget-main');
@@ -27,7 +27,7 @@ export function initializeFooterFundingWidgets() {
         );
         mainRoot.render(widgetElement);
       } catch (error) {
-        console.warn('Failed to initialize footer funding widget:', error);
+        // Silent error handling
       }
     }
   }
@@ -42,8 +42,6 @@ if (typeof window !== 'undefined') {
   (window as any).initializeFooterFundingWidgets = initializeFooterFundingWidgets;
   
   const init = () => {
-    setTimeout(initializeFooterFundingWidgets, 100);
-    setTimeout(initializeFooterFundingWidgets, 500);
     setTimeout(initializeFooterFundingWidgets, 1000);
   };
   
@@ -53,22 +51,9 @@ if (typeof window !== 'undefined') {
     init();
   }
   
-  // Listen for navigation events to re-initialize after page changes
+  // Disable automatic route checking to prevent API spam
+  // Only listen for manual popstate events (back/forward navigation)
   window.addEventListener('popstate', () => {
-    setTimeout(initializeFooterFundingWidgets, 500);
+    setTimeout(initializeFooterFundingWidgets, 1000);
   });
-  
-  // Listen for Docusaurus route changes  
-  const originalPushState = history.pushState;
-  const originalReplaceState = history.replaceState;
-  
-  history.pushState = function(...args) {
-    originalPushState.apply(history, args);
-    setTimeout(initializeFooterFundingWidgets, 500);
-  };
-  
-  history.replaceState = function(...args) {
-    originalReplaceState.apply(history, args);
-    setTimeout(initializeFooterFundingWidgets, 500);
-  };
 }

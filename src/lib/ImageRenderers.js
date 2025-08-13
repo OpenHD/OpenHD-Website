@@ -13,7 +13,15 @@ const getOpenHDLogo = () => {
     return `data:image/png;base64,${logoBuffer.toString('base64')}`;
   } catch (error) {
     console.warn('Could not load OpenHD logo for social cards:', error.message);
-    return null;
+    // Fallback to the logo.svg if PNG fails
+    try {
+      const svgLogoPath = join(__dirname, '../../static/img/logo.svg');
+      const svgBuffer = readFileSync(svgLogoPath);
+      return `data:image/svg+xml;base64,${svgBuffer.toString('base64')}`;
+    } catch (svgError) {
+      console.warn('Could not load SVG logo either:', svgError.message);
+      return null;
+    }
   }
 };
 
@@ -112,11 +120,13 @@ const CardHeader = ({ title, subtitle, showLogo = true }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: '36px',
+          fontSize: '28px',
           fontWeight: '900',
           color: 'white',
+          border: '2px solid rgba(255,255,255,0.3)',
+          boxShadow: '0 4px 12px rgba(0,166,242,0.3)',
         }
-      }, 'HD'),
+      }, 'OHD'),
       React.createElement('div', {
         key: 'brand-text',
         style: {
@@ -214,11 +224,13 @@ const docs = (data, context) => {
           }) : React.createElement('div', {
             key: 'doc-fallback',
             style: {
-              fontSize: '48px',
-              fontWeight: '700',
+              fontSize: '32px',
+              fontWeight: '900',
               color: brandColors.primary,
+              textAlign: 'center',
+              lineHeight: '1.2',
             }
-          }, 'DOCS')
+          }, 'OpenHD')
         ]),
         React.createElement('div', {
           key: 'doc-info',

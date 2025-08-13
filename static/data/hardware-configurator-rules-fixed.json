@@ -1,0 +1,96 @@
+{
+  "structured_validation_rules": [
+    {
+      "rule_id": "interface_compatibility",
+      "type": "interface_compatibility",
+      "severity": "error",
+      "message": "Camera requires {camera.interface} interface but {sbc.name} doesn't support {camera.interface}",
+      "parameters": {}
+    },
+    {
+      "rule_id": "role_compatibility",
+      "type": "role_compatibility", 
+      "severity": "error",
+      "message": "{sbc.name} doesn't support {selected_role} role",
+      "parameters": {}
+    },
+    {
+      "rule_id": "legacy_camera_warning",
+      "type": "status_check",
+      "severity": "warning",
+      "message": "This camera uses legacy drivers and is not recommended for FPV use",
+      "parameters": {
+        "status_filter": {
+          "component": "camera",
+          "forbidden_statuses": ["legacy"]
+        }
+      }
+    },
+    {
+      "rule_id": "thermal_usb_bandwidth",
+      "type": "feature_check",
+      "severity": "info",
+      "message": "Thermal cameras may have USB bandwidth limitations and require special setup",
+      "parameters": {
+        "feature_requirements": {
+          "component": "camera",
+          "required_features": ["thermal"],
+          "interface_constraints": ["usb", "usb2", "usb3"]
+        }
+      }
+    },
+    {
+      "rule_id": "multi_camera_limitation",
+      "type": "count_check",
+      "severity": "warning",
+      "message": "Multiple cameras use software encoding for secondary camera. Not recommended for high quality cameras.",
+      "parameters": {
+        "count_limits": {
+          "field": "camera_count",
+          "max": 1
+        }
+      }
+    },
+    {
+      "rule_id": "radxa_camera_limitation",
+      "type": "manufacturer_compatibility",
+      "severity": "warning", 
+      "message": "Radxa SBCs currently have limited camera support. IMX415 is the only fully supported camera.",
+      "parameters": {
+        "manufacturer_filter": {
+          "component": "sbc",
+          "must_be": ["Radxa"],
+          "cross_check": {
+            "component": "camera",
+            "operator": "different"
+          }
+        }
+      }
+    },
+    {
+      "rule_id": "x86_camera_limitation",
+      "type": "manufacturer_compatibility",
+      "severity": "error",
+      "message": "X86 systems don't support CSI cameras. Use USB or IP cameras instead.",
+      "parameters": {
+        "manufacturer_filter": {
+          "component": "sbc", 
+          "must_be": ["Generic X86", "Intel", "AMD"],
+          "cross_check": {
+            "component": "camera",
+            "operator": "any_csi_interface"
+          }
+        }
+      }
+    },
+    {
+      "rule_id": "chipset_compatibility",
+      "type": "chipset_whitelist",
+      "severity": "error",
+      "message": "WiFi chipset {wifi.chipset} is not supported by OpenHD",
+      "parameters": {
+        "chipset_whitelist": ["RTL8812AU", "RTL8814AU", "RTL8811AU", "RTL8812BU", "RTL8812EU"]
+      }
+    }
+  ]
+}

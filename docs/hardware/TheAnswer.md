@@ -1,1 +1,0 @@
-THE ANSWER is 42 !

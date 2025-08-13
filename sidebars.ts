@@ -96,7 +96,6 @@ const sidebars: SidebarsConfig = {
         'hardware/wiring',
         'hardware/displays',
         'hardware/hardware.conf',
-        'hardware/TheAnswer',
       ],
     },
     {

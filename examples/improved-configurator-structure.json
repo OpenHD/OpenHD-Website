@@ -1,0 +1,209 @@
+{
+  "schema_version": "2.0",
+  "metadata": {
+    "created_by": "OpenHD Community",
+    "last_updated": "2025-01-11",
+    "validation_engine": "structured-rules-v2",
+    "description": "Hardware compatibility configurator for OpenHD Evo releases"
+  },
+
+  "compatibility_engine": {
+    "configuration": {
+      "supported_chipsets": [
+        "RTL8812AU", "RTL8814AU", "RTL8811AU", "RTL8812BU", "RTL8812EU"
+      ],
+      "supported_interfaces": [
+        "csi", "usb", "usb2", "usb3", "hdmi", "hdmi_in", "hdmi_out", "ethernet", "gpio"
+      ],
+      "valid_statuses": [
+        "recommended", "supported", "legacy", "development", "specialized", "limited"
+      ],
+      "warning_statuses": ["legacy", "development", "limited"],
+      "auto_update_lists": true
+    },
+
+    "structured_validation_rules": [
+      {
+        "rule_id": "interface_compatibility",
+        "type": "interface_mismatch",
+        "severity": "error",
+        "message": "Camera requires {camera.interface} interface but {sbc.name} doesn't support {camera.interface}",
+        "parameters": {
+          "required_interface": "csi",
+          "component_type": "camera",
+          "target_type": "sbc"
+        }
+      },
+      {
+        "rule_id": "role_compatibility",
+        "type": "role_incompatible", 
+        "severity": "error",
+        "message": "{sbc.name} doesn't support {selected_role} role",
+        "parameters": {}
+      },
+      {
+        "rule_id": "legacy_camera_warning",
+        "type": "status_check",
+        "severity": "warning",
+        "message": "This camera uses legacy drivers and is not recommended for FPV use",
+        "parameters": {
+          "component_type": "camera",
+          "status": "legacy",
+          "operator": "equals"
+        }
+      },
+      {
+        "rule_id": "thermal_usb_bandwidth",
+        "type": "feature_check",
+        "severity": "info",
+        "message": "Thermal cameras may have USB bandwidth limitations and require special setup",
+        "parameters": {
+          "component_type": "camera",
+          "required_features": ["thermal"],
+          "operator": "and"
+        }
+      },
+      {
+        "rule_id": "multi_camera_limitation",
+        "type": "count_check",
+        "severity": "warning",
+        "message": "Multiple cameras use software encoding for secondary camera. Not recommended for high quality cameras.",
+        "parameters": {
+          "count_field": "camera_count",
+          "operator": "gt",
+          "threshold": 1
+        }
+      },
+      {
+        "rule_id": "radxa_camera_limitation",
+        "type": "manufacturer_mismatch",
+        "severity": "warning",
+        "message": "Radxa SBCs currently have limited camera support. IMX415 is the only fully supported camera.",
+        "parameters": {
+          "component1_type": "sbc",
+          "component2_type": "camera",
+          "operator": "different",
+          "additional_condition": {
+            "sbc_manufacturer": "Radxa"
+          }
+        }
+      },
+      {
+        "rule_id": "x86_camera_limitation",
+        "type": "interface_mismatch",
+        "severity": "error",
+        "message": "X86 systems don't support CSI cameras. Use USB or IP cameras instead.",
+        "parameters": {
+          "required_interface": "csi",
+          "component_type": "camera",
+          "target_type": "sbc",
+          "additional_condition": {
+            "sbc_id": "x86_generic"
+          }
+        }
+      },
+      {
+        "rule_id": "chipset_compatibility",
+        "type": "chipset_whitelist",
+        "severity": "error",
+        "message": "WiFi chipset {wifi.chipset} is not supported by OpenHD",
+        "parameters": {
+          "component_type": "wifi",
+          "use_global_whitelist": true
+        }
+      },
+      {
+        "rule_id": "high_power_wifi_warning",
+        "type": "feature_check",
+        "severity": "warning",
+        "message": "High-power WiFi adapter may require external power supply",
+        "parameters": {
+          "component_type": "wifi",
+          "required_features": ["high_power"],
+          "operator": "or"
+        }
+      },
+      {
+        "rule_id": "uncertified_wifi_warning",
+        "type": "feature_check",
+        "severity": "info",
+        "message": "WiFi adapter lacks FCC/CE certification - check local regulations",
+        "parameters": {
+          "component_type": "wifi",
+          "required_features": ["no_certification"],
+          "operator": "or"
+        }
+      }
+    ],
+
+    "dynamic_rules": {
+      "auto_generate_interface_rules": true,
+      "auto_generate_chipset_rules": true,
+      "auto_generate_manufacturer_warnings": false
+    },
+
+    "performance_matrix": [
+      {
+        "sbc": "openhd_custom",
+        "camera_interface": "csi",
+        "performance": {
+          "max_resolution": "4K",
+          "max_fps": "60",
+          "latency": "ultra_low",
+          "encoding": "h264_h265_hardware"
+        }
+      },
+      {
+        "sbc": "radxa_rock5b",
+        "camera_interface": "csi", 
+        "performance": {
+          "max_resolution": "4K",
+          "max_fps": "30", 
+          "latency": "low",
+          "encoding": "h265_hardware"
+        }
+      },
+      {
+        "sbc": "rpi_4b",
+        "camera_interface": "csi",
+        "performance": {
+          "max_resolution": "1080p",
+          "max_fps": "60",
+          "latency": "medium", 
+          "encoding": "h264_hardware"
+        }
+      }
+    ]
+  },
+
+  "component_categories": {
+    "wifi_adapters": {
+      "components": [
+        {
+          "id": "blm8812eu",
+          "name": "BLM8812EU",
+          "category": "wifi",
+          "manufacturer": "Generic",
+          "chipset": "RTL8812EU",
+          "bands": ["5.8GHz"],
+          "tx_power": "800mW+",
+          "antennas": ["u_fl"],
+          "antenna_count": 2,
+          "status": "recommended",
+          "price_range": "low",
+          "features": ["high_power", "no_certification"],
+          "notes": "Most recent and potent chip. Best cost/performance. No FCC/CE certification - use at own risk.",
+          "power_requirements": {
+            "external_power_needed": true,
+            "recommended_supply": "5V/2A"
+          },
+          "regulatory_notes": "Not FCC/CE certified - check local regulations",
+          "links": {
+            "buy_url": "https://es.aliexpress.com/item/1005007386940533.html",
+            "documentation_url": "/hardware/wifi-adapters"
+          }
+        }
+      ]
+    }
+  }
+}

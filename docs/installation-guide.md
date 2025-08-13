@@ -1,6 +1,5 @@
 ---
 description: Complete guide for installing OpenHD firmware on your air and ground units
-image: /img/social-cards/openhd-default.svg
 ---
 
 # Installation Guide
