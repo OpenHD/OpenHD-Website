@@ -27,7 +27,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
 
       - name: Setup pnpm 🔧
         uses: pnpm/action-setup@v4
@@ -80,7 +79,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Upload to GitHub Pages �
+      - name: Upload to GitHub Pages 📄
         uses: actions/upload-pages-artifact@v3
         with:
           path: build
