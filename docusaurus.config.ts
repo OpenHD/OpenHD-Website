@@ -265,17 +265,6 @@ const config: Config = {
         },
       },
     ],
-    // Official Docusaurus ideal image plugin with modern formats
-    [
-      '@docusaurus/plugin-ideal-image',
-      {
-        quality: 80,
-        max: 1920, // max resized image width
-        min: 640,  // min resized image width  
-        steps: 3,  // number of generated widths between min and max
-        disableInDev: false, // enable in development for testing
-      },
-    ],
     // Image zoom plugin with better compatibility
     [
       'docusaurus-plugin-image-zoom',

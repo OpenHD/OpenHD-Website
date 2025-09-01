@@ -27,10 +27,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          cache: pnpm
+
+      - name: Enable Corepack and pnpm 🔧
+        run: |
+          corepack enable
+          corepack prepare pnpm@9 --activate
 
       - name: Install dependencies 📦
-        run: npm ci
+        run: pnpm install
+
+      - name: Typecheck 🧪
+        run: pnpm typecheck
 
       - name: Cache converted images 🖼️
         uses: actions/cache@v4
@@ -44,11 +52,19 @@ jobs:
             images-
         
       - name: Build website 🔧
-        run: npm run build
+        run: pnpm build
 
       - name: Setup Pages 📄
         uses: actions/configure-pages@v4
         
+      - name: Upload build artifact 📦
+        uses: actions/upload-artifact@v4
+        with:
+          name: docusaurus-build
+          path: build
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Upload to GitHub Pages �
         uses: actions/upload-pages-artifact@v3
         with:

@@ -2,10 +2,12 @@
   "name": "docusaurus-website",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
     "docusaurus": "docusaurus",
+    "prestart": "node scripts/convert-images.mjs",
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "node scripts/convert-images.mjs && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -18,10 +20,9 @@
     "@acid-info/docusaurus-og": "^1.0.3-beta.2",
     "@docusaurus/core": "3.8.1",
     "@docusaurus/plugin-content-docs": "^3.8.1",
-    "@docusaurus/plugin-ideal-image": "^3.8.1",
     "@docusaurus/preset-classic": "3.8.1",
+    "@docusaurus/theme-common": "^3.8.1",
     "@docusaurus/theme-mermaid": "^3.8.1",
-    "@docusaurus/theme-search-algolia": "^3.8.1",
     "@easyops-cn/docusaurus-search-local": "^0.52.1",
     "@fortawesome/fontawesome-free": "^7.0.0",
     "@mdx-js/react": "^3.1.0",
@@ -29,9 +30,8 @@
     "docusaurus-plugin-image-zoom": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
     "qr-code-styling": "^1.9.2",
-    "qrcode": "^1.5.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "rehype-katex": "^7.0.1",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0"
@@ -40,7 +40,8 @@
     "@docusaurus/module-type-aliases": "3.8.1",
     "@docusaurus/tsconfig": "3.8.1",
     "@docusaurus/types": "3.8.1",
-    "typescript": "~5.6.2"
+    "typescript": "~5.6.2",
+    "sharp": "^0.33.4"
   },
   "browserslist": {
     "production": [
