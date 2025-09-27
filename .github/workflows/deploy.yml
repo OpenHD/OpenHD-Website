@@ -68,14 +68,28 @@ jobs:
       - name: Build website 🔧
         run: pnpm build
 
+      - name: Create offline archive 📦
+        run: |
+          mkdir -p artifacts
+          cd build
+          zip -r ../artifacts/openhd-website-offline.zip .
+
       - name: Setup Pages 📄
         uses: actions/configure-pages@v4
-        
+
       - name: Upload build artifact 📦
         uses: actions/upload-artifact@v4
         with:
           name: docusaurus-build
           path: build
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload offline archive 📥
+        uses: actions/upload-artifact@v4
+        with:
+          name: docusaurus-offline-zip
+          path: artifacts/openhd-website-offline.zip
           if-no-files-found: error
           retention-days: 7
 
