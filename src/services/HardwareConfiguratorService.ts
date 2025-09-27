@@ -302,7 +302,7 @@ class RuleEvaluator {
   }
 
   private evaluateStructuredRule(rule: ValidationRule, context: EvaluationContext): boolean {
-    const { type, parameters } = rule;
+    const { type, parameters = {} } = rule;
 
     // Map old rule types to new ones for backward compatibility
     let mappedType = type;

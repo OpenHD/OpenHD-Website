@@ -3,21 +3,25 @@ import Layout from '@theme/Layout';
 import Head from '@docusaurus/Head';
 import styles from './hardware-configurator-debug.module.css';
 import { hardwareConfiguratorService } from '../services/HardwareConfiguratorService';
-import { 
+import {
   HardwareConfiguratorData,
   SBCComponent,
   CameraComponent,
   WiFiComponent,
   ValidationRule,
+  StructuredRule,
   UseCase,
   ConfiguratorStats,
   ComponentStatus
 } from '../types/hardware-configurator';
 import CompatibilityMatrix from '../components/debug/CompatibilityMatrix';
 
+type CategoryKey = keyof HardwareConfiguratorData['component_categories'];
+type ComponentData = HardwareConfiguratorData['component_categories'][CategoryKey]['components'][number];
+
 export default function HardwareConfiguratorDebug() {
   const [activeTab, setActiveTab] = useState<'overview' | 'components' | 'rules' | 'usecases' | 'compatibility'>('overview');
-  const [selectedCategory, setSelectedCategory] = useState<string>('sbcs');
+  const [selectedCategory, setSelectedCategory] = useState<CategoryKey>('sbcs');
   const [data, setData] = useState<HardwareConfiguratorData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -445,7 +449,7 @@ const StatusBadge: React.FC<{ status?: string }> = ({ status }) => {
             {activeTab === 'components' && (
               <div className={styles.components}>
                 <div className={styles.categorySelector}>
-                  {Object.keys(data.component_categories).map(category => (
+                  {(Object.keys(data.component_categories) as CategoryKey[]).map(category => (
                     <button
                       key={category}
                       className={`${styles.categoryButton} ${selectedCategory === category ? styles.active : ''}`}
