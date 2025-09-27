@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import type { JSX } from 'react';
 import { useWindowSize } from '@docusaurus/theme-common';
 import styles from './CommunityDropdown.module.css';
 

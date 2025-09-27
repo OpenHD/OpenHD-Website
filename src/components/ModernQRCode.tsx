@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import type { JSX } from 'react';
 import QRCodeStyling from 'qr-code-styling';
 import styles from './ModernQRCode.module.css';
 

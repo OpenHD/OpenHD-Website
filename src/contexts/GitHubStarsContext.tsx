@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react';
+import type { JSX } from 'react';
 
 interface GitHubStarsData {
   stars: number | null;
@@ -7,108 +8,78 @@ interface GitHubStarsData {
   lastFetched: number | null;
 }
 
-interface FundingData {
-  amount: number | null;
-  isLoading: boolean;
-  error: string | null;
-  lastFetched: number | null;
-}
-
-interface AppContextType {
-  githubData: GitHubStarsData;
-  fundingData: FundingData;
+interface GitHubStarsContextValue {
+  data: GitHubStarsData;
   fetchStars: (repo: string) => Promise<void>;
-  fetchFunding: () => Promise<void>;
 }
 
-const AppContext = createContext<AppContextType | null>(null);
+const STALE_THRESHOLD_MS = 10 * 60 * 1000;
 
-// Global cache outside of React to persist across re-renders
-let globalStarsCache: { [repo: string]: GitHubStarsData } = {};
-let globalFundingCache: FundingData = {
-  amount: null,
-  isLoading: true,
-  error: null,
-  lastFetched: null
-};
+const GitHubStarsContext = createContext<GitHubStarsContextValue | undefined>(undefined);
 
-export function AppProvider({ children }: { children: ReactNode }) {
-  const [githubData, setGithubData] = useState<GitHubStarsData>({
+// Cache that lives outside of React to survive component unmounts
+const globalStarsCache: Record<string, GitHubStarsData> = {};
+
+export function GitHubStarsProvider({ children }: { children: ReactNode }): JSX.Element {
+  const [data, setData] = useState<GitHubStarsData>({
     stars: null,
     isLoading: true,
     error: null,
-    lastFetched: null
+    lastFetched: null,
   });
 
-  const [fundingData, setFundingData] = useState<FundingData>({
-    amount: null,
-    isLoading: true,
-    error: null,
-    lastFetched: null
-  });
+  const fetchStars = useCallback(async (repo: string) => {
+    const now = Date.now();
+    const cached = globalStarsCache[repo];
 
-  const fetchStars = async (repo: string) => {
-    // Check global cache first
-    if (globalStarsCache[repo] && globalStarsCache[repo].stars !== null) {
-      setData(globalStarsCache[repo]);
-      
-      // Only refetch if data is older than 10 minutes
-      const isStale = !globalStarsCache[repo].lastFetched || 
-                     Date.now() - globalStarsCache[repo].lastFetched! > 10 * 60 * 1000;
-      
-      if (!isStale) {
+    if (cached && cached.stars !== null) {
+      setData(cached);
+      if (cached.lastFetched && now - cached.lastFetched < STALE_THRESHOLD_MS) {
         return;
       }
     }
 
-    // Check localStorage cache
     const CACHE_KEY = `github_stars_${repo}`;
-    const cached = localStorage.getItem(CACHE_KEY);
-    
-    if (cached) {
-      try {
-        const { stars, timestamp } = JSON.parse(cached);
-        const cacheData = {
-          stars,
-          isLoading: false,
-          error: null,
-          lastFetched: timestamp
-        };
-        
-        // Update both global cache and state
-        globalStarsCache[repo] = cacheData;
-        setData(cacheData);
-        
-        // If cache is fresh, don't make API call
-        if (Date.now() - timestamp < 10 * 60 * 1000) {
-          return;
+    if (typeof window !== 'undefined') {
+      const localCache = window.localStorage.getItem(CACHE_KEY);
+      if (localCache) {
+        try {
+          const parsed = JSON.parse(localCache) as { stars: number; timestamp: number };
+          const cacheData: GitHubStarsData = {
+            stars: parsed.stars,
+            isLoading: false,
+            error: null,
+            lastFetched: parsed.timestamp,
+          };
+          globalStarsCache[repo] = cacheData;
+          setData(cacheData);
+          if (now - parsed.timestamp < STALE_THRESHOLD_MS) {
+            return;
+          }
+        } catch {
+          window.localStorage.removeItem(CACHE_KEY);
         }
-      } catch (e) {
-        localStorage.removeItem(CACHE_KEY);
       }
     }
 
-    // Make API call only if needed
     try {
       const response = await fetch(`https://api.github.com/repos/${repo}`, {
         headers: {
-          'Accept': 'application/vnd.github.v3+json',
-          'User-Agent': 'OpenHD-Website'
-        }
+          Accept: 'application/vnd.github.v3+json',
+          'User-Agent': 'OpenHD-Website',
+        },
       });
-      
+
       if (!response.ok) {
         if (response.status === 403 || response.status === 429) {
-          // Rate limited - keep existing data if we have it
-          if (globalStarsCache[repo]?.stars !== null) {
+          if (cached?.stars !== null) {
             return;
           }
-          // Otherwise hide stars
-          const errorData = {
+          const errorData: GitHubStarsData = {
             stars: null,
             isLoading: false,
             error: 'rate_limited',
-            lastFetched: Date.now()
+            lastFetched: now,
           };
           globalStarsCache[repo] = errorData;
           setData(errorData);
@@ -118,53 +89,54 @@ export function AppProvider({ children }: { children: ReactNode }) {
       }
 
       const apiData = await response.json();
-      const starCount = apiData.stargazers_count;
-      
-      // Cache the result
+      const starCount = apiData.stargazers_count as number | undefined;
       const timestamp = Date.now();
-      localStorage.setItem(CACHE_KEY, JSON.stringify({
-        stars: starCount,
-        timestamp
-      }));
-      
-      const newData = {
-        stars: starCount,
+
+      if (typeof window !== 'undefined' && typeof starCount === 'number') {
+        window.localStorage.setItem(CACHE_KEY, JSON.stringify({
+          stars: starCount,
+          timestamp,
+        }));
+      }
+
+      const newData: GitHubStarsData = {
+        stars: typeof starCount === 'number' ? starCount : null,
         isLoading: false,
         error: null,
-        lastFetched: timestamp
+        lastFetched: timestamp,
       };
-      
+
       globalStarsCache[repo] = newData;
       setData(newData);
-      
-    } catch (err) {
-      console.warn('Failed to fetch GitHub stars:', err);
-      
-      // Keep existing cached data if available
-      if (globalStarsCache[repo]?.stars !== null) {
+    } catch (error) {
+      console.warn('Failed to fetch GitHub stars:', error);
+      if (cached?.stars !== null) {
         return;
       }
-      
-      // Final fallback
-      const errorData = {
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      const errorData: GitHubStarsData = {
         stars: null,
         isLoading: false,
-        error: err.message,
-        lastFetched: Date.now()
+        error: message,
+        lastFetched: Date.now(),
       };
       globalStarsCache[repo] = errorData;
       setData(errorData);
     }
-  };
+  }, []);
 
-  return (
-    <GitHubStarsContext.Provider value={{ data, fetchStars }}>
-      {children}
-    </GitHubStarsContext.Provider>
+  const value = useMemo(
+    () => ({
+      data,
+      fetchStars,
+    }),
+    [data, fetchStars],
   );
+
+  return <GitHubStarsContext.Provider value={value}>{children}</GitHubStarsContext.Provider>;
 }
 
-export function useGitHubStars() {
+export function useGitHubStars(): GitHubStarsContextValue {
   const context = useContext(GitHubStarsContext);
   if (!context) {
     throw new Error('useGitHubStars must be used within a GitHubStarsProvider');

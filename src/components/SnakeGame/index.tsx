@@ -30,7 +30,7 @@ export default function SnakeGame(): React.JSX.Element {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const gameLoopRef = useRef<NodeJS.Timeout>();
+  const gameLoopRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Load high score from localStorage
   useEffect(() => {
