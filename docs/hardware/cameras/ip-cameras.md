@@ -26,9 +26,10 @@ This feature requires disabling auto-detection and needs manual activation in th
 Before setting things in OpenHD, first configure the following things in the IP camera:
 
 Setup static IP for the camera.
-Configure a H.264 rtsp stream and test it in a program like VLC. 
+Configure a H.264 rtsp stream and test it in a program like VLC or FFplay.
+
   Streams differ by camera brand and model. Try H264B first, 720p or 1080p with about 2mbs stream. Set the Iframe as low as possible. Disable ANY smartcodec/aicodec features. 
-  You will also need to create a user for viewing the stream. They user must be able to authenticate on the webinterface (not an OPENHd requirements but a means to test the login for rtsp)
+  You will also need to create a user for viewing the stream. That user must be able to authenticate on the webinterface (not an OPENHd requirement but a means to test the login for rtsp)
   Then lookup the format for your IPCAM RTSP Stream from the manufacturer and test with FFPlay, example:
   
   Dahua:```ffplay rtsp://openhduser:openhdpass@192.168.10.202/cam/realmonitor?channel=1```
@@ -50,7 +51,9 @@ To configure the pipeline to the camera you need to modify the script /boot/open
 After that, open the script and you will find different examples of configuration for connection to different cameras.
 
   a. Modify or Copy "setup_and_stream_ip_cam_siyi_h264" configuration and rename it to your IP Cams prefered name - e.g "setup_and_stream_ipcam_dh()"
+  
   b  Now to configure "LOCALIP" and "GATEWAYIP" with the same first 3 numbers as your IP camera IP and with the last number being different in all 3 cases.
+  
   c  Then you need to change the stream link in the Gstreamer pipeline command with the correct IP and username/password combo of your camera. (You got this in the ffplay part/web interface of the camera)
   
   The gstreamer configuration should look like this:
