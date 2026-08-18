@@ -27,6 +27,7 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
 
+  // Merged markdown config
   markdown: {
     mermaid: true,
     hooks: {
@@ -306,13 +307,6 @@ const config: Config = {
       },
     }),
   ],
-
-  markdown: {
-    mermaid: true,
-    hooks: {
-      onBrokenMarkdownLinks: 'warn',
-    },
-  },
 
   themes: ['@docusaurus/theme-mermaid'],
 
