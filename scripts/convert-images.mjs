@@ -42,7 +42,7 @@ async function ensureAvif(srcPath) {
     return { created: true, outPath };
   } catch (err) {
     // Non-fatal; continue build
-    return { error: true, message: err.message };
+    return { error: true, message: err.message, path: srcPath };
   }
 }
 
@@ -104,7 +104,8 @@ async function main() {
     console.log(`[convert-images] Created ${created} AVIF file(s).`);
   }
   if (errors.length > 0) {
-    console.warn(`[convert-images] ${errors.length} error(s) during conversion.`);
+    console.warn(`[convert-images] ${errors.length} error(s) during conversion:`);
+    errors.forEach(err => console.warn(`  - [${err.path}] Error: ${err.message}`));
   }
   if (skippedAmbiguous > 0) {
     console.warn(`[convert-images] Skipped ${skippedAmbiguous} case-ambiguous basename(s) to avoid conflicts.`);
