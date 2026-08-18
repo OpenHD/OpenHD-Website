@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - online
   workflow_dispatch:
 
 jobs:
@@ -11,12 +12,11 @@ jobs:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pages: write
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -66,6 +66,8 @@ jobs:
             images-
         
       - name: Build website 🔧
+        env:
+          STAGING: ${{ github.ref == 'refs/heads/main' }}
         run: pnpm build
 
       - name: Create offline archive 📦
@@ -74,13 +76,10 @@ jobs:
           cd build
           zip -r ../artifacts/openhd-website-offline.zip .
 
-      - name: Setup Pages 📄
-        uses: actions/configure-pages@v4
-
       - name: Upload build artifact 📦
         uses: actions/upload-artifact@v4
         with:
-          name: docusaurus-build
+          name: docusaurus-build-${{ github.ref_name }}
           path: build
           if-no-files-found: error
           retention-days: 7
@@ -88,16 +87,15 @@ jobs:
       - name: Upload offline archive 📥
         uses: actions/upload-artifact@v4
         with:
-          name: docusaurus-offline-zip
+          name: docusaurus-offline-zip-${{ github.ref_name }}
           path: artifacts/openhd-website-offline.zip
           if-no-files-found: error
           retention-days: 7
 
-      - name: Upload to GitHub Pages 📄
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build
-          
       - name: Deploy to GitHub Pages 🚀
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          destination_dir: ${{ github.ref == 'refs/heads/main' && 'staging' || '.' }}
+          keep_files: true
