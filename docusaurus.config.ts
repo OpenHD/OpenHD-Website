@@ -1,6 +1,8 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+// @ts-ignore
+import { nativeIdealImageRemarkPlugin } from 'docusaurus-plugin-native-ideal-image';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -11,7 +13,7 @@ const config: Config = {
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: false, // Temporarily disable to fix image path resolution issues
+    v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
   // Set the production url of your site here
@@ -214,6 +216,16 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/',
+          remarkPlugins: [
+            [nativeIdealImageRemarkPlugin, {
+              presets: {
+                default: {
+                  formats: ['avif', 'webp', 'jpeg'],
+                  sizes: 1200,
+                },
+              },
+            }],
+          ],
           // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/OpenHD/OpenHD-Website/edit/main/',
           // Versioning configuration
@@ -244,6 +256,18 @@ const config: Config = {
   ],
 
   plugins: [
+    [
+      'docusaurus-plugin-native-ideal-image',
+      {
+        disableInDev: true,
+        presets: {
+          default: {
+            formats: ['avif', 'webp', 'jpeg'],
+            sizes: 1200,
+          },
+        },
+      },
+    ],
     [
       '@easyops-cn/docusaurus-search-local',
       {
