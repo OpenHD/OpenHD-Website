@@ -122,7 +122,7 @@ function ChangelogTimelineCard({ item, index }) {
           
           <Link
             className={styles.detailsButton}
-            to={`/changelog-details#v${item.version.replace('.', '-')}`}>
+            to={`/changelog-details#v${item.version.split('.').join('-')}`}>
             View Details →
           </Link>
         </div>
