@@ -19,6 +19,7 @@
   "dependencies": {
     "@acid-info/docusaurus-og": "^1.0.3-beta.2",
     "@docusaurus/core": "3.10.2",
+    "@docusaurus/faster": "3.10.2",
     "@docusaurus/plugin-content-docs": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
     "@docusaurus/theme-common": "3.10.2",
@@ -40,8 +41,8 @@
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/tsconfig": "3.10.2",
     "@docusaurus/types": "3.10.2",
-    "typescript": "~5.7.3",
-    "sharp": "^0.35.3"
+    "sharp": "^0.35.3",
+    "typescript": "~5.7.3"
   },
   "browserslist": {
     "production": [
