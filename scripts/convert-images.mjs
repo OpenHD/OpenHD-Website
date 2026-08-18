@@ -108,7 +108,8 @@ async function main() {
     errors.forEach(err => console.warn(`  - [${err.path}] Error: ${err.message}`));
   }
   if (skippedAmbiguous > 0) {
-    console.warn(`[convert-images] Skipped ${skippedAmbiguous} case-ambiguous basename(s) to avoid conflicts.`);
+    console.warn(`[convert-images] Skipped ${skippedAmbiguous} case-ambiguous basename(s) to avoid conflicts:`);
+    ambiguousKeys.forEach(key => console.warn(`  - ${key}`));
   }
 }
 

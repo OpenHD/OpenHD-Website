@@ -5,8 +5,10 @@ import MDXComponents from '@theme-original/MDXComponents';
 // Global <img> override for MDX/Markdown content to prefer AVIF when available
 function ImgWithAvif(props: ComponentProps<'img'>) {
   const {src = '', alt, ...rest} = props;
-  // Only add AVIF source for png/jpg/jpeg; otherwise fall back to default
-  if (typeof src === 'string' && /\.(png|jpe?g)(\?.*)?$/i.test(src)) {
+
+  // Only add AVIF source for png/jpg/jpeg images in the /img/ directory (managed by our script)
+  // Skip hashed assets in /assets/images/ because Docusaurus doesn't generate matching AVIFs there
+  if (typeof src === 'string' && src.includes('/img/') && /\.(png|jpe?g)(\?.*)?$/i.test(src)) {
     const avifSrc = src.replace(/\.(png|jpe?g)(\?.*)?$/i, '.avif$2');
     return (
       <picture>
@@ -16,7 +18,7 @@ function ImgWithAvif(props: ComponentProps<'img'>) {
       </picture>
     );
   }
-  // Non-convertible type: render default
+  // Non-convertible type or hashed asset: render default
   // eslint-disable-next-line jsx-a11y/alt-text
   return <img src={src} alt={alt} {...rest} />;
 }
