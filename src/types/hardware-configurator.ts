@@ -85,17 +85,24 @@ export interface ValidationRule {
   type: RuleType;
   severity: SeverityLevel;
   message: string;
-  parameters: RuleParameters;
+  parameters?: RuleParameters;
+  condition?: string;
+  deprecated?: boolean;
+  structured_equivalent?: string;
+  auto_generated?: boolean;
 }
 
-export type RuleType = 
+export type RuleType =
   | 'interface_compatibility'
-  | 'manufacturer_compatibility' 
+  | 'manufacturer_compatibility'
   | 'status_check'
   | 'feature_check'
   | 'count_check'
   | 'chipset_whitelist'
-  | 'role_compatibility';
+  | 'role_compatibility'
+  | 'interface_mismatch'
+  | 'role_incompatible'
+  | 'manufacturer_mismatch';
 
 export interface RuleParameters {
   // Common parameters
@@ -109,6 +116,7 @@ export interface RuleParameters {
   };
   
   // Interface rules
+  required_interface?: string;
   required_interfaces?: string[];
   
   // Manufacturer rules (completely flexible)
@@ -147,6 +155,9 @@ export interface RuleParameters {
   
   // Chipset rules
   chipset_whitelist?: string[];
+  component_type?: string;
+  target_type?: string;
+  use_global_whitelist?: boolean;
   
   // Role rules
   role_requirements?: {
@@ -207,6 +218,12 @@ export interface HardwareConfiguratorData {
     last_updated: string;
     validation_engine: string;
     description: string;
+    last_auto_update?: string;
+    auto_extracted_data?: {
+      chipsets_count: number;
+      interfaces_count: number;
+      manufacturers_count: number;
+    };
   };
   version_support: {
     current_version: OpenHDVersion;
@@ -220,7 +237,7 @@ export interface HardwareConfiguratorData {
       valid_statuses: ComponentStatus[];
       auto_update_lists: boolean;
     };
-    structured_validation_rules: ValidationRule[];
+    structured_validation_rules: StructuredRule[];
     validation_rules: ValidationRule[]; // Legacy
     performance_matrix: PerformanceEntry[];
   };
@@ -240,6 +257,11 @@ export interface HardwareConfiguratorData {
     format: string;
     description: string;
   }>;
+}
+
+export interface StructuredRule extends ValidationRule {
+  parameters?: RuleParameters;
+  auto_generated?: boolean;
 }
 
 // Evaluation context for rules

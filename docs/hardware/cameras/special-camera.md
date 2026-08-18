@@ -65,7 +65,7 @@ Germanium lenses offer high-quality thermal images but are costly. Many lightwei
 In most cases, you can't replace a thermal camera lens unless it's designed for it. Even cameras with removable lenses often require careful handling to avoid damage.
 
 
-<!-- The following content is commented out for future use.
+{/* The following content is commented out for future use.
 #### Seek Compact \([manufacturer](https://www.thermal.com/compact-series.html), [Amazon](https://www.amazon.com/Seek-Thermal-CompactPRO-Resolution-Imaging/dp/B00NYWAHHM)\)
 
 These cameras are inexpensive but have significant lens and sensor issues. A FLIR One G2 is a better option if cost is a primary concern.
@@ -87,4 +87,4 @@ These are similar to Seek Compact Pro cameras and are essentially clones. The ca
 Real world flight video:
 
 [![FLIR Boson 320 flight](https://github.com/OpenHD/OpenHD/blob/fc9d050b3d8d9bc2493895b558ee2f13f6ec15b1/wiki-content/Thermal-Cameras/flir-boson-320-flight.jpg?raw=true)](https://www.youtube.com/watch?v=PQGDQzf-Z50)
--->
+*/}

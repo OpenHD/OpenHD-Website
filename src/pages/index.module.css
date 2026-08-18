@@ -8,7 +8,11 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  background-image: url('/img/IMG_0005.png');
+  /* Prefer AVIF with PNG fallback */
+  background-image: image-set(
+    url('/img/IMG_0005.avif') type('image/avif'),
+    url('/img/IMG_0005.png') type('image/png')
+  );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

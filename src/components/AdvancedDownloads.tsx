@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import type { JSX } from 'react';
 import styles from './AdvancedDownloads.module.css';
 
 interface ReleaseItem {
@@ -58,10 +59,19 @@ export default function AdvancedDownloads(): JSX.Element {
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   useEffect(() => {
+    const safeFetch = async (url: string): Promise<Response | null> => {
+      try {
+        const response = await fetch(url);
+        return response.ok ? response : null;
+      } catch {
+        return null;
+      }
+    };
+
     const fetchReleases = async () => {
       try {
         setLoading(true);
-        
+
         // Try multiple CORS proxies as fallback
         const proxies = [
           'https://cors-anywhere.herokuapp.com/',
@@ -70,22 +80,23 @@ export default function AdvancedDownloads(): JSX.Element {
           'https://proxy.cors.sh/'
         ];
         
-        let stableData, devData;
-        let lastError;
-        
+        let stableData: ReleaseData | null = null;
+        let devData: ReleaseData | null = null;
+        let lastError: unknown;
+
         for (const proxyUrl of proxies) {
           try {
             // Try to fetch all available JSON files
             const [stableResponse, stableResponse2, devResponse] = await Promise.all([
-              fetch(proxyUrl + 'https://github.com/OpenHD/OpenHD-ImageWriter/releases/download/Json/OpenHD-download-index.json').catch(() => ({ ok: false })),
-              fetch(proxyUrl + 'https://github.com/OpenHD/OpenHD-ImageWriter/releases/download/Json/OpenHD-download-index.json_1.json').catch(() => ({ ok: false })),
-              fetch(proxyUrl + 'https://github.com/OpenHD/OpenHD-ImageWriter/releases/download/Json/OpenHD-development-releases.json').catch(() => ({ ok: false }))
+              safeFetch(proxyUrl + 'https://github.com/OpenHD/OpenHD-ImageWriter/releases/download/Json/OpenHD-download-index.json'),
+              safeFetch(proxyUrl + 'https://github.com/OpenHD/OpenHD-ImageWriter/releases/download/Json/OpenHD-download-index.json_1.json'),
+              safeFetch(proxyUrl + 'https://github.com/OpenHD/OpenHD-ImageWriter/releases/download/Json/OpenHD-development-releases.json')
             ]);
 
             // Use whichever stable response is successful
-            const workingStableResponse = stableResponse.ok ? stableResponse : (stableResponse2.ok ? stableResponse2 : null);
-            
-            if (workingStableResponse && devResponse.ok) {
+            const workingStableResponse = stableResponse ?? stableResponse2;
+
+            if (workingStableResponse && devResponse) {
               stableData = await workingStableResponse.json();
               devData = await devResponse.json();
               break; // Success, exit loop

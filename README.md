@@ -22,8 +22,8 @@ Official website and documentation platform for OpenHD - Open Source Digital FPV
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or yarn
+- Node.js 18+
+- pnpm 9 (via `corepack enable`)
 
 ### Installation
 
@@ -32,21 +32,26 @@ Official website and documentation platform for OpenHD - Open Source Digital FPV
 git clone https://github.com/OpenHD/OpenHD-Website.git
 cd OpenHD-Website
 
+# Enable corepack (once per machine)
+corepack enable
+
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm start
+pnpm start
 ```
 
 ### Building for Production
 
 ```bash
 # Build static files
-npm run build
+pnpm build
 
 # Serve built files locally
-npm run serve
+pnpm serve
+
+Note: During `pnpm build`, a script converts `.png/.jpg` in `static/img` to `.avif`. Use the `OptimizedImg` component or CSS `image-set(...)` to prefer AVIF with fallback.
 ```
 
 ## 📁 Project Structure
@@ -83,11 +88,22 @@ The site uses a custom FPV-themed design with:
 
 ### Available Scripts
 
-- `npm start` - Start development server
-- `npm run build` - Build for production
-- `npm run serve` - Serve built files
-- `npm run clear` - Clear cache
-- `npm run swizzle` - Eject components for customization
+- `pnpm start` - Start development server
+- `pnpm build` - Build for production
+- `pnpm serve` - Serve built files
+- `pnpm clear` - Clear cache
+- `pnpm swizzle` - Eject components for customization
+
+### Images & Optimization
+- AVIF conversion runs at build time for files under `static/img`.
+- In React, use `src/components/OptimizedImg.tsx`:
+  `
+  <OptimizedImg path="/img/logo.png" alt="Logo" />
+  `
+- In CSS, prefer:
+  `
+  background-image: image-set(url('/img/hero.avif') type('image/avif'), url('/img/hero.png') type('image/png'));
+  `
 
 ### Asset Migration
 Use the included PowerShell script to migrate external assets:

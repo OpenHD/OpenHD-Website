@@ -1,4 +1,5 @@
 import React from 'react';
+import type { JSX } from 'react';
 import ModernQRCode from './ModernQRCode';
 import styles from './AppDownloadBanner.module.css';
 

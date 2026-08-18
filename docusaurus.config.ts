@@ -18,7 +18,7 @@ const config: Config = {
   url: 'https://openhdfpv.org',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: process.env.STAGING === 'true' ? '/staging/' : '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -26,7 +26,13 @@ const config: Config = {
   projectName: 'OpenHD-Website', // Usually your repo name.
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+
+  markdown: {
+    mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -265,17 +271,6 @@ const config: Config = {
         },
       },
     ],
-    // Official Docusaurus ideal image plugin with modern formats
-    [
-      '@docusaurus/plugin-ideal-image',
-      {
-        quality: 80,
-        max: 1920, // max resized image width
-        min: 640,  // min resized image width  
-        steps: 3,  // number of generated widths between min and max
-        disableInDev: false, // enable in development for testing
-      },
-    ],
     // Image zoom plugin with better compatibility
     [
       'docusaurus-plugin-image-zoom',
@@ -314,8 +309,11 @@ const config: Config = {
 
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
   },
-  
+
   themes: ['@docusaurus/theme-mermaid'],
 
   themeConfig: {

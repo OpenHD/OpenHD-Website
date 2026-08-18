@@ -4,8 +4,8 @@
  * work well for content-centric websites.
  */
 
-/* FontAwesome CDN Import */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+/* Font Awesome (local package) */
+@import '@fortawesome/fontawesome-free/css/all.min.css';
 
 /* Removed navbar.css import - using Docusaurus defaults */
 
@@ -820,5 +820,4 @@ table tr:hover {
     var(--ifm-navbar-background-color) 100%
   );
 }
-
 
