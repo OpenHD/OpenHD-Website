@@ -1,0 +1,59 @@
+diff --git a/lib/server/blog.plugin.js b/lib/server/blog.plugin.js
+index 56d77463ad3299e030ee0ccad07195a8d331a425..b710c70f7717e067b234a3312f3f493efd7c12ab 100644
+--- a/lib/server/blog.plugin.js
++++ b/lib/server/blog.plugin.js
+@@ -124,6 +124,13 @@ class BlogPlugin {
+             await document.write();
+         }
+     };
+-    getHtmlPath = (permalink, baseUrl) => path.join(this.context.outDir, permalink, 'index.html');
++    getHtmlPath = (permalink) => {
++        if (permalink && this.context.baseUrl !== '/') {
++            if (permalink.startsWith(this.context.baseUrl)) {
++                permalink = permalink.substring(this.context.baseUrl.length);
++            }
++        }
++        return path.join(this.context.outDir, permalink, 'index.html');
++    };
+ }
+ exports.BlogPlugin = BlogPlugin;
+diff --git a/lib/server/docs.plugin.js b/lib/server/docs.plugin.js
+index 90f705e7a5f2658f1c92bc7c7ee9b0ad630eefce..42c772107fe7f45063b1349d28312d3946472097 100644
+--- a/lib/server/docs.plugin.js
++++ b/lib/server/docs.plugin.js
+@@ -83,7 +83,14 @@ class DocsPlugin {
+             await document.write();
+         }
+     };
+-    getHtmlPath = (doc) => doc.metadata?.permalink &&
+-        path.join(this.context.outDir, doc.metadata.permalink, 'index.html');
++    getHtmlPath = (doc) => {
++        let permalink = doc.metadata?.permalink;
++        if (permalink && this.context.baseUrl !== '/') {
++            if (permalink.startsWith(this.context.baseUrl)) {
++                permalink = permalink.substring(this.context.baseUrl.length);
++            }
++        }
++        return permalink && path.join(this.context.outDir, permalink, 'index.html');
++    };
+ }
+ exports.DocsPlugin = DocsPlugin;
+diff --git a/lib/server/pages.plugin.js b/lib/server/pages.plugin.js
+index 106fe9ff80bf9d122a4f43c7e8fa0a849d01a215..567138766af782e53e3c0d4e4a74b5e8a9374eec 100644
+--- a/lib/server/pages.plugin.js
++++ b/lib/server/pages.plugin.js
+@@ -91,6 +91,13 @@ class PagesPlugin {
+             await document.write();
+         }
+     };
+-    getHtmlPath = (permalink) => path.join(this.context.outDir, permalink, 'index.html');
++    getHtmlPath = (permalink) => {
++        if (permalink && this.context.baseUrl !== '/') {
++            if (permalink.startsWith(this.context.baseUrl)) {
++                permalink = permalink.substring(this.context.baseUrl.length);
++            }
++        }
++        return path.join(this.context.outDir, permalink, 'index.html');
++    };
+ }
+ exports.PagesPlugin = PagesPlugin;

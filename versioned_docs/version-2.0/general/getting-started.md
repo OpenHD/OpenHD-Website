@@ -23,7 +23,7 @@ Assuming you are starting with nothing, we recommend you get the following hardw
 * Two High class SD Cards of 8Gb or more
 * An SD card Adapter for your computer to flash the cards.
 * A mobile device capable of running QOpen.HD and connecting to the Ground SBC (_optional_)
-* Two BEC's for powering the Air and Ground SBC's. (See [Guidelines](../hardware/wiring.md#general-tips-and-guidelines))
+* Two BEC's for powering the Air and Ground SBC's. (See [Guidelines](../hardware/wiring.md#some-tips-to-keep-in-mind))
 * Various lengths of connection wires.
 * A soldering iron and required disposables.
 
@@ -181,7 +181,7 @@ Go ahead, **celebrate** your success, and please **let us know** if it worked fo
 
 ### Next steps
 
-Logically most user will want to connect their Flight Controller to the system to actually see the OSD do it's thing. To do this, follow the steps outlined in [Wiring ](../hardware/wiring.md)-> [Flight Controller](../hardware/wiring.md#flight-controller) and then make sure to use the correct settings in [Telemetry and OSD](../software-setup/telemetry-and-osd.md). After that, you can look into [RC Control](../rc-control/general.md) over Open.HD as well as the subjects in the Advanced Setup.
+Logically most user will want to connect their Flight Controller to the system to actually see the OSD do it's thing. To do this, follow the steps outlined in [Wiring ](../hardware/wiring.md) and then make sure to use the correct settings in [Telemetry and OSD](../software-setup/telemetry-and-osd.md). After that, you can look into [RC Control](../rc-control/general.md) over Open.HD as well as the subjects in the Advanced Setup.
 
 
 
