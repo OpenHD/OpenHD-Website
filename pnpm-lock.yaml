@@ -4,13 +4,18 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@acid-info/docusaurus-og@1.0.4-alpha.0':
+    hash: vtyinecjv573vohpamzlmkubgi
+    path: patches/@acid-info__docusaurus-og@1.0.4-alpha.0.patch
+
 importers:
 
   .:
     dependencies:
       '@acid-info/docusaurus-og':
-        specifier: ^1.0.3-beta.2
-        version: 1.0.3(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)
+        specifier: 1.0.4-alpha.0
+        version: 1.0.4-alpha.0(patch_hash=vtyinecjv573vohpamzlmkubgi)(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)
       '@docusaurus/core':
         specifier: 3.10.2
         version: 3.10.2(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(debug@4.4.3)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)
@@ -88,8 +93,8 @@ packages:
     resolution: {integrity: sha512-7mJJl+wf1AByoT0PknQiQfOPnVNT4fevGrUBVWO4HXsnYn1aQPyRyrELYrNUFleUBM++KzMKN6QaxHPk0t/6/g==}
     engines: {node: '>=11'}
 
-  '@acid-info/docusaurus-og@1.0.3':
-    resolution: {integrity: sha512-XmS04lhiTo+4pbvMbdx1p/A0xV7l9OClhuvL1OG9D0oOSWlL8KBtgmijEhe+OqT4fxO6QkDnNUlUaoCII7c+KA==}
+  '@acid-info/docusaurus-og@1.0.4-alpha.0':
+    resolution: {integrity: sha512-2ztVWX6f9WOhjBfzNh6gV2Lyr1lu0FC+XtAX/Wob8nIy1Tm4Wo+5hWz2DcL2MY8g5DwvtQWBmSdOgGzjtJWykw==}
     engines: {node: '>=20.0'}
 
   '@algolia/abtesting@1.22.0':
@@ -6678,7 +6683,7 @@ snapshots:
       section-matter: 1.0.0
       strip-bom-string: 1.0.0
 
-  '@acid-info/docusaurus-og@1.0.3(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)':
+  '@acid-info/docusaurus-og@1.0.4-alpha.0(patch_hash=vtyinecjv573vohpamzlmkubgi)(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)':
     dependencies:
       '@docusaurus/core': 3.8.1(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)
       '@docusaurus/module-type-aliases': 3.8.1(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -8228,7 +8233,7 @@ snapshots:
       tinypool: 1.1.1
       tslib: 2.8.1
       update-notifier: 6.0.2
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
       webpack-bundle-analyzer: 4.10.2
       webpack-dev-server: 5.2.6(debug@4.4.3)(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26))
       webpack-merge: 6.0.1
@@ -8299,7 +8304,7 @@ snapshots:
       tinypool: 1.1.1
       tslib: 2.8.1
       update-notifier: 6.0.2
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
       webpack-bundle-analyzer: 4.10.2
       webpack-dev-server: 4.15.2(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26))
       webpack-merge: 6.0.1
@@ -8402,7 +8407,7 @@ snapshots:
       unist-util-visit: 5.1.0
       url-loader: 4.1.1(file-loader@6.2.0(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26)))(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26))
       vfile: 6.0.3
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@swc/core'
@@ -8446,7 +8451,7 @@ snapshots:
       unist-util-visit: 5.1.0
       url-loader: 4.1.1(file-loader@6.2.0(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26)))(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26))
       vfile: 6.0.3
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@swc/core'
@@ -8540,7 +8545,7 @@ snapshots:
       tslib: 2.8.1
       unist-util-visit: 5.1.0
       utility-types: 3.11.0
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - '@docusaurus/faster'
       - '@mdx-js/react'
@@ -8586,7 +8591,7 @@ snapshots:
       schema-dts: 1.1.5
       tslib: 2.8.1
       utility-types: 3.11.0
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - '@docusaurus/faster'
       - '@mdx-js/react'
@@ -8632,7 +8637,7 @@ snapshots:
       schema-dts: 1.1.5
       tslib: 2.8.1
       utility-types: 3.11.0
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - '@docusaurus/faster'
       - '@mdx-js/react'
@@ -8668,7 +8673,7 @@ snapshots:
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
       tslib: 2.8.1
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - '@docusaurus/faster'
       - '@mdx-js/react'
@@ -8904,7 +8909,7 @@ snapshots:
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
       tslib: 2.8.1
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - '@docusaurus/faster'
       - '@mdx-js/react'
@@ -9232,7 +9237,7 @@ snapshots:
       react-dom: 19.2.8(react@19.2.8)
       react-helmet-async: '@slorber/react-helmet-async@1.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)'
       utility-types: 3.11.0
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
       webpack-merge: 5.10.0
     transitivePeerDependencies:
       - '@minify-html/node'
@@ -9290,7 +9295,7 @@ snapshots:
       react-dom: 19.2.8(react@19.2.8)
       react-helmet-async: '@slorber/react-helmet-async@1.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)'
       utility-types: 3.11.0
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
       webpack-merge: 5.10.0
     transitivePeerDependencies:
       - '@minify-html/node'
@@ -9515,7 +9520,7 @@ snapshots:
       tslib: 2.8.1
       url-loader: 4.1.1(file-loader@6.2.0(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26)))(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26))
       utility-types: 3.11.0
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@swc/core'
@@ -9597,7 +9602,7 @@ snapshots:
       tslib: 2.8.1
       url-loader: 4.1.1(file-loader@6.2.0(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26)))(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26))
       utility-types: 3.11.0
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@swc/core'
@@ -12248,7 +12253,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
 
   fill-range@7.1.1:
     dependencies:
@@ -12622,7 +12627,7 @@ snapshots:
       tapable: 2.3.3
     optionalDependencies:
       '@rspack/core': 1.7.12
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
 
   htmlparser2@10.1.0:
     dependencies:
@@ -13694,17 +13699,6 @@ snapshots:
       html-minifier-terser: 7.2.0
       postcss: 8.5.26
 
-  minimizer-webpack-plugin@5.6.1(@swc/core@1.16.0)(postcss@8.5.26)(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26)):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.31
-      jest-worker: 27.5.1
-      schema-utils: 4.3.3
-      terser: 5.50.0
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
-    optionalDependencies:
-      '@swc/core': 1.16.0
-      postcss: 8.5.26
-
   mkdirp-classic@0.5.3: {}
 
   mrmime@2.0.1: {}
@@ -14541,7 +14535,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.29.7
       react-loadable: '@docusaurus/react-loadable@6.0.0(react@19.2.8)'
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
 
   react-router-config@5.1.1(react-router@5.3.4(react@19.2.8))(react@19.2.8):
     dependencies:
@@ -15495,7 +15489,7 @@ snapshots:
       loader-utils: 2.0.4
       mime-types: 2.1.35
       schema-utils: 3.3.0
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     optionalDependencies:
       file-loader: 6.2.0(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26))
 
@@ -15570,7 +15564,7 @@ snapshots:
       mime-types: 2.1.35
       range-parser: 1.3.0
       schema-utils: 4.3.3
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
 
   webpack-dev-middleware@7.4.5(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26)):
     dependencies:
@@ -15581,7 +15575,7 @@ snapshots:
       range-parser: 1.3.0
       schema-utils: 4.3.3
     optionalDependencies:
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
 
   webpack-dev-server@4.15.2(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26)):
     dependencies:
@@ -15616,7 +15610,7 @@ snapshots:
       webpack-dev-middleware: 5.3.4(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26))
       ws: 8.21.3
     optionalDependencies:
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -15654,7 +15648,7 @@ snapshots:
       webpack-dev-middleware: 7.4.5(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26))
       ws: 8.21.3
     optionalDependencies:
-      webpack: 5.109.2(@swc/core@1.16.0)(postcss@8.5.26)
+      webpack: 5.109.2(@swc/core@1.16.0)(@swc/html@1.16.0)(lightningcss@1.33.0)(postcss@8.5.26)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -15728,42 +15722,6 @@ snapshots:
       graceful-fs: 4.2.11
       mime-db: 1.54.0
       minimizer-webpack-plugin: 5.6.1(@swc/core@1.16.0)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.26))(html-minifier-terser@7.2.0)(postcss@8.5.26)(webpack@5.109.2(@swc/core@1.16.0)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.26))(html-minifier-terser@7.2.0)(postcss@8.5.26))
-      neo-async: 2.6.2
-      schema-utils: 4.3.3
-      tapable: 2.3.3
-      watchpack: 2.5.2
-      webpack-sources: 3.5.1
-    transitivePeerDependencies:
-      - '@minify-html/node'
-      - '@swc/core'
-      - '@swc/css'
-      - '@swc/html'
-      - clean-css
-      - cssnano
-      - csso
-      - esbuild
-      - html-minifier-terser
-      - lightningcss
-      - postcss
-      - uglify-js
-
-  webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26):
-    dependencies:
-      '@types/estree': 1.0.9
-      '@types/json-schema': 7.0.15
-      '@webassemblyjs/ast': 1.14.1
-      '@webassemblyjs/wasm-edit': 1.14.1
-      '@webassemblyjs/wasm-parser': 1.14.1
-      acorn: 8.18.0
-      browserslist: 4.28.8
-      chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.24.5
-      es-module-lexer: 2.3.2
-      eslint-scope: 5.1.1
-      events: 3.3.0
-      graceful-fs: 4.2.11
-      mime-db: 1.54.0
-      minimizer-webpack-plugin: 5.6.1(@swc/core@1.16.0)(postcss@8.5.26)(webpack@5.109.2(@swc/core@1.16.0)(postcss@8.5.26))
       neo-async: 2.6.2
       schema-utils: 4.3.3
       tapable: 2.3.3

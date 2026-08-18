@@ -98,7 +98,7 @@ const detailedChangelog = [
 
 function DetailedChangelogSection({ item }) {
   return (
-    <section className={styles.changelogSection} id={`v${item.version.replace('.', '-')}`}>
+    <section className={styles.changelogSection} id={`v${item.version.split('.').join('-')}`}>
       <div className={styles.sectionHeader}>
         <div className={styles.versionInfo}>
           <div className={`${styles.versionBadge} ${styles[item.type]}`}>
