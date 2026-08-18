@@ -1,0 +1,258 @@
+<!doctype html><html lang=en dir=ltr class="docs-wrapper plugin-docs plugin-id-default docs-version-2.0 docs-doc-page docs-doc-id-developers/the-openhd-ecosystem" data-has-hydrated=false><head><meta charset=UTF-8><meta name=generator content="Docusaurus v3.10.2"><title data-rh=true>The OpenHD Ecosystem | OpenHD</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"><meta data-rh=true name=twitter:card content=summary_large_image ><meta data-rh="true" property="og:image" content="https://openhdfpv.org/social-cards/563ccf42c456fd0dee2f6e740dcdddfd86fa7538.png"><meta data-rh="true" name="twitter:image" content="https://openhdfpv.org/social-cards/563ccf42c456fd0dee2f6e740dcdddfd86fa7538.png"><meta data-rh=true property=og:url content=https://openhdfpv.org/2.0/developers/the-openhd-ecosystem ><meta data-rh=true property=og:locale content=en ><meta data-rh=true name=docusaurus_locale content=en ><meta data-rh=true name=docsearch:language content=en ><meta data-rh=true name=docusaurus_version content=2.0 ><meta data-rh=true name=docusaurus_tag content=docs-default-2.0 ><meta data-rh=true name=docsearch:version content=2.0 ><meta data-rh=true name=docsearch:docusaurus_tag content=docs-default-2.0 ><meta data-rh=true property=og:title content="The OpenHD Ecosystem | OpenHD"><meta data-rh=true name=description content="Understanding the OpenHD system architecture and component relationships."><meta data-rh=true property=og:description content="Understanding the OpenHD system architecture and component relationships."><link data-rh=true rel=icon href=/img/favicon.png ><link data-rh=true rel=canonical href=https://openhdfpv.org/2.0/developers/the-openhd-ecosystem ><link data-rh=true rel=alternate href=https://openhdfpv.org/2.0/developers/the-openhd-ecosystem hreflang=en ><link data-rh=true rel=alternate href=https://openhdfpv.org/2.0/developers/the-openhd-ecosystem hreflang=x-default ><script data-rh=true type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://openhdfpv.org/2.0/developers/the-openhd-ecosystem","name":"The OpenHD Ecosystem","position":1}]}</script><meta property=og:title content="OpenHD - Open Source Digital FPV Ecosystem"><meta property=og:description content="Professional digital FPV system for drones and RC aircraft. High-quality video transmission, telemetry, and ground station software."><meta property=og:image content=https://openhdfpv.org/img/social-cards/openhd-default.png><meta property=og:image:width content=1200><meta property=og:image:height content=630><meta property=og:type content=website><meta property=og:url content=https://openhdfpv.org><meta property=og:site_name content=OpenHD><meta name=twitter:card content=summary_large_image><meta name=twitter:title content="OpenHD - Open Source Digital FPV Ecosystem"><meta name=twitter:description content="Professional digital FPV system for drones and RC aircraft. High-quality video transmission, telemetry, and ground station software."><meta name=twitter:image content=https://openhdfpv.org/img/social-cards/openhd-default.png><meta name=description content="OpenHD is an open source digital FPV ecosystem for professional drone and RC aircraft applications. Features high-quality video transmission, comprehensive telemetry, and advanced ground station software."><meta name=keywords content="OpenHD, FPV, digital video transmission, drone, RC aircraft, open source, telemetry, ground station, HD video, WiFi FPV"><script type=application/ld+json>{"@context":"https://schema.org","@type":"SoftwareApplication","applicationCategory":"MultimediaApplication","author":{"@type":"Organization","name":"OpenHD Community"},"description":"Open source digital FPV ecosystem for professional drone and RC aircraft applications","name":"OpenHD","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"operatingSystem":["Linux","Windows","Android"],"screenshot":"https://openhdfpv.org/img/social-cards/openhd-default.svg","softwareVersion":"2.6.4-evo","url":"https://openhdfpv.org"}</script><link rel=canonical href=https://openhdfpv.org><link rel=manifest href=/site.webmanifest><meta name=theme-color content=#00a6f2><meta name=robots content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><link rel=stylesheet href=/assets/css/styles.59f2d4bb.css ><script src=/assets/js/runtime~main.c809cbcf.js defer></script><script src=/assets/js/main.770e9dcf.js defer></script><meta name="image" content="https://openhdfpv.org/social-cards/563ccf42c456fd0dee2f6e740dcdddfd86fa7538.png"></head><body><svg style="display: none;"><defs>
+<symbol id=theme-svg-external-link viewBox="0 0 24 24"><path fill=currentColor d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme-b6d")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><link rel=preload as=image href=/img/OpenHD-Logo.png ><div role=region aria-label="Skip to main content"><a class=skipToContent_NGGd href=#__docusaurus_skipToContent_fallback>Skip to main content</a></div><nav aria-label=Main class="theme-layout-navbar navbar navbar--fixed-top"><div class=navbar__inner><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class=navbar__brand href=></a><div class=navbar__logo><img src=/img/OpenHD-Logo.png alt="OpenHD Logo" class="themedComponent_kxvp themedComponent--light_Wc1B"><img src=/img/OpenHD-Logo.png alt="OpenHD Logo" class="themedComponent_kxvp themedComponent--dark_r6By"></div><b class="navbar__title text--truncate">OpenHD</b><a aria-current=page class="navbar__item navbar__link navbar__link--active" href=/2.0/intro>Documentation</a><a class="navbar__item navbar__link" href=/downloads>Downloads</a><a class="navbar__item navbar__link" href=/changelog>Changelog</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a aria-current=page class="navbar__link active" aria-haspopup=true aria-expanded=false role=button href=/2.0/developers/the-openhd-ecosystem>2.0 (Legacy)</a><ul class=dropdown__menu><li><a class=dropdown__link href=/introduction>Evo (Latest)</a></li><li><a aria-current=page class="dropdown__link dropdown__link--active" href=/2.0/developers/the-openhd-ecosystem>2.0 (Legacy)</a></li></ul></div><a href=https://github.com/OpenHD/OpenHD target=_blank rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_f3A0><use href=#theme-svg-external-link ></use></svg></a><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link>Community</a><ul class=dropdown__menu><li><a href=https://t.me/OpenHD_User target=_blank rel="noopener noreferrer" class=dropdown__link><i class="fab fa-telegram"></i> Telegram</a></li><li><a href=https://discord.gg/P9kXs9N2RP target=_blank rel="noopener noreferrer" class=dropdown__link><i class="fab fa-discord"></i> Discord</a></li><li><a href=https://www.youtube.com/@OpenHD-Official target=_blank rel="noopener noreferrer" class=dropdown__link><i class="fab fa-youtube"></i> YouTube</a></li><li><a href=https://www.facebook.com/groups/openhd target=_blank rel="noopener noreferrer" class=dropdown__link><i class="fab fa-facebook"></i> Facebook</a></li></ul></div><div class="toggle_bgab colorModeToggle_HcfO"><button class="clean-btn toggleButton_KmB4 toggleButtonDisabled_xr98" type=button disabled title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_kulx lightToggleIcon_eEh3"><path fill=currentColor d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_kulx darkToggleIcon_SC9C"><path fill=currentColor d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_kulx systemToggleIcon_J2xj"><path fill=currentColor d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class=navbarSearchContainer_hvYO><div class="navbar__search searchBarContainer_fMOq" dir=ltr><svg aria-hidden=true class=searchIcon_FcUz focusable=false viewBox="0 0 16 16"><path fill=currentColor d="M6.02945 10.20327a4.17382 4.17382 0 1 1 4.17382-4.17382 4.15609 4.15609 0 0 1-4.17382 4.17382Zm9.69195 4.2199-4.8225-4.82338A5.88021 5.88021 0 0 0 12.058 6.02856 6.00467 6.00467 0 1 0 9.59979 10.8989l4.82338 4.82338a.89729.89729 0 0 0 1.29912 0 .89749.89749 0 0 0-.00087-1.29909Z"></path></svg><input placeholder=Search aria-label=Search class="navbar__search-input searchInput_P3Sl" value="" ><div class="loadingRing_gyw6 searchBarLoadingRing_ZLbB"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="theme-layout-main main-wrapper mainWrapper_uhnF"><div class=docsWrapper_uGxj><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_mMeE" type=button></button><div class=docRoot_kxmI><aside class="theme-doc-sidebar-container docSidebarContainer_S20Q"><div class=sidebarViewport_TZ5y><div class=sidebar_gmmV><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_k1jo"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/2.0/intro><span class=linkLabel_juTD>Introduction</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_uCHp menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/2.0/general/features><span class=categoryLinkLabel_ZFXN>General</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_uCHp menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/2.0/hardware/wiring><span class=categoryLinkLabel_ZFXN>Hardware</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_uCHp menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/2.0/software-setup/telemetry-and-osd><span class=categoryLinkLabel_ZFXN>Software Setup</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_uCHp menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/2.0/rc-control/general><span class=categoryLinkLabel_ZFXN>RC Control</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_uCHp menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/2.0/ground-station-software/qopen.hd-recommended><span class=categoryLinkLabel_ZFXN>Ground Station Software</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_uCHp menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false href=/2.0/advanced-setup/bidirectional-telemetry><span class=categoryLinkLabel_ZFXN>Advanced Setup</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_uCHp menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role=button aria-expanded=true href=/2.0/developers/the-openhd-ecosystem><span class=categoryLinkLabel_ZFXN>Developer Corner</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current=page tabindex=0 href=/2.0/developers/the-openhd-ecosystem><span class=linkLabel_juTD>The OpenHD Ecosystem</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/2.0/developers/making-a-release><span class=linkLabel_juTD>Making a Release</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/2.0/developers/updating-package-on-a-pi><span class=linkLabel_juTD>Updating Package on a Pi</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/2.0/developers/change-packet-source-on-a-pi><span class=linkLabel_juTD>Change Packet Source on a Pi</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/2.0/developers/building-an-image><span class=linkLabel_juTD>Building an Image</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/2.0/developers/essentials><span class=linkLabel_juTD>Essentials</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/2.0/developers/qopenhd-and-custom-mavlink><span class=linkLabel_juTD>QOpenHD and Custom MAVLink</span></a></li></ul></li></ul></nav></div></div></aside><main class=docMainContainer_WbFY><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_xE0Y"><div class="theme-doc-version-banner alert alert--warning margin-bottom--md" role=alert><div>This is documentation for OpenHD <b>2.0 (Legacy)</b>, which is no longer actively maintained.</div><div class=margin-top--md>For up-to-date documentation, see the <b><a href=/introduction>latest version</a></b> (Evo (Latest)).</div></div><div class=docItemContainer_uaSD><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_FiOq" aria-label=Breadcrumbs><ul class=breadcrumbs><li class=breadcrumbs__item><a aria-label="Home page" class=breadcrumbs__link href=></a><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_YyuG><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor ></path></svg></li><li class=breadcrumbs__item><span class=breadcrumbs__link>Developer Corner</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link>The OpenHD Ecosystem</span></li></ul></nav><span class="theme-doc-version-badge badge badge--secondary">Version: 2.0 (Legacy)</span><div class="tocCollapsible__FDE theme-doc-toc-mobile tocMobile_uMfA"><button type=button class="clean-btn tocCollapsibleButton_m0FI">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>The OpenHD Ecosystem</h1></header>
+<p>Understanding the OpenHD system architecture and component relationships.</p>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=system-overview>System Overview<a href=#system-overview class=hash-link aria-label="Direct link to System Overview" title="Direct link to System Overview" translate=no>​</a></h2>
+<p>OpenHD consists of multiple interconnected components:</p>
+<ul>
+<li class=""><strong>Air Unit</strong>: Onboard aircraft systems</li>
+<li class=""><strong>Ground Unit</strong>: Ground station hardware</li>
+<li class=""><strong>Ground Software</strong>: Control and display applications</li>
+<li class=""><strong>Communication Protocol</strong>: Data exchange standards</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=core-components>Core Components<a href=#core-components class=hash-link aria-label="Direct link to Core Components" title="Direct link to Core Components" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=openhd-core>OpenHD Core<a href=#openhd-core class=hash-link aria-label="Direct link to OpenHD Core" title="Direct link to OpenHD Core" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>Video Pipeline</strong>: H.264/H.265 encoding and streaming</li>
+<li class=""><strong>Telemetry System</strong>: MAVLink integration and forwarding</li>
+<li class=""><strong>RF Management</strong>: Radio frequency control and optimization</li>
+<li class=""><strong>Configuration System</strong>: Parameter management and storage</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=wfb-ng-wifi-broadcast-next-generation>WFB-ng (WiFi Broadcast Next Generation)<a href=#wfb-ng-wifi-broadcast-next-generation class=hash-link aria-label="Direct link to WFB-ng (WiFi Broadcast Next Generation)" title="Direct link to WFB-ng (WiFi Broadcast Next Generation)" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>Packet Injection</strong>: Raw packet transmission</li>
+<li class=""><strong>FEC (Forward Error Correction)</strong>: Error recovery mechanisms</li>
+<li class=""><strong>Diversity Reception</strong>: Multiple antenna support</li>
+<li class=""><strong>Link Adaptation</strong>: Dynamic parameter adjustment</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=architecture-layers>Architecture Layers<a href=#architecture-layers class=hash-link aria-label="Direct link to Architecture Layers" title="Direct link to Architecture Layers" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=hardware-layer>Hardware Layer<a href=#hardware-layer class=hash-link aria-label="Direct link to Hardware Layer" title="Direct link to Hardware Layer" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>Single Board Computers</strong>: Raspberry Pi, Radxa, etc.</li>
+<li class=""><strong>Radio Hardware</strong>: WiFi cards and antennas</li>
+<li class=""><strong>Camera Interfaces</strong>: CSI, USB, IP cameras</li>
+<li class=""><strong>Sensors</strong>: GPS, IMU, environmental sensors</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=system-layer>System Layer<a href=#system-layer class=hash-link aria-label="Direct link to System Layer" title="Direct link to System Layer" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>Linux Distribution</strong>: Custom OpenHD Linux images</li>
+<li class=""><strong>Kernel Modifications</strong>: RF drivers and optimizations</li>
+<li class=""><strong>System Services</strong>: Background processes and daemons</li>
+<li class=""><strong>Hardware Abstraction</strong>: Device-specific adaptations</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=application-layer>Application Layer<a href=#application-layer class=hash-link aria-label="Direct link to Application Layer" title="Direct link to Application Layer" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>OpenHD Service</strong>: Main system control service</li>
+<li class=""><strong>Camera Service</strong>: Video capture and encoding</li>
+<li class=""><strong>Telemetry Service</strong>: MAVLink processing</li>
+<li class=""><strong>Web Interface</strong>: Configuration web UI</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=user-interface-layer>User Interface Layer<a href=#user-interface-layer class=hash-link aria-label="Direct link to User Interface Layer" title="Direct link to User Interface Layer" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>QOpenHD</strong>: Primary ground station software</li>
+<li class=""><strong>Mobile Apps</strong>: Android and iOS applications</li>
+<li class=""><strong>Web Interface</strong>: Browser-based configuration</li>
+<li class=""><strong>OSD System</strong>: On-screen display overlay</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=data-flow>Data Flow<a href=#data-flow class=hash-link aria-label="Direct link to Data Flow" title="Direct link to Data Flow" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=video-pipeline>Video Pipeline<a href=#video-pipeline class=hash-link aria-label="Direct link to Video Pipeline" title="Direct link to Video Pipeline" translate=no>​</a></h3>
+<div class="language-text codeBlockContainer_I6jD theme-code-block" style=--prism-color:#F8F8F2;--prism-background-color:#282A36><div class=codeBlockContent_QMVe><pre tabindex=0 class="prism-code language-text codeBlock_B5Ui thin-scrollbar" style=color:#F8F8F2;background-color:#282A36><code class=codeBlockLines_Eo3m><div class=token-line style=color:#F8F8F2><span class="token plain">Camera → Encoder → Packetizer → RF Transmitter</span><br/></div><div class=token-line style=color:#F8F8F2><span class="token plain">                                      ↓</span><br/></div><div class=token-line style=color:#F8F8F2><span class="token plain">RF Receiver → Depacketizer → Decoder → Display</span><br/></div></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=telemetry-flow>Telemetry Flow<a href=#telemetry-flow class=hash-link aria-label="Direct link to Telemetry Flow" title="Direct link to Telemetry Flow" translate=no>​</a></h3>
+<div class="language-text codeBlockContainer_I6jD theme-code-block" style=--prism-color:#F8F8F2;--prism-background-color:#282A36><div class=codeBlockContent_QMVe><pre tabindex=0 class="prism-code language-text codeBlock_B5Ui thin-scrollbar" style=color:#F8F8F2;background-color:#282A36><code class=codeBlockLines_Eo3m><div class=token-line style=color:#F8F8F2><span class="token plain">Flight Controller → OpenHD Air → RF Link → OpenHD Ground → Ground Software</span><br/></div></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=control-flow>Control Flow<a href=#control-flow class=hash-link aria-label="Direct link to Control Flow" title="Direct link to Control Flow" translate=no>​</a></h3>
+<div class="language-text codeBlockContainer_I6jD theme-code-block" style=--prism-color:#F8F8F2;--prism-background-color:#282A36><div class=codeBlockContent_QMVe><pre tabindex=0 class="prism-code language-text codeBlock_B5Ui thin-scrollbar" style=color:#F8F8F2;background-color:#282A36><code class=codeBlockLines_Eo3m><div class=token-line style=color:#F8F8F2><span class="token plain">Ground Software → OpenHD Ground → RF Link → OpenHD Air → Flight Controller</span><br/></div></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=communication-protocols>Communication Protocols<a href=#communication-protocols class=hash-link aria-label="Direct link to Communication Protocols" title="Direct link to Communication Protocols" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=internal-protocols>Internal Protocols<a href=#internal-protocols class=hash-link aria-label="Direct link to Internal Protocols" title="Direct link to Internal Protocols" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>OpenHD Protocol</strong>: Internal system communication</li>
+<li class=""><strong>MAVLink</strong>: Flight controller integration</li>
+<li class=""><strong>REST API</strong>: Web interface communication</li>
+<li class=""><strong>UDP Streams</strong>: Video and telemetry distribution</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=rf-protocols>RF Protocols<a href=#rf-protocols class=hash-link aria-label="Direct link to RF Protocols" title="Direct link to RF Protocols" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>WFB-ng</strong>: Video and telemetry transmission</li>
+<li class=""><strong>WiFi 802.11</strong>: Standard WiFi for configuration</li>
+<li class=""><strong>Custom Frames</strong>: Optimized data structures</li>
+<li class=""><strong>Frequency Management</strong>: Channel selection and hopping</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=development-environment>Development Environment<a href=#development-environment class=hash-link aria-label="Direct link to Development Environment" title="Direct link to Development Environment" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=build-system>Build System<a href=#build-system class=hash-link aria-label="Direct link to Build System" title="Direct link to Build System" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>CMake</strong>: Cross-platform build system</li>
+<li class=""><strong>Cross-compilation</strong>: ARM target compilation</li>
+<li class=""><strong>Package Management</strong>: Debian package creation</li>
+<li class=""><strong>Continuous Integration</strong>: Automated testing and builds</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=dependencies>Dependencies<a href=#dependencies class=hash-link aria-label="Direct link to Dependencies" title="Direct link to Dependencies" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>GStreamer</strong>: Video processing pipeline</li>
+<li class=""><strong>FFmpeg</strong>: Video encoding and decoding</li>
+<li class=""><strong>OpenCV</strong>: Computer vision operations</li>
+<li class=""><strong>Qt</strong>: User interface framework</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=development-tools>Development Tools<a href=#development-tools class=hash-link aria-label="Direct link to Development Tools" title="Direct link to Development Tools" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>Git</strong>: Version control system</li>
+<li class=""><strong>GitHub</strong>: Repository hosting and collaboration</li>
+<li class=""><strong>Docker</strong>: Containerized build environments</li>
+<li class=""><strong>QEMU</strong>: ARM emulation for testing</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=component-interaction>Component Interaction<a href=#component-interaction class=hash-link aria-label="Direct link to Component Interaction" title="Direct link to Component Interaction" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=service-communication>Service Communication<a href=#service-communication class=hash-link aria-label="Direct link to Service Communication" title="Direct link to Service Communication" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>D-Bus</strong>: Inter-process communication</li>
+<li class=""><strong>Shared Memory</strong>: High-performance data sharing</li>
+<li class=""><strong>Unix Sockets</strong>: Local communication channels</li>
+<li class=""><strong>Network Sockets</strong>: Remote communication</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=configuration-management>Configuration Management<a href=#configuration-management class=hash-link aria-label="Direct link to Configuration Management" title="Direct link to Configuration Management" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>JSON Configuration</strong>: Human-readable settings</li>
+<li class=""><strong>Parameter Validation</strong>: Input validation and bounds checking</li>
+<li class=""><strong>Default Values</strong>: Fallback configuration values</li>
+<li class=""><strong>Runtime Updates</strong>: Dynamic parameter changes</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=extension-points>Extension Points<a href=#extension-points class=hash-link aria-label="Direct link to Extension Points" title="Direct link to Extension Points" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=plugin-architecture>Plugin Architecture<a href=#plugin-architecture class=hash-link aria-label="Direct link to Plugin Architecture" title="Direct link to Plugin Architecture" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>Video Plugins</strong>: Custom video processing</li>
+<li class=""><strong>Telemetry Plugins</strong>: Custom telemetry handling</li>
+<li class=""><strong>OSD Plugins</strong>: Custom display elements</li>
+<li class=""><strong>Protocol Plugins</strong>: Additional communication protocols</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=api-interfaces>API Interfaces<a href=#api-interfaces class=hash-link aria-label="Direct link to API Interfaces" title="Direct link to API Interfaces" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>REST API</strong>: HTTP-based configuration interface</li>
+<li class=""><strong>WebSocket API</strong>: Real-time data streaming</li>
+<li class=""><strong>UDP API</strong>: Low-latency data access</li>
+<li class=""><strong>Callback API</strong>: Event-driven programming</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=quality-assurance>Quality Assurance<a href=#quality-assurance class=hash-link aria-label="Direct link to Quality Assurance" title="Direct link to Quality Assurance" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=testing-framework>Testing Framework<a href=#testing-framework class=hash-link aria-label="Direct link to Testing Framework" title="Direct link to Testing Framework" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>Unit Tests</strong>: Component-level testing</li>
+<li class=""><strong>Integration Tests</strong>: System-level testing</li>
+<li class=""><strong>Hardware Tests</strong>: Real hardware validation</li>
+<li class=""><strong>Performance Tests</strong>: Latency and throughput measurement</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=code-quality>Code Quality<a href=#code-quality class=hash-link aria-label="Direct link to Code Quality" title="Direct link to Code Quality" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>Static Analysis</strong>: Code quality checking</li>
+<li class=""><strong>Code Reviews</strong>: Peer review process</li>
+<li class=""><strong>Documentation</strong>: Comprehensive code documentation</li>
+<li class=""><strong>Coding Standards</strong>: Consistent coding practices</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=deployment>Deployment<a href=#deployment class=hash-link aria-label="Direct link to Deployment" title="Direct link to Deployment" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=image-building>Image Building<a href=#image-building class=hash-link aria-label="Direct link to Image Building" title="Direct link to Image Building" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>Custom Linux Images</strong>: Tailored system images</li>
+<li class=""><strong>Package Installation</strong>: Automated package deployment</li>
+<li class=""><strong>Configuration Templates</strong>: Default system configurations</li>
+<li class=""><strong>Hardware Variants</strong>: Device-specific optimizations</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=update-mechanism>Update Mechanism<a href=#update-mechanism class=hash-link aria-label="Direct link to Update Mechanism" title="Direct link to Update Mechanism" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>OTA Updates</strong>: Over-the-air system updates</li>
+<li class=""><strong>Package Updates</strong>: Individual component updates</li>
+<li class=""><strong>Configuration Migration</strong>: Settings preservation</li>
+<li class=""><strong>Rollback Capability</strong>: Revert to previous versions</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=performance-considerations>Performance Considerations<a href=#performance-considerations class=hash-link aria-label="Direct link to Performance Considerations" title="Direct link to Performance Considerations" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=latency-optimization>Latency Optimization<a href=#latency-optimization class=hash-link aria-label="Direct link to Latency Optimization" title="Direct link to Latency Optimization" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>Pipeline Optimization</strong>: Minimize processing delays</li>
+<li class=""><strong>Kernel Bypassing</strong>: Direct hardware access</li>
+<li class=""><strong>Priority Scheduling</strong>: Real-time process scheduling</li>
+<li class=""><strong>Buffer Management</strong>: Minimize buffering delays</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=resource-management>Resource Management<a href=#resource-management class=hash-link aria-label="Direct link to Resource Management" title="Direct link to Resource Management" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>CPU Allocation</strong>: Process priority management</li>
+<li class=""><strong>Memory Management</strong>: Efficient memory usage</li>
+<li class=""><strong>Power Management</strong>: Battery life optimization</li>
+<li class=""><strong>Thermal Management</strong>: Heat dissipation strategies</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_QSXr" id=future-development>Future Development<a href=#future-development class=hash-link aria-label="Direct link to Future Development" title="Direct link to Future Development" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=planned-features>Planned Features<a href=#planned-features class=hash-link aria-label="Direct link to Planned Features" title="Direct link to Planned Features" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>AI Integration</strong>: Computer vision and autonomous features</li>
+<li class=""><strong>Cloud Integration</strong>: Remote monitoring and control</li>
+<li class=""><strong>Mesh Networking</strong>: Multi-node communication</li>
+<li class=""><strong>Protocol Evolution</strong>: Enhanced communication protocols</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_QSXr" id=technology-roadmap>Technology Roadmap<a href=#technology-roadmap class=hash-link aria-label="Direct link to Technology Roadmap" title="Direct link to Technology Roadmap" translate=no>​</a></h3>
+<ul>
+<li class=""><strong>Hardware Support</strong>: New platform support</li>
+<li class=""><strong>Protocol Enhancements</strong>: Improved communication</li>
+<li class=""><strong>User Interface</strong>: Enhanced user experience</li>
+<li class=""><strong>Performance</strong>: Continued optimization</li>
+</ul>
+<p>:::info Developer Resources
+Additional developer documentation, APIs, and tools are available in the OpenHD GitHub repositories.
+:::</p>
+<p>:::warning System Complexity
+The OpenHD ecosystem is complex. Start with simple modifications and gradually work on more complex features.
+:::</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_wQKf"><a href=https://github.com/OpenHD/OpenHD-Website/edit/main/versioned_docs/version-2.0/developers/the-openhd-ecosystem.md target=_blank rel="noopener noreferrer" class=theme-edit-this-page><svg fill=currentColor height=20 width=20 viewBox="0 0 40 40" class=iconEdit_fhgo aria-hidden=true><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_CCeY"><span class=theme-last-updated>Last updated on <b><time datetime=2025-07-29T15:02:51.000Z itemprop=dateModified>Jul 29, 2025</time></b> by <b>LimitlessGreen</b></span></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href=/2.0/advanced-setup/ground-power-monitoring><div class=pagination-nav__sublabel>Previous</div><div class=pagination-nav__label>Ground Power Monitoring</div></a><a class="pagination-nav__link pagination-nav__link--next" href=/2.0/developers/making-a-release><div class=pagination-nav__sublabel>Next</div><div class=pagination-nav__label>Making a Release</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_mJMc thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href=#system-overview class="table-of-contents__link toc-highlight">System Overview</a></li><li><a href=#core-components class="table-of-contents__link toc-highlight">Core Components</a><ul><li><a href=#openhd-core class="table-of-contents__link toc-highlight">OpenHD Core</a></li><li><a href=#wfb-ng-wifi-broadcast-next-generation class="table-of-contents__link toc-highlight">WFB-ng (WiFi Broadcast Next Generation)</a></li></ul></li><li><a href=#architecture-layers class="table-of-contents__link toc-highlight">Architecture Layers</a><ul><li><a href=#hardware-layer class="table-of-contents__link toc-highlight">Hardware Layer</a></li><li><a href=#system-layer class="table-of-contents__link toc-highlight">System Layer</a></li><li><a href=#application-layer class="table-of-contents__link toc-highlight">Application Layer</a></li><li><a href=#user-interface-layer class="table-of-contents__link toc-highlight">User Interface Layer</a></li></ul></li><li><a href=#data-flow class="table-of-contents__link toc-highlight">Data Flow</a><ul><li><a href=#video-pipeline class="table-of-contents__link toc-highlight">Video Pipeline</a></li><li><a href=#telemetry-flow class="table-of-contents__link toc-highlight">Telemetry Flow</a></li><li><a href=#control-flow class="table-of-contents__link toc-highlight">Control Flow</a></li></ul></li><li><a href=#communication-protocols class="table-of-contents__link toc-highlight">Communication Protocols</a><ul><li><a href=#internal-protocols class="table-of-contents__link toc-highlight">Internal Protocols</a></li><li><a href=#rf-protocols class="table-of-contents__link toc-highlight">RF Protocols</a></li></ul></li><li><a href=#development-environment class="table-of-contents__link toc-highlight">Development Environment</a><ul><li><a href=#build-system class="table-of-contents__link toc-highlight">Build System</a></li><li><a href=#dependencies class="table-of-contents__link toc-highlight">Dependencies</a></li><li><a href=#development-tools class="table-of-contents__link toc-highlight">Development Tools</a></li></ul></li><li><a href=#component-interaction class="table-of-contents__link toc-highlight">Component Interaction</a><ul><li><a href=#service-communication class="table-of-contents__link toc-highlight">Service Communication</a></li><li><a href=#configuration-management class="table-of-contents__link toc-highlight">Configuration Management</a></li></ul></li><li><a href=#extension-points class="table-of-contents__link toc-highlight">Extension Points</a><ul><li><a href=#plugin-architecture class="table-of-contents__link toc-highlight">Plugin Architecture</a></li><li><a href=#api-interfaces class="table-of-contents__link toc-highlight">API Interfaces</a></li></ul></li><li><a href=#quality-assurance class="table-of-contents__link toc-highlight">Quality Assurance</a><ul><li><a href=#testing-framework class="table-of-contents__link toc-highlight">Testing Framework</a></li><li><a href=#code-quality class="table-of-contents__link toc-highlight">Code Quality</a></li></ul></li><li><a href=#deployment class="table-of-contents__link toc-highlight">Deployment</a><ul><li><a href=#image-building class="table-of-contents__link toc-highlight">Image Building</a></li><li><a href=#update-mechanism class="table-of-contents__link toc-highlight">Update Mechanism</a></li></ul></li><li><a href=#performance-considerations class="table-of-contents__link toc-highlight">Performance Considerations</a><ul><li><a href=#latency-optimization class="table-of-contents__link toc-highlight">Latency Optimization</a></li><li><a href=#resource-management class="table-of-contents__link toc-highlight">Resource Management</a></li></ul></li><li><a href=#future-development class="table-of-contents__link toc-highlight">Future Development</a><ul><li><a href=#planned-features class="table-of-contents__link toc-highlight">Planned Features</a></li><li><a href=#technology-roadmap class="table-of-contents__link toc-highlight">Technology Roadmap</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class=footer__title>OpenHD</div><ul class="footer__items clean-list"><li class=footer__item>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px; line-height: 1.6;">
+                  Open source digital FPV ecosystem - The ultimate OpenSource Digital Video solution, 
+                  which doesn't require a doctors degree.
+                </p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                  <a href=https://www.youtube.com/@OpenHD-Official target=_blank rel="noopener noreferrer" style="color: rgba(255,255,255,0.8); font-size: 24px; text-decoration: none; transition: color 0.2s ease;" title=YouTube onmouseover='this.style.color="rgba(255,255,255,1)"' onmouseout='this.style.color="rgba(255,255,255,0.8)"'>
+                    <i class="fab fa-youtube"></i>
+                  </a>
+                  <a href=https://github.com/OpenHD target=_blank rel="noopener noreferrer" style="color: rgba(255,255,255,0.8); font-size: 24px; text-decoration: none; transition: color 0.2s ease;" title=GitHub onmouseover='this.style.color="rgba(255,255,255,1)"' onmouseout='this.style.color="rgba(255,255,255,0.8)"'>
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href=https://t.me/OpenHD_User target=_blank rel="noopener noreferrer" style="color: rgba(255,255,255,0.8); font-size: 24px; text-decoration: none; transition: color 0.2s ease;" title=Telegram onmouseover='this.style.color="rgba(255,255,255,1)"' onmouseout='this.style.color="rgba(255,255,255,0.8)"'>
+                    <i class="fab fa-telegram"></i>
+                  </a>
+                  <a href=https://discord.gg/P9kXs9N2RP target=_blank rel="noopener noreferrer" style="color: rgba(255,255,255,0.8); font-size: 24px; text-decoration: none; transition: color 0.2s ease;" title=Discord onmouseover='this.style.color="rgba(255,255,255,1)"' onmouseout='this.style.color="rgba(255,255,255,0.8)"'>
+                    <i class="fab fa-discord"></i>
+                  </a>
+                  <a href=https://www.facebook.com/groups/openhd target=_blank rel="noopener noreferrer" style="color: rgba(255,255,255,0.8); font-size: 24px; text-decoration: none; transition: color 0.2s ease;" title=Facebook onmouseover='this.style.color="rgba(255,255,255,1)"' onmouseout='this.style.color="rgba(255,255,255,0.8)"'>
+                    <i class="fab fa-facebook"></i>
+                  </a>
+                </div>
+              </li></ul></div><div class="theme-layout-footer-column col footer__col"><div class=footer__title>About Us</div><ul class="footer__items clean-list"><li class=footer__item><a class=footer__link-item href=/general/features>Features</a></li><li class=footer__item><a class=footer__link-item href=/downloads>Downloads</a></li><li class=footer__item><a class=footer__link-item href=/general/team>Team</a></li><li class=footer__item><a class=footer__link-item href=/general/contributing>Contributing</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class=footer__title>Useful Links</div><ul class="footer__items clean-list"><li class=footer__item><a class=footer__link-item href=/introduction>Documentation</a></li><li class=footer__item><a class=footer__link-item href=/general/faq>FAQ</a></li><li class=footer__item><a class=footer__link-item href=/hardware/first-time-setup>First Time Setup</a></li><li class=footer__item><a class=footer__link-item href=/changelog>Changelog</a></li><li class=footer__item><a class=footer__link-item href=/privacy>Privacy</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class=footer__title>Send us a Message</div><ul class="footer__items clean-list"><li class=footer__item>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px; line-height: 1.6;">
+                  For partnership or business inquiries, simply reach out to us here.
+                </p>
+                <a href=# onclick='var e="developers@openhdfpv.org";return window.location.href="mailto:"+e,!1' style="display: inline-flex; align-items: center; gap: 8px; 
+                          background: linear-gradient(135deg, #2e8b57, #228b22); 
+                          color: white; padding: 12px 20px; 
+                          border-radius: 8px; text-decoration: none; font-weight: 500;
+                          transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                          transform: translateY(0px);" onmouseover='this.style.transform="translateY(-2px)",this.style.boxShadow="0 4px 12px rgba(46, 139, 87, 0.4)",this.style.background="linear-gradient(135deg, #32a05f, #2e8b57)"' onmouseout='this.style.transform="translateY(0px)",this.style.boxShadow="0 2px 4px rgba(0,0,0,0.2)",this.style.background="linear-gradient(135deg, #2e8b57, #228b22)"'>
+                  <i class="fas fa-envelope"></i>
+                  <span>developers@openhdfpv.org</span>
+                </a>
+              </li></ul></div></div><div class="footer__bottom text--center"><div class=footer__copyright>
+        <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 20px;">
+          
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 25px; background: rgba(255,255,255,0.05); border-radius: 12px; margin: 0 20px;">
+            <h3 style="color: #00a6f2; margin: 0; font-size: 1.2rem; font-weight: 600;">Support OpenHD</h3>
+            <p style="color: rgba(255,255,255,0.8); text-align: center; margin: 0; line-height: 1.5; max-width: 500px;">
+              Help us continue developing OpenHD with your support. Every contribution helps us improve the platform for the entire FPV community.
+            </p>
+            
+            
+            <div style="display: flex; align-items: center; gap: 25px; width: 100%; max-width: 650px; flex-wrap: wrap; justify-content: center;">
+              <div id=footer-funding-widget-main style="flex: 1; min-width: 300px; max-width: 400px;">
+                
+              </div>
+              <div id=footer-buttons-container>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+          <a href=/ style="text-decoration: none;">
+            <img src=/img/OpenHD-Logo.png alt="OpenHD Logo" style="width: 180px; height: auto;">
+          </a>
+        </div>
+        Copyright © 2026 OpenHD Project. Built with Docusaurus.</div></div></div></footer><a class="globalSponsorCorner_JGRq topright_avv9" aria-label="Love OpenHD? Support us!" href=/help-us><div class="globalCornerContent_p2Q7 "><i class="fas fa-heart"></i></div><span class="sponsorText_MbCt ">Love OpenHD?</span></a></div></body></html>
