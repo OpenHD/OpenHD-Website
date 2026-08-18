@@ -17,7 +17,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@acid-info/docusaurus-og": "^1.0.3-beta.2",
+    "@acid-info/docusaurus-og": "1.0.4-alpha.0",
     "@docusaurus/core": "3.10.2",
     "@docusaurus/faster": "3.10.2",
     "@docusaurus/plugin-content-docs": "3.10.2",
@@ -57,6 +57,11 @@
     ]
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=26.0"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@acid-info/docusaurus-og@1.0.4-alpha.0": "patches/@acid-info__docusaurus-og@1.0.4-alpha.0.patch"
+    }
   }
 }
