@@ -1,8 +1,6 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-// @ts-ignore
-import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -246,48 +244,6 @@ const config: Config = {
   ],
 
   plugins: [
-    // Image Optimization Pipeline
-    () => ({
-      name: 'openhd-image-optimization',
-      configureWebpack(config, isServer) {
-        if (!isServer) {
-          config.optimization.minimizer.push(
-            new ImageMinimizerPlugin({
-              minimizer: {
-                implementation: ImageMinimizerPlugin.sharpMinify,
-                options: {
-                  encodeOptions: {
-                    avif: { quality: 60, effort: 4 },
-                    webp: { quality: 75 },
-                    jpeg: { quality: 75 },
-                  },
-                },
-              },
-              generator: [
-                {
-                  preset: 'avif',
-                  implementation: ImageMinimizerPlugin.sharpGenerate,
-                  options: {
-                    encodeOptions: {
-                      avif: { quality: 60, effort: 4 },
-                    },
-                  },
-                },
-                {
-                  preset: 'webp',
-                  implementation: ImageMinimizerPlugin.sharpGenerate,
-                  options: {
-                    encodeOptions: {
-                      webp: { quality: 75 },
-                    },
-                  },
-                },
-              ],
-            })
-          );
-        }
-      },
-    }),
     [
       '@easyops-cn/docusaurus-search-local',
       {
