@@ -8,11 +8,8 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  /* Prefer AVIF with PNG fallback */
-  background-image: image-set(
-    url('/img/IMG_0005.avif') type('image/avif'),
-    url('/img/IMG_0005.png') type('image/png')
-  );
+  /* Using relative path to let Docusaurus/Webpack process the image */
+  background-image: url('../../static/img/IMG_0005.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

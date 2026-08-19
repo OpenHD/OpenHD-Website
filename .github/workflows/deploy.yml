@@ -58,17 +58,6 @@ jobs:
       - name: Typecheck 🧪
         run: pnpm typecheck
 
-      - name: Cache converted images 🖼️
-        uses: actions/cache@v4
-        with:
-          path: |
-            static/img
-            .image-cache
-          key: images-${{ runner.os }}-${{ hashFiles('static/img/**/*.png', 'static/img/**/*.jpg', 'static/img/**/*.jpeg') }}
-          restore-keys: |
-            images-${{ runner.os }}-
-            images-
-        
       - name: Build website 🔧
         env:
           STAGING: ${{ github.ref == 'refs/heads/main' }}
