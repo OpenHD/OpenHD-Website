@@ -28,7 +28,6 @@
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.1.1",
     "docusaurus-plugin-image-zoom": "^3.0.1",
-    "docusaurus-plugin-native-ideal-image": "^0.1.3",
     "prism-react-renderer": "^2.4.1",
     "qr-code-styling": "^1.9.2",
     "react": "^19.0.0",
