@@ -58,6 +58,14 @@ jobs:
       - name: Typecheck 🧪
         run: pnpm typecheck
 
+      - name: Cache optimized images 🖼️
+        uses: actions/cache@v4
+        with:
+          path: .image-cache
+          key: image-optimization-cache-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            image-optimization-cache-${{ runner.os }}-
+
       - name: Build website 🔧
         env:
           STAGING: ${{ github.ref == 'refs/heads/main' }}

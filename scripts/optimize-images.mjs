@@ -2,36 +2,63 @@ import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 import { glob } from 'glob';
+import crypto from 'crypto';
 
 const buildDir = './build';
+const cacheDir = './.image-cache';
 const baseUrl = process.env.STAGING === 'true' ? '/staging/' : '/';
 
-async function optimize() {
-  console.log('--- Starting image optimization pipeline ---');
+// Ensure cache directory exists
+if (!fs.existsSync(cacheDir)) {
+  fs.mkdirSync(cacheDir, { recursive: true });
+}
 
-  // 1. Find all original images in the build output
+function getFileHash(filePath) {
+  const content = fs.readFileSync(filePath);
+  return crypto.createHash('md5').update(content).digest('hex');
+}
+
+async function optimize() {
+  console.log('--- Starting cached image optimization pipeline ---');
+
   const images = await glob(`${buildDir}/**/*.{png,jpg,jpeg}`, { nodir: true });
-  console.log(`Found ${images.length} images to optimize.`);
+  console.log(`Found ${images.length} images in build output.`);
 
   const assetMap = new Map();
+  let optimizedCount = 0;
+  let cachedCount = 0;
 
   for (const imgPath of images) {
-    const avifPath = imgPath.replace(/\.(png|jpe?g)$/i, '.avif');
-    const webpPath = imgPath.replace(/\.(png|jpe?g)$/i, '.webp');
+    const fileHash = getFileHash(imgPath);
+    const ext = path.extname(imgPath);
 
-    // Create AVIF
-    if (!fs.existsSync(avifPath)) {
+    const avifCachePath = path.join(cacheDir, `${fileHash}.avif`);
+    const webpCachePath = path.join(cacheDir, `${fileHash}.webp`);
+
+    const avifDestPath = imgPath.replace(/\.(png|jpe?g)$/i, '.avif');
+    const webpDestPath = imgPath.replace(/\.(png|jpe?g)$/i, '.webp');
+
+    // --- AVIF ---
+    if (fs.existsSync(avifCachePath)) {
+      fs.copyFileSync(avifCachePath, avifDestPath);
+      cachedCount++;
+    } else {
       try {
-        await sharp(imgPath).avif({ quality: 60, effort: 4 }).toFile(avifPath);
+        await sharp(imgPath).avif({ quality: 60, effort: 4 }).toFile(avifCachePath);
+        fs.copyFileSync(avifCachePath, avifDestPath);
+        optimizedCount++;
       } catch (e) {
         console.warn(`Failed AVIF for ${imgPath}: ${e.message}`);
       }
     }
 
-    // Create WebP
-    if (!fs.existsSync(webpPath)) {
+    // --- WebP ---
+    if (fs.existsSync(webpCachePath)) {
+      fs.copyFileSync(webpCachePath, webpDestPath);
+    } else {
       try {
-        await sharp(imgPath).webp({ quality: 75 }).toFile(webpPath);
+        await sharp(imgPath).webp({ quality: 75 }).toFile(webpCachePath);
+        fs.copyFileSync(webpCachePath, webpDestPath);
       } catch (e) {
         console.warn(`Failed WebP for ${imgPath}: ${e.message}`);
       }
@@ -49,6 +76,8 @@ async function optimize() {
     });
   }
 
+  console.log(`Optimization stats: ${optimizedCount} new, ${cachedCount} from cache.`);
+
   // 2. Patch HTML files
   const htmlFiles = await glob(`${buildDir}/**/*.html`, { nodir: true });
   console.log(`Patching ${htmlFiles.length} HTML files...`);
@@ -57,8 +86,7 @@ async function optimize() {
     let content = fs.readFileSync(htmlPath, 'utf8');
     let modified = false;
 
-    // FIX DOUBLE LOADING: Remove all image preloads in the head
-    // Docusaurus preloads original images which triggers extra downloads
+    // Remove preloads to prevent double loading
     const preloadRegex = /<link[^>]+as=["']?image["']?[^>]*>/g;
     if (preloadRegex.test(content)) {
       content = content.replace(preloadRegex, '<!-- preload-removed -->');
@@ -66,16 +94,11 @@ async function optimize() {
     }
 
     assetMap.forEach((optimized, orig) => {
-      // Escape for regex
       const escapedOrig = orig.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`<img[^>]+src=["']?${escapedOrig}["']?[^>]*>`, 'g');
 
-      // Regex to find <img> tags with this specific src
-      const imgRegex = new RegExp(`<img[^>]+src=["']?${escapedOrig}["']?[^>]*>`, 'g');
-
-      content = content.replace(imgRegex, (match) => {
-        // Skip if already optimized in this file
-        if (match.includes('data-optimized')) return match;
-
+      content = content.replace(regex, (match) => {
+        if (content.includes(optimized.avif)) return match;
         modified = true;
         const optimizedImg = match.replace('<img', '<img data-optimized="true"');
 
