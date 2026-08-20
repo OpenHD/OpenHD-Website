@@ -61,8 +61,6 @@ jobs:
       - name: Build website 🔧
         env:
           STAGING: ${{ github.ref == 'refs/heads/main' }}
-          NODE_OPTIONS: "--max-old-space-size=4096"
-          VIPS_CONCURRENCY: 1
         run: pnpm build
 
       - name: Create offline archive 📦
