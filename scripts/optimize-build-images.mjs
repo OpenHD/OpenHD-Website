@@ -4,12 +4,10 @@ import path from 'path';
 import { glob } from 'glob';
 
 const buildDir = './build';
-
-// Get baseUrl from environment or assume root
 const baseUrl = process.env.STAGING === 'true' ? '/staging/' : '/';
 
 async function optimizeImages() {
-  console.log('--- Starting post-build image optimization ---');
+  console.log('--- Starting post-build image optimization pipeline ---');
 
   // 1. Find all images in the build directory
   const images = await glob(`${buildDir}/**/*.{png,jpg,jpeg}`, { nodir: true });
@@ -24,9 +22,9 @@ async function optimizeImages() {
     // Convert to AVIF
     if (!fs.existsSync(avifPath)) {
       try {
-        await sharp(imgPath).avif({ quality: 60 }).toFile(avifPath);
+        await sharp(imgPath).avif({ quality: 60, effort: 4 }).toFile(avifPath);
       } catch (err) {
-        console.error(`Failed AVIF: ${imgPath}`, err.message);
+        // console.error(`Failed AVIF: ${imgPath}`, err.message);
       }
     }
 
@@ -35,7 +33,7 @@ async function optimizeImages() {
       try {
         await sharp(imgPath).webp({ quality: 75 }).toFile(webpPath);
       } catch (err) {
-        console.error(`Failed WebP: ${imgPath}`, err.message);
+        // console.error(`Failed WebP: ${imgPath}`, err.message);
       }
     }
 
@@ -44,7 +42,7 @@ async function optimizeImages() {
     let relAvif = avifPath.replace(/^build/, '').replace(/\\/g, '/');
     let relWebp = webpPath.replace(/^build/, '').replace(/\\/g, '/');
 
-    // Ensure they start with baseUrl if they are absolute within the site
+    // Fix baseUrl
     if (baseUrl !== '/' && !relOrig.startsWith(baseUrl)) {
       relOrig = (baseUrl + relOrig).replace(/\/+/g, '/');
       relAvif = (baseUrl + relAvif).replace(/\/+/g, '/');
@@ -58,7 +56,7 @@ async function optimizeImages() {
     }
   }
 
-  // 2. Patch HTML files to use optimized images
+  // 2. Patch HTML files
   const htmlFiles = await glob(`${buildDir}/**/*.html`, { nodir: true });
   console.log(`Patching ${htmlFiles.length} HTML files...`);
 
@@ -66,21 +64,22 @@ async function optimizeImages() {
     let content = fs.readFileSync(htmlPath, 'utf8');
     let modified = false;
 
-    // Very robust replacement that handles quotes or lack thereof
-    assetMap.forEach((optimized, orig) => {
-      // Escape for regex
-      const escapedOrig = orig.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // FIX DOUBLE LOADING: Remove all image preloads in the head
+    // We look for any link tag that has as="image" (with or without quotes)
+    const preloadRegex = /<link[^>]+as=["']?image["']?[^>]*>/g;
+    if (preloadRegex.test(content)) {
+      content = content.replace(preloadRegex, '<!-- preload-removed -->');
+      modified = true;
+    }
 
-      // Matches <img ... src="/path" ... > or <img ... src=/path ... >
-      // Handles optional quotes and any surrounding characters
+    // Wrap <img> in <picture>
+    assetMap.forEach((optimized, orig) => {
+      const escapedOrig = orig.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       const imgRegex = new RegExp(`<img[^>]+src=["']?${escapedOrig}["']?[^>]*>`, 'g');
 
       content = content.replace(imgRegex, (match) => {
-        // Skip if already in a picture
-        if (content.includes(`<source srcset="${optimized.avif}"`)) return match;
-
+        if (content.includes(optimized.avif)) return match;
         modified = true;
-
         return `
 <picture>
   <source srcset="${optimized.avif}" type="image/avif">
