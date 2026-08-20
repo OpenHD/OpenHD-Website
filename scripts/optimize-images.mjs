@@ -11,12 +11,11 @@ async function optimize() {
 
   // 1. Find all original images in the build output
   const images = await glob(`${buildDir}/**/*.{png,jpg,jpeg}`, { nodir: true });
-  console.log(`Found ${images.length} images.`);
+  console.log(`Found ${images.length} images to optimize.`);
 
   const assetMap = new Map();
 
   for (const imgPath of images) {
-    // Skip if it's already an optimized version (shouldn't happen with these extensions)
     const avifPath = imgPath.replace(/\.(png|jpe?g)$/i, '.avif');
     const webpPath = imgPath.replace(/\.(png|jpe?g)$/i, '.webp');
 
@@ -38,7 +37,7 @@ async function optimize() {
       }
     }
 
-    // Map the URLs
+    // Calculate URLs for HTML patching
     let relPath = imgPath.replace(/^build/, '').replace(/\\/g, '/');
     if (baseUrl !== '/' && !relPath.startsWith(baseUrl)) {
       relPath = (baseUrl + relPath).replace(/\/+/g, '/');
@@ -58,19 +57,33 @@ async function optimize() {
     let content = fs.readFileSync(htmlPath, 'utf8');
     let modified = false;
 
-    assetMap.forEach((optimized, orig) => {
-      // Find <img> tags with this src. Handle optional quotes.
-      const escapedOrig = orig.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regex = new RegExp(`<img[^>]+src=["']?${escapedOrig}["']?[^>]*>`, 'g');
+    // FIX DOUBLE LOADING: Remove all image preloads in the head
+    // Docusaurus preloads original images which triggers extra downloads
+    const preloadRegex = /<link[^>]+as=["']?image["']?[^>]*>/g;
+    if (preloadRegex.test(content)) {
+      content = content.replace(preloadRegex, '<!-- preload-removed -->');
+      modified = true;
+    }
 
-      content = content.replace(regex, (match) => {
-        if (content.includes(optimized.avif)) return match; // Already patched
+    assetMap.forEach((optimized, orig) => {
+      // Escape for regex
+      const escapedOrig = orig.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+      // Regex to find <img> tags with this specific src
+      const imgRegex = new RegExp(`<img[^>]+src=["']?${escapedOrig}["']?[^>]*>`, 'g');
+
+      content = content.replace(imgRegex, (match) => {
+        // Skip if already optimized in this file
+        if (match.includes('data-optimized')) return match;
+
         modified = true;
+        const optimizedImg = match.replace('<img', '<img data-optimized="true"');
+
         return `
 <picture>
   <source srcset="${optimized.avif}" type="image/avif">
   <source srcset="${optimized.webp}" type="image/webp">
-  ${match}
+  ${optimizedImg}
 </picture>`.trim();
       });
     });
