@@ -5,8 +5,12 @@ name: Build & Deploy
 #   production  -> production, served at https://openhdfpv.org/
 #   gh-pages    -> build output only, written by this workflow
 #
-# Every deploy builds BOTH branches and replaces gh-pages completely
+# Each run builds only the pushed branch. The other half of the site is taken
+# from the current gh-pages, then gh-pages is replaced completely
 # (keep_files: false), so removed pages never linger on the live site.
+#
+# Caches: pnpm store (setup-node) and .image-cache (AVIF/WebP keyed by content
+# hash). The image cache saves most of the build time - keep its path stable.
 
 on:
   push:
@@ -20,10 +24,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  check:
-    name: Typecheck & build (PR)
-    if: github.event_name == 'pull_request'
+  build:
+    name: Build ${{ github.event_name == 'pull_request' && 'PR' || github.ref_name }}
     runs-on: ubuntu-latest
+    env:
+      STAGING: ${{ (github.event_name == 'pull_request' && github.base_ref || github.ref_name) == 'main' }}
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -45,13 +50,45 @@ jobs:
       - name: Typecheck 🧪
         run: pnpm typecheck
 
+      - name: Cache optimized images 🖼️
+        uses: actions/cache@v4
+        with:
+          path: .image-cache
+          key: image-optimization-cache-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            image-optimization-cache-${{ runner.os }}-
+
       - name: Build website 🔧
-        env:
-          STAGING: ${{ github.base_ref == 'main' }}
         run: pnpm build
+
+      - name: Create offline archive 📦
+        if: github.event_name != 'pull_request'
+        run: |
+          mkdir -p artifacts
+          cd build
+          zip -qr ../artifacts/openhd-website-offline.zip .
+
+      - name: Upload build artifact 📦
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-${{ github.ref_name }}
+          path: build
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload offline archive 📥
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-offline-zip-${{ github.ref_name }}
+          path: artifacts/openhd-website-offline.zip
+          if-no-files-found: error
+          retention-days: 7
 
   deploy:
     name: Deploy to GitHub Pages
+    needs: build
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     concurrency:
@@ -61,90 +98,37 @@ jobs:
       contents: write
     environment:
       name: github-pages
-      url: ${{ github.ref == 'refs/heads/main' && 'https://openhdfpv.org/staging/' || 'https://openhdfpv.org/' }}
+      url: ${{ github.ref_name == 'main' && 'https://openhdfpv.org/staging/' || 'https://openhdfpv.org/' }}
     steps:
-      - name: Checkout production 🛎️
+      - name: Download build 📥
+        uses: actions/download-artifact@v4
+        with:
+          name: website-${{ github.ref_name }}
+          path: build
+
+      - name: Checkout current gh-pages 🛎️
         uses: actions/checkout@v4
         with:
-          ref: production
-          path: production
-
-      - name: Checkout staging (main) 🛎️
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          path: staging
-
-      - name: Setup pnpm 🔧
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.0.0
-
-      - name: Setup Node.js ⚙️
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: pnpm
-          cache-dependency-path: |
-            production/pnpm-lock.yaml
-            staging/pnpm-lock.yaml
-
-      - name: Cache optimized images 🖼️
-        uses: actions/cache@v4
-        with:
-          path: |
-            production/.image-cache
-            staging/.image-cache
-          key: image-optimization-cache-${{ runner.os }}-${{ github.run_id }}
-          restore-keys: |
-            image-optimization-cache-${{ runner.os }}-
-
-      - name: Build production 🔧
-        working-directory: production
-        run: |
-          pnpm install --frozen-lockfile
-          pnpm typecheck
-          pnpm build
-
-      - name: Build staging 🔧
-        working-directory: staging
-        env:
-          STAGING: 'true'
-        run: |
-          pnpm install --frozen-lockfile
-          pnpm typecheck
-          pnpm build
+          ref: gh-pages
+          path: current
 
       - name: Assemble site 🧩
         run: |
-          mkdir -p site
-          cp -r production/build/. site/
-          rm -rf site/staging
-          cp -r staging/build site/staging
+          rm -rf current/.git
+          mkdir site
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            # keep production as is, replace /staging/
+            cp -r current/. site/
+            rm -rf site/staging
+            cp -r build site/staging
+          else
+            # replace production, keep /staging/
+            cp -r build/. site/
+            rm -rf site/staging
+            [ -d current/staging ] && cp -r current/staging site/staging
+          fi
 
-      - name: Create offline archive 📦
-        run: |
-          mkdir -p artifacts
-          cd production/build
-          zip -qr ../../artifacts/openhd-website-offline.zip .
-
-      - name: Upload site artifact 📦
-        uses: actions/upload-artifact@v4
-        with:
-          name: website-${{ github.ref_name }}
-          path: site
-          if-no-files-found: error
-          retention-days: 7
-
-      - name: Upload offline archive 📥
-        uses: actions/upload-artifact@v4
-        with:
-          name: website-offline-zip
-          path: artifacts/openhd-website-offline.zip
-          if-no-files-found: error
-          retention-days: 7
-
-      - name: Deploy to GitHub Pages 🚀
+      - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
