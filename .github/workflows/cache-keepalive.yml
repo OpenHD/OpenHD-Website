@@ -1,0 +1,22 @@
+name: Keep image cache warm
+
+# GitHub evicts caches that were not accessed for 7 days. Without .image-cache a
+# build takes ~15-50 min instead of ~2 min, so touch it every few days.
+# Runs on main (default branch), whose caches are readable by all branches.
+
+on:
+  schedule:
+    - cron: '17 3 */3 * *'
+  workflow_dispatch:
+
+jobs:
+  touch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore image cache ♻️
+        uses: actions/cache/restore@v4
+        with:
+          path: .image-cache
+          key: image-optimization-cache-${{ runner.os }}-keepalive
+          restore-keys: |
+            image-optimization-cache-${{ runner.os }}-

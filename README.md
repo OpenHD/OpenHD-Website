@@ -134,6 +134,7 @@ feature branch ──PR──▶ main ──────────PR "Promote 
   from the live site as well.
 - **Caching**: pnpm store and `.image-cache` (AVIF/WebP keyed by content hash). A warm image
   cache cuts the build from ~15–50 min to ~2 min, so keep its path stable.
+  `cache-keepalive.yml` touches it every 3 days so GitHub does not evict it (7-day limit).
 - Deploys are serialized (`pages-deploy` concurrency group); the build and an offline ZIP of
   the production site are attached to every run as artifacts (7 days).
 
