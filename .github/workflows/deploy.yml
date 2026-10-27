@@ -1,56 +1,43 @@
-name: Deploy to GitHub Pages
+name: Build & Deploy
+
+# Branch model:
+#   main        -> staging,    served at https://openhdfpv.org/staging/ (noindex)
+#   production  -> production, served at https://openhdfpv.org/
+#   gh-pages    -> build output only, written by this workflow
+#
+# Every deploy builds BOTH branches and replaces gh-pages completely
+# (keep_files: false), so removed pages never linger on the live site.
 
 on:
   push:
     branches:
       - main
-      - online
+      - production
+  pull_request:
+    branches:
+      - main
+      - production
   workflow_dispatch:
 
-concurrency:
-  group: pages-deploy
-  cancel-in-progress: false
-
 jobs:
-  deploy:
-    name: Deploy to GitHub Pages
+  check:
+    name: Typecheck & build (PR)
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js ⚙️
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
 
       - name: Setup pnpm 🔧
         uses: pnpm/action-setup@v4
         with:
           version: 9.0.0
 
-      - name: Determine pnpm store path 📦
-        id: pnpm-store
-        run: echo "PNPM_STORE_PATH=$(pnpm store path)" >> $GITHUB_ENV
-
-      - name: Restore pnpm store cache ♻️
-        uses: actions/cache@v4
+      - name: Setup Node.js ⚙️
+        uses: actions/setup-node@v4
         with:
-          path: ${{ env.PNPM_STORE_PATH }}
-          key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-store-${{ runner.os }}-
-
-      - name: Preload dependencies into store 📥
-        run: pnpm fetch
+          node-version: 24
+          cache: pnpm
 
       - name: Install dependencies 📦
         run: pnpm install --frozen-lockfile
@@ -58,37 +45,101 @@ jobs:
       - name: Typecheck 🧪
         run: pnpm typecheck
 
+      - name: Build website 🔧
+        env:
+          STAGING: ${{ github.base_ref == 'main' }}
+        run: pnpm build
+
+  deploy:
+    name: Deploy to GitHub Pages
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    environment:
+      name: github-pages
+      url: ${{ github.ref == 'refs/heads/main' && 'https://openhdfpv.org/staging/' || 'https://openhdfpv.org/' }}
+    steps:
+      - name: Checkout production 🛎️
+        uses: actions/checkout@v4
+        with:
+          ref: production
+          path: production
+
+      - name: Checkout staging (main) 🛎️
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: staging
+
+      - name: Setup pnpm 🔧
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.0.0
+
+      - name: Setup Node.js ⚙️
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: |
+            production/pnpm-lock.yaml
+            staging/pnpm-lock.yaml
+
       - name: Cache optimized images 🖼️
         uses: actions/cache@v4
         with:
-          path: .image-cache
+          path: |
+            production/.image-cache
+            staging/.image-cache
           key: image-optimization-cache-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
             image-optimization-cache-${{ runner.os }}-
 
-      - name: Build website 🔧
+      - name: Build production 🔧
+        working-directory: production
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm typecheck
+          pnpm build
+
+      - name: Build staging 🔧
+        working-directory: staging
         env:
-          STAGING: ${{ github.ref == 'refs/heads/main' }}
-        run: pnpm build
+          STAGING: 'true'
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm typecheck
+          pnpm build
+
+      - name: Assemble site 🧩
+        run: |
+          mkdir -p site
+          cp -r production/build/. site/
+          rm -rf site/staging
+          cp -r staging/build site/staging
 
       - name: Create offline archive 📦
         run: |
           mkdir -p artifacts
-          cd build
-          zip -r ../artifacts/openhd-website-offline.zip .
+          cd production/build
+          zip -qr ../../artifacts/openhd-website-offline.zip .
 
-      - name: Upload build artifact 📦
+      - name: Upload site artifact 📦
         uses: actions/upload-artifact@v4
         with:
-          name: docusaurus-build-${{ github.ref_name }}
-          path: build
+          name: website-${{ github.ref_name }}
+          path: site
           if-no-files-found: error
           retention-days: 7
 
       - name: Upload offline archive 📥
         uses: actions/upload-artifact@v4
         with:
-          name: docusaurus-offline-zip-${{ github.ref_name }}
+          name: website-offline-zip
           path: artifacts/openhd-website-offline.zip
           if-no-files-found: error
           retention-days: 7
@@ -97,6 +148,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-          destination_dir: ${{ github.ref == 'refs/heads/main' && 'staging' || '.' }}
-          keep_files: true
+          publish_dir: ./site
+          cname: openhdfpv.org
+          keep_files: false
+          commit_message: "deploy: ${{ github.ref_name }}@${{ github.sha }}"

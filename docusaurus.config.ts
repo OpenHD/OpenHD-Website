@@ -4,6 +4,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+// Staging builds (branch `main`) are served under /staging/ and must not be indexed
+const isStaging = process.env.STAGING === 'true';
+
 const config: Config = {
   title: 'OpenHD',
   tagline: 'Open source digital FPV ecosystem',
@@ -18,7 +21,8 @@ const config: Config = {
   url: 'https://openhdfpv.org',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: process.env.STAGING === 'true' ? '/staging/' : '/',
+  baseUrl: isStaging ? '/staging/' : '/',
+  noIndex: isStaging,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -202,7 +206,9 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'robots',
-        content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+        content: isStaging
+          ? 'noindex, nofollow'
+          : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
       },
     },
   ],

@@ -22,7 +22,7 @@ Official website and documentation platform for OpenHD - Open Source Digital FPV
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 24+
 - pnpm 9 (via `corepack enable`)
 
 ### Installation
@@ -51,8 +51,11 @@ pnpm build
 # Serve built files locally
 pnpm serve
 
-Note: During `pnpm build`, a script converts `.png/.jpg` in `static/img` to `.avif`. Use the `OptimizedImg` component or CSS `image-set(...)` to prefer AVIF with fallback.
+# Build exactly like the staging site (served under /staging/, noindex)
+STAGING=true pnpm build
 ```
+
+Note: During `pnpm build`, a script converts `.png/.jpg` in `static/img` to `.avif`. Use the `OptimizedImg` component or CSS `image-set(...)` to prefer AVIF with fallback.
 
 ## 📁 Project Structure
 
@@ -81,7 +84,7 @@ The site uses a custom FPV-themed design with:
 
 ### Adding New Versions
 1. Create documentation in `docs/`
-2. Run `npm run docusaurus docs:version X.X` 
+2. Run `pnpm docusaurus docs:version X.X`
 3. Assets go in `static/img/assets/vX-X/`
 
 ## 🔧 Development
@@ -105,32 +108,49 @@ The site uses a custom FPV-themed design with:
   background-image: image-set(url('/img/hero.avif') type('image/avif'), url('/img/hero.png') type('image/png'));
   `
 
-### Asset Migration
-Use the included PowerShell script to migrate external assets:
+## 🌿 Branches, CI & Deployment
 
-```powershell
-powershell -ExecutionPolicy Bypass -File migrate-assets.ps1
+The site is hosted on **GitHub Pages** at [openhdfpv.org](https://openhdfpv.org). Each branch has exactly one job:
+
+| Branch | Purpose | Published at | Indexed by search engines |
+|---|---|---|---|
+| `main` | Development / **staging**. All PRs target this branch. | [openhdfpv.org/staging/](https://openhdfpv.org/staging/) | No (`noindex`) |
+| `production` | The **live** website. Only updated by promoting `main`. | [openhdfpv.org](https://openhdfpv.org/) | Yes |
+| `gh-pages` | Build output only. Written by CI, **never edit by hand**. | – | – |
+
+```
+feature branch ──PR──▶ main ──────────PR "Promote to production"──────────▶ production
+                        │                                                    │
+                        ▼                                                    ▼
+              openhdfpv.org/staging/                                   openhdfpv.org/
 ```
 
-## 🚀 Deployment
+### What CI does (`.github/workflows/deploy.yml`)
 
-This site is designed to be deployed on:
-- **GitHub Pages** (recommended)
-- Netlify
-- Vercel
-- Any static hosting service
+- **Pull requests** to `main` or `production`: typecheck + full build. Nothing is deployed.
+- **Push to `main` or `production`**: CI checks out *both* branches, builds `production` at `/`
+  and `main` (with `STAGING=true`) at `/staging/`, then replaces the whole `gh-pages` branch.
+  Pages that were deleted or renamed therefore disappear from the live site as well.
+- Deploys are serialized (`pages-deploy` concurrency group); the build and an offline ZIP of
+  the production site are attached to every run as artifacts (7 days).
 
-### GitHub Pages Deployment
+`STAGING=true` switches `baseUrl` to `/staging/` and sets `noindex`, so staging never competes
+with the live site in search results.
 
-The site includes GitHub Actions workflow for automatic deployment. Simply push to the main branch.
+### Workflow
+
+1. Branch off `main`, open a PR against `main`.
+2. After merge, check the result on [openhdfpv.org/staging/](https://openhdfpv.org/staging/).
+3. To go live, open a PR **`main` → `production`** and merge it (fast-forward/merge, no squash).
+4. Hotfixes on `production` must be merged back into `main` right away, so both branches don't drift apart.
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+2. Create a feature branch from `main` (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+5. Open a Pull Request against `main` (never against `production` directly)
 
 ## 📄 License
 
