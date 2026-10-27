@@ -201,16 +201,18 @@ const config: Config = {
         content: '#00a6f2',
       },
     },
-    // Robots meta
-    {
-      tagName: 'meta',
-      attributes: {
-        name: 'robots',
-        content: isStaging
-          ? 'noindex, nofollow'
-          : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
-      },
-    },
+    // Robots meta (staging gets `noindex, nofollow` from `noIndex` instead)
+    ...(isStaging
+      ? []
+      : [
+          {
+            tagName: 'meta',
+            attributes: {
+              name: 'robots',
+              content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+            },
+          },
+        ]),
   ],
 
   presets: [
