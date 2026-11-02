@@ -61,7 +61,7 @@ diff --git a/lib/server/document.js b/lib/server/document.js
 --- a/lib/server/document.js
 +++ b/lib/server/document.js
 @@ -40,7 +40,7 @@ class Document {
-     };
+     }
      load = async () => {
          const htmlString = await fsp.readFile(this.path, 'utf-8');
 -        this.root = (0, node_html_parser_1.parse)(htmlString);

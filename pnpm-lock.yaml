@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   '@acid-info/docusaurus-og@1.0.4-alpha.0':
-    hash: 7tbcdpgr4xuktuo25z6s3wo7vy
+    hash: gbdez57tprgcrczxk6m7tfzoye
     path: patches/@acid-info__docusaurus-og@1.0.4-alpha.0.patch
 
 importers:
@@ -15,7 +15,7 @@ importers:
     dependencies:
       '@acid-info/docusaurus-og':
         specifier: 1.0.4-alpha.0
-        version: 1.0.4-alpha.0(patch_hash=7tbcdpgr4xuktuo25z6s3wo7vy)(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)
+        version: 1.0.4-alpha.0(patch_hash=gbdez57tprgcrczxk6m7tfzoye)(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)
       '@docusaurus/core':
         specifier: 3.10.2
         version: 3.10.2(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(debug@4.4.3)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)
@@ -6737,7 +6737,7 @@ snapshots:
       section-matter: 1.0.0
       strip-bom-string: 1.0.0
 
-  '@acid-info/docusaurus-og@1.0.4-alpha.0(patch_hash=7tbcdpgr4xuktuo25z6s3wo7vy)(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)':
+  '@acid-info/docusaurus-og@1.0.4-alpha.0(patch_hash=gbdez57tprgcrczxk6m7tfzoye)(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)':
     dependencies:
       '@docusaurus/core': 3.8.1(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(postcss@8.5.26))(@mdx-js/react@3.1.1(@types/react@19.2.18)(react@19.2.8))(@rspack/core@1.7.12)(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.7.3)
       '@docusaurus/module-type-aliases': 3.8.1(@swc/core@1.16.0)(postcss@8.5.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
