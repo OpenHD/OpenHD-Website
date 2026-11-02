@@ -57,3 +57,15 @@ index 106fe9ff80bf9d122a4f43c7e8fa0a849d01a215..567138766af782e53e3c0d4e4a74b5e8
 +    };
  }
  exports.PagesPlugin = PagesPlugin;
+diff --git a/lib/server/document.js b/lib/server/document.js
+--- a/lib/server/document.js
++++ b/lib/server/document.js
+@@ -40,7 +40,7 @@ class Document {
+     }
+     load = async () => {
+         const htmlString = await fsp.readFile(this.path, 'utf-8');
+-        this.root = (0, node_html_parser_1.parse)(htmlString);
++        this.root = (0, node_html_parser_1.parse)(htmlString, { parseNoneClosedTags: true });
+         this.loaded = true;
+     };
+     write = async () => {
