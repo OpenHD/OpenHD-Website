@@ -24,6 +24,8 @@ const config: Config = {
   baseUrl: isStaging ? '/staging/' : '/',
   noIndex: isStaging,
 
+  customFields: {bugReportApiUrl: process.env.BUG_REPORT_API_URL || ''},
+
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'OpenHD', // Usually your GitHub org/user name.
@@ -364,6 +366,11 @@ const config: Config = {
         {
           to: '/changelog',
           label: 'Changelog',
+          position: 'left',
+        },
+        {
+          to: '/bugs',
+          label: 'Bug Tracker',
           position: 'left',
         },
         {
