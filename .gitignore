@@ -40,6 +40,8 @@ social-card-template.html
 # Windows artifacts
 nul
 Thumbs.db
+test-results/
+playwright-report/
 *.tmp
 
 # Version control temp files

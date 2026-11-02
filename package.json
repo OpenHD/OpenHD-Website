@@ -13,7 +13,8 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "test:bugs": "playwright test"
   },
   "dependencies": {
     "@acid-info/docusaurus-og": "1.0.4-alpha.0",
@@ -40,6 +41,7 @@
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/tsconfig": "3.10.2",
     "@docusaurus/types": "3.10.2",
+    "@playwright/test": "1.58.2",
     "glob": "^13.0.6",
     "sharp": "^0.35.3",
     "typescript": "~5.7.3"

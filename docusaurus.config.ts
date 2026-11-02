@@ -24,7 +24,7 @@ const config: Config = {
   baseUrl: isStaging ? '/staging/' : '/',
   noIndex: isStaging,
 
-  customFields: {bugReportApiUrl: process.env.BUG_REPORT_API_URL || ''},
+  customFields: {bugReportApiUrl: process.env.BUG_REPORT_API_URL || 'https://openhd.tech/api/bugs'},
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.

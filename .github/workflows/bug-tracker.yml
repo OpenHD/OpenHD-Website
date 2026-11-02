@@ -1,0 +1,28 @@
+name: Bug tracker validation
+on:
+  pull_request:
+  push:
+    branches: [feature/unified-bug-tracker]
+permissions:
+  contents: read
+jobs:
+  website:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.0.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:bugs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bug-tracker-browser-results
+          path: test-results
