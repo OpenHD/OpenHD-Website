@@ -16,6 +16,6 @@ OpenHD carries live video, telemetry, and optionally RC control between an **Air
 | Checking the link for the first time | [First-time setup](./hardware/first-time-setup.md) |
 | Configuring a Ground station | [QOpenHD](./ground-station-software/qopenhd.md) and [offline maps](./ground-station-software/offline-maps.md) |
 
-### About the beta
+### Release status
 
-Albatross is the OpenHD 3.0 beta series. Capabilities depend on the image, board, radio, and camera. Use matching builds for Air and Ground when first setting up the link. The manual shows current workflows and calls out older hardware references where they remain useful.
+Albatross is the OpenHD 3.0 release. It is currently in beta, and the stable release is coming soon.
