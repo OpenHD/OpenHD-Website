@@ -357,17 +357,6 @@ const config: Config = {
           label: 'Documentation',
         },
         {
-          type: 'dropdown',
-          label: 'Albatross',
-          position: 'left',
-          items: [
-            {to: '/albatross', label: 'Overview', exact: true},
-            {to: '/albatross/installation', label: 'Installation'},
-            {to: '/albatross/first-link', label: 'First link'},
-            {to: '/albatross/qopenhd', label: 'QOpenHD'},
-          ],
-        },
-        {
           to: '/downloads',
           label: 'Downloads',
           position: 'left',
@@ -380,6 +369,9 @@ const config: Config = {
         {
           type: 'docsVersionDropdown',
           position: 'right',
+          dropdownItemsBefore: [
+            {to: '/albatross', label: 'Albatross', activeBasePath: '/albatross'},
+          ],
         },
         {
           href: 'https://github.com/OpenHD/OpenHD',
