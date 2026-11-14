@@ -13,6 +13,12 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
  Create as many sidebars as you want.
  */
 const sidebars: SidebarsConfig = {
+  albatrossSidebar: [
+    'albatross/index',
+    'albatross/installation',
+    'albatross/first-link',
+    'albatross/qopenhd',
+  ],
   tutorialSidebar: [
     'introduction',
     'installation-guide',
