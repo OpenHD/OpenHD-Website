@@ -21,7 +21,7 @@ To establish a connection between INAV and OpenHD, there are different methods a
 By default, UART telemetry is disabled in OpenHD &lt;2.5 . To enable it, navigate to the AIR(TMP) Settings registry using QOpenHD and select serial0. Be sure to set the correct baud rate that matches your flight controller.
 If you use 2.5 or higher versions telemetry is enabled from the start on Serial0.
 
-![Enable UART in OpenHD](/img/assets/Screenshot%20from%202022-11-12%2019-19-37.png)
+In QOpenHD, open the Air settings and select the flight controller’s **Serial port**. Match the protocol and baud rate on both ends. Check **Status** for the flight controller after applying the settings.
 
 ### 2) Wiring
 
