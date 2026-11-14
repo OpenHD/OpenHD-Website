@@ -229,8 +229,13 @@ const config: Config = {
           includeCurrentVersion: true,
           versions: {
             current: {
-              label: 'Evo (Latest)',
+              label: 'Evo',
               path: '/',
+              banner: 'none',
+            },
+            '3.0': {
+              label: 'Albatross (3.0 Beta)',
+              path: 'albatross',
               banner: 'none',
             },
             '2.0': {
@@ -369,9 +374,7 @@ const config: Config = {
         {
           type: 'docsVersionDropdown',
           position: 'right',
-          dropdownItemsBefore: [
-            {to: '/albatross', label: 'Albatross', activeBasePath: '/albatross'},
-          ],
+          versions: ['current', '3.0', '2.0'],
         },
         {
           href: 'https://github.com/OpenHD/OpenHD',
