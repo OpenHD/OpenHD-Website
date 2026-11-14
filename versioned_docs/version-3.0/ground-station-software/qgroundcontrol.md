@@ -13,10 +13,7 @@ Here´s what can happen if you use wifi as a connection method for external tele
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xjr56PovA8A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 2. Next power on your Air- and GroundPi
-3. Enter in the Ground tab and here change the settings "Ethernet" from disable to Hostpot or forward+internet, the last one is very handy to give internet to the pc from your phone
-
-![Ground settings](/img/assets/Ground_hotspot.jpg)
-![Ground settings](/img/assets/Ground_forward.jpg)
+3. Configure the Ground network using the [Ethernet guide](../software-setup/ethernet-hotspot.md) or the [Wi-Fi hotspot guide](../software-setup/wifi-hotspot.md). Check the Ground IP address from your client before setting up telemetry.
 
 Now lets continue in QgroundControl:
 

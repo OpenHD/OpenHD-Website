@@ -16,7 +16,7 @@ While Arduplane is a perfect choice for building complex and advanced planes and
 
 UART telemetry is disabled in OpenHD by default. To enable it, use QOpenHD in the AIR(TMP) Settings registry (FC_UART_CONN) and select serial0. Be sure to choose the correct baud rate that matches your flight controller.
 
-![Enable UART in OpenHD](/img/assets/Screenshot%20from%202022-11-12%2019-19-37.png)
+In QOpenHD, open the Air settings and select the flight controller’s **Serial port**. Match the protocol and baud rate on both ends. Check **Status** for the flight controller after applying the settings.
 
 ### 2) Wiring
 

@@ -31,10 +31,7 @@ Now, Let's gets get started:
 
 1. The Wifi hostpot is by default ON when disarm and OFF when arm because the possible interference, you can change it using the sidebar, if you want to use Ethernet just connect the cable
 2. Next power on your Air- and GroundPi
-3. Enter in the Ground tab and here change the settings "Ethernet" from disable to Hostpot or forward+internet, the last one is very handy to give internet to the pc from your phone
-
-![Ground settings](/img/assets/Ground_hotspot.jpg)
-![Ground settings](/img/assets/Ground_forward.jpg)
+3. Configure the Ground network using the [Ethernet guide](../software-setup/ethernet-hotspot.md) or the [Wi-Fi hotspot guide](../software-setup/wifi-hotspot.md). Check the Ground IP address from your client before setting up telemetry.
 
 4. Reboot ground unit, once you have done this settings you can leave it ON it doesnt interfere with anything
 5. Open Mission Planner and select as method of connection TCP
