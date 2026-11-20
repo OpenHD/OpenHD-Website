@@ -16,6 +16,15 @@ async function mocks(page: Page, enabled = true) {
       result = {id: 'report', number: 42, status: 'created', url: 'https://github.com/OpenHD/OpenHD/issues/42', message: 'Bug report created. Notification queued.'};
     } else if (url.pathname.includes('/entry/')) result = {id: 1, number: 42, title: 'Camera fails', body: 'Steps: boot the unit. <script>unsafe()</script>', state: 'open', html_url: 'https://github.com/OpenHD/OpenHD/issues/42', updated_at: '2026-11-02T10:00:00Z', repository_url: 'https://api.github.com/repos/OpenHD/OpenHD', labels: [{name: 'website-report'}, {name: 'component:video'}]};
     else result = {total_count: 70, items: [{id: 1, number: 42, title: 'Camera fails', state: 'open', html_url: 'https://github.com/OpenHD/OpenHD/issues/42', updated_at: '2026-11-02T10:00:00Z', repository_url: 'https://api.github.com/repos/OpenHD/OpenHD', labels: [{name: 'website-report'}, {name: 'component:video'}]}, {id: 2, number: 43, title: 'Fix camera', state: 'closed', html_url: 'https://github.com/OpenHD/OpenHD/pull/43', updated_at: '2026-11-02T10:00:00Z', repository_url: 'https://api.github.com/repos/OpenHD/OpenHD', labels: [], pull_request: {merged_at: '2026-11-02T10:00:00Z'}}]};
+    if (url.pathname === '/api/bugs' && req.method() === 'GET') {
+      const list = result as {items: unknown[]};
+      const baseEntry = {updated_at: '2026-11-02T10:00:00Z', repository_url: 'https://api.github.com/repos/OpenHD/OpenHD', labels: []};
+      list.items.push(
+        {...baseEntry, id: 3, number: 44, title: 'Radio issue', state: 'open', html_url: 'https://github.com/OpenHD/OpenHD/issues/44'},
+        {...baseEntry, id: 4, number: 45, title: 'Radio fix', state: 'open', html_url: 'https://github.com/OpenHD/OpenHD/pull/45', pull_request: {}},
+        {...baseEntry, id: 5, number: 46, title: 'Old website report', state: 'closed', html_url: 'https://github.com/OpenHD/OpenHD/issues/46', labels: [{name: 'website-report'}]},
+      );
+    }
     return route.fulfill({json: result, headers});
   });
 }
@@ -38,13 +47,25 @@ test('normal report requires all fields and both archives before submission', as
   await expect(submit).toBeEnabled(); await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true); await page.evaluate(() => window.scrollTo(0, 0)); await page.screenshot({path: info.outputPath('report.png'), fullPage: true});
   await submit.click(); await expect(page.getByRole('heading', {name: 'Bug #42 created'})).toBeVisible(); await expect(page.getByRole('link', {name: 'View your issue on GitHub'})).toHaveAttribute('href', 'https://github.com/OpenHD/OpenHD/issues/42');
 });
-test('tracker renders distinct types, filters, pagination and escaped detail content', async ({page}, info) => {
+test('tracker shows open reports, optionally includes GitHub activity, and paginates details', async ({page}, info) => {
   await mocks(page); await page.goto('/bugs'); await expect(page.getByRole('link', {name: '#42 Camera fails'})).toBeVisible();
-  await expect(page.getByRole('cell', {name: 'Pull Request', exact: true})).toBeVisible(); await expect(page.getByRole('cell', {name: 'merged', exact: true})).toBeVisible();
-  const request = page.waitForRequest(r => r.url().includes('/api/bugs?') && r.url().includes('type=pull'));
-  await page.getByLabel('Type', {exact: true}).selectOption('pull'); await request;
+  await expect(page.getByLabel('Show GitHub issues and pull requests')).toHaveValue('no');
+  await expect(page.getByRole('link', {name: '#43 Fix camera'})).toHaveCount(0);
+  await expect(page.getByRole('link', {name: '#44 Radio issue'})).toHaveCount(0);
+  await expect(page.getByRole('link', {name: '#45 Radio fix'})).toHaveCount(0);
+  await expect(page.getByRole('link', {name: '#46 Old website report'})).toHaveCount(0);
+  const request = page.waitForRequest(r => {const url = new URL(r.url()); return url.pathname === '/api/bugs' && url.searchParams.get('type') === 'all' && url.searchParams.get('status') === 'open';});
+  await page.getByLabel('Show GitHub issues and pull requests').selectOption('yes'); await request;
+  await expect(page.getByRole('link', {name: '#44 Radio issue'})).toBeVisible();
+  await expect(page.getByRole('link', {name: '#45 Radio fix'})).toBeVisible();
+  await expect(page.getByRole('link', {name: '#43 Fix camera'})).toHaveCount(0);
+  await expect(page.getByRole('link', {name: '#46 Old website report'})).toHaveCount(0);
   await page.getByRole('button', {name: 'Next', exact: true}).click(); await expect(page.getByText('Page 2 of 3')).toBeVisible();
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true); await page.evaluate(() => window.scrollTo(0, 0)); await page.screenshot({path: info.outputPath('tracker.png'), fullPage: true});
+  const reportsOnly = page.waitForRequest(r => {const url = new URL(r.url()); return url.pathname === '/api/bugs' && url.searchParams.get('type') === 'bug' && url.searchParams.get('status') === 'open' && url.searchParams.get('page') === '1';});
+  await page.getByLabel('Show GitHub issues and pull requests').selectOption('no'); await reportsOnly;
+  await expect(page.getByRole('link', {name: '#44 Radio issue'})).toHaveCount(0);
+  await expect(page.getByRole('link', {name: '#45 Radio fix'})).toHaveCount(0);
   await page.getByRole('link', {name: '#42 Camera fails'}).click(); await expect(page.getByRole('heading', {name: '#42 Camera fails'})).toBeVisible();
   await expect(page.getByText('Steps: boot the unit. <script>unsafe()</script>', {exact: true})).toBeVisible(); await expect(page.getByRole('heading', {name: 'Diagnostic files'})).toBeVisible();
 });
