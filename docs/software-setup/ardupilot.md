@@ -18,34 +18,36 @@ UART telemetry is disabled in OpenHD by default. To enable it, use QOpenHD in th
 
 ### 2) Wiring
 
-Connect the TX pin of the serial port on your flight controller to the RX pin on the Pi. **Warning:** The Pi uses 3.3V logic level on the serial ports, so ensure your flight controller also uses 3.3V. Connecting 5V may damage the Pi's serial port. Refer to the Pinout diagram for pinout details.
+Connect flight controller TX to Air RX, Air TX to flight controller RX, and connect the grounds. Both data wires are required for automatic stream-rate setup. With only flight controller TX connected, use the manual rates below. **Warning:** The Pi uses 3.3V logic level on the serial ports, so ensure your flight controller also uses 3.3V. Connecting 5V may damage the Pi's serial port. Refer to the Pinout diagram for pinout details.
 ![RPI Pinout](/img/assets/rp2_pinout.png)
 
 
 
 ## Configuration of Ardupilot
 
-Ardupilot does not send telemetry without specifying the telemetry rates set by the user. In versions below 2.5, this needs to be manually set via the SRX parameters. In versions 2.5 and above, OpenHD handles this automatically.
+With a bidirectional MAVLink 2 connection and **Set mavlink message rates** enabled in QOpenHD, QOpenHD requests the telemetry rates from ArduPilot at runtime. These requests work with both the older `SRx_` and newer `MAVn_` parameter names.
 
-You can choose different subsets of telemetry information and determine how often you want the Flight Controller (FC) to stream specific sets of data per second (defined in Hz). These parameters are known as `SRx_Parameters`, where x represents the serial ports using Mavlink in ascending order (e.g., SERIAL0, SERIAL2, SERIAL6 correspond to SR0_, SR1_, and SR6_).
+### Manual rates for receive-only links
 
-To prevent transmitting telemetry data too frequently over the radio link, select necessary data subsets and find a balance between data update frequency and radio link usage. The following parameters are crucial:
+Use `SRx_` on ArduPilot 4.6 and earlier, and `MAVn_` on ArduPilot 4.7 and later. Count only MAVLink ports in ascending serial order. For example, when `SERIAL0`, `SERIAL2`, and `SERIAL6` are the MAVLink ports, they correspond to `SR0_`, `SR1_`, and `SR2_` on older firmware, or `MAV1_`, `MAV2_`, and `MAV3_` on 4.7 and later. See [ArduPilot's parameter name changes](https://ardupilot.org/copter/docs/common-param-name-changes.html#gcs-mavlink-streamrate-and-system-id-parameters).
 
-```plaintext
-SR1_ADSB=5
-SR1_EXT_STAT=2
-SR1_EXTRA1=4
-SR1_EXTRA2=4
-SR1_EXTRA3=2
-SR1_PARAMS=10
-SR1_POSITION=2
-SR1_RAW_CTRL=0
-SR1_RAW_SENS=2
-SR1_RC_CHAN=2
-```
+These are example rates for the second MAVLink port. Use the prefix for the port connected to OpenHD.
+
+| ArduPilot 4.6 and earlier | ArduPilot 4.7 and later | Rate (Hz) |
+| --- | --- | ---: |
+| `SR1_ADSB` | `MAV2_ADSB` | 5 |
+| `SR1_EXT_STAT` | `MAV2_EXT_STAT` | 2 |
+| `SR1_EXTRA1` | `MAV2_EXTRA1` | 4 |
+| `SR1_EXTRA2` | `MAV2_EXTRA2` | 4 |
+| `SR1_EXTRA3` | `MAV2_EXTRA3` | 2 |
+| `SR1_PARAMS` | `MAV2_PARAMS` | 10 |
+| `SR1_POSITION` | `MAV2_POSITION` | 2 |
+| `SR1_RAW_CTRL` | `MAV2_RAW_CTRL` | 0 |
+| `SR1_RAW_SENS` | `MAV2_RAW_SENS` | 2 |
+| `SR1_RC_CHAN` | `MAV2_RC_CHAN` | 2 |
 
 Using the Config/Tuning -> Full Parameter Tree menu, modify the mentioned settings:
 
 ![Where to find the stream rate settings](/img/assets/image%20%2819%29.png)
 
-Save the settings and disconnect the Flight Controller.
+Save the settings and reboot the flight controller.
